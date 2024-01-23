@@ -40,7 +40,7 @@ function UserTransactions () {
         }
         fetchData();
         
-       },[]);
+       },);
 
     return (
       <div>

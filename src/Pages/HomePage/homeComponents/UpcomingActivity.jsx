@@ -97,7 +97,7 @@ const UpcomingActivity = () => {
 
   return (
     <div className='container mx-auto'>
-      <h1 className='m-3 font-bold text-primary text-[28px]'>UPCOMING ACTIVITY</h1>
+      <h1 className='m-3 font-bold text-primary md:text-[28px] text-[20px]'>UPCOMING ACTIVITY</h1>
       {loading ? (
         <div className='m-auto container flex justify-center'>
           <div className='p-10'>Loading...</div>

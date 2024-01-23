@@ -79,25 +79,27 @@ function Profile() {
       <div className='m-auto container'>
         <div className='container m-3'>
           <div className='m-auto  flex justify-between p-3'>
-            <h1 className='m-3 font-bold text-primary text-[28px]'>Profile Page</h1>
+            <h1 className='m-3 font-bold text-primary md:text-[28px] text-[20px]'>Profile Page</h1>
             </div>
-           <div className='container m-auto p-2'>
-            <div className=" bg-red-100 rounded-[13px] shadow flex">
-                <ImageUploader />
-                    <div className='p-auto'>
-                        <div className='text-md '>
-                        <h1 className='pt-10 pb-5 text-black md:text-4xl font-bold' >
+           <div className='container m-auto '>
+            <div className=" bg-red-100 rounded-[13px] shadow md:flex">
+                    <div className='flex justify-center'>
+                    <ImageUploader />
+                    </div>
+                    <div className=' sm:flex sm:justify-center'>
+                        <div className='text-md container sm:p-2 text-center'>
+                        <h1 className='pt-10 pb-5 text-black md:text-4xl text-2xl  font-bold' >
                             {userName}
                         </h1>
-                        <ul >
+                        <ul className='container p-2 md:text-md text-sm' >
                             <li className='py-3'>Tel No: 019234567</li>
                             <li className='py-3'>Email :{userData.email}</li>
                             <li className='py-3'>Account Type: {userrole} </li>
                         </ul>
                         </div>
                     </div>
-                <div className="m-auto text-md">
-                    <div className="m-4 p-5 flex justify-center bg-indigo-500 shadow">
+                <div className="m-auto text-md flex justify-center">
+                    <div className="m-4 p-5 md:flex justify-center bg-indigo-500 shadow">
                         <div className=' md:text-3xl text-white font-bold '><Points /></div>
                     </div>
                     <button onClick={handleLogout}>

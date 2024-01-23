@@ -93,7 +93,7 @@ function Activity() {
       <MainLayout>
       <div className='container mx-auto'>
       <div className='m-auto  flex justify-between p-3 '>
-                <p className='font-bold text-primary text-[28px]'>UPCOMING PARTICIPATED ACTIVITIES</p>
+                <p className='font-bold text-primary md:text-[28px] text-[20px]'>UPCOMING PARTICIPATED ACTIVITIES</p>
                 </div>
       {upcomingActivities.length === 0 ? (
         <div key="key" className='m-auto container flex justify-center'>
@@ -163,7 +163,7 @@ function Activity() {
         </Swiper>
       )}
         <div className='m-auto  flex justify-between p-3 '>
-                <p className='font-bold text-primary text-[28px]'>PAST PARTICPATED ACTIVITIES</p>
+                <p className='font-bold text-primary md:text-[28px] text-[20px]'>PAST PARTICPATED ACTIVITIES</p>
                 </div>
       {pastActivities.length === 0 ? (
         <div className='m-auto container flex justify-center'>
