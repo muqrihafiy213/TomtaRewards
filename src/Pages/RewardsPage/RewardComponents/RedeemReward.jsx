@@ -1,10 +1,11 @@
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../../../firebaseConfig';
 
-export const redeemReward = async (userId, rewardId, quantity,totalpoints) => {
+export const redeemReward = async (userId,userName, rewardId, quantity,totalpoints) => {
   try {
     const redemptionInfo = {
       userId,
+      userName,
       rewardId,
       quantity,
       totalpoints,

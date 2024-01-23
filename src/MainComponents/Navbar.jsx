@@ -103,7 +103,7 @@ const Navbar = ({userRole}) => {
       </div>
 
        {/* sidebar */}
-      <div ref={navRef} className={nav ? ' left-0 top-0 w-[30%] h-screen border-r absolute bg-secondary ease-in-out duration-500 z-50' : 'fixed left-[-100%] z-50'}>
+      <div ref={navRef} className={nav ? ' left-0 top-0 md:w-[30%] w-[50%] h-screen border-r absolute bg-secondary ease-in-out duration-500 z-50' : 'fixed left-[-100%] z-50'}>
       
         <li className='font-bold p-4'>
           <div className=" flex  bg-primary rounded-[99px] shadow-xl  p-2" >

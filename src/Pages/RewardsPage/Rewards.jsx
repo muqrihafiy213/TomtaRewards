@@ -7,6 +7,7 @@ import { getDocs, collection, doc, updateDoc,getDoc , onSnapshot, where ,query} 
 import Points from '../../MainComponents/Points';
 import { ref , getDownloadURL as getImgDownloadURL } from 'firebase/storage';
 import { redeemReward } from './RewardComponents/RedeemReward';
+import { Link } from 'react-router-dom';
 
 function Rewards() {
   const [rewardsData, setRewardsData] = useState([]);
@@ -79,6 +80,7 @@ function Rewards() {
       const userDoc = await getDoc(userDocRef);
       const currentPoints = userDoc.data().points;
       const userName = userDoc.data().firstName + userDoc.data().lastName  
+      const userId = userDoc.data().uid
   
       const pointsToDeduct = price * selectedQuantity;
       if (currentPoints >= pointsToDeduct) {
@@ -91,7 +93,7 @@ function Rewards() {
         
         
         await updateDoc(rewardDocRef, { quantity: newDeductQuantity });
-        await redeemReward(userName,selectedRewards.name,selectedQuantity,pointsToDeduct);
+        await redeemReward(userId,userName,selectedRewards.name,selectedQuantity,pointsToDeduct);
         setModalOpen(false);
         alert('Purchase Success')
       } else {
@@ -134,7 +136,12 @@ function Rewards() {
       <MainLayout>
         <div className='container mx-auto'>
           <div className='m-auto column flex justify-between'>
-            <h1 className='m-3 font-bold text-primary text-[28px]'>AVAILABLE REWARDS</h1>
+          <div className=' flex my-auto'>
+                <p className='font-bold text-primary md:text-[28px] text-[20px]'>REWARDS</p>
+                <Link to="/usertransactions">
+                <p className='px-3 font-bold text-white md:text-[28px] text-[20px]'>TRANSACTIONS</p>
+                  </Link> 
+                </div>
             <div key="key" className='w-4/12 container p-4'>
               <div className='m-auto flex justify-center bg-primary rounded-[99px] shadow-xl p-2'>
                 <span className='text-white font-bold '>
@@ -143,15 +150,15 @@ function Rewards() {
               </div>
             </div>
           </div>
-          <div className='max-w-[1240px] mx-auto grid sm:grid-cols-2 md:grid-cols-4 gap-6' >
+          <div className='max-w-[1240px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-6' >
             { rewardsData.length === 0 ? (
                 <div className='m-auto container flex justify-center'>
                   <div className='p-10'>No Rewards Available</div>
                 </div>
               ) : (
             rewardsData.map((rewards) => (
-              <div className=' '>
-                <div className=' bg-white rounded-[10px] shadow m-4 container' key={rewards.id}>
+              <div className='container mx-auto'>
+                <div className=' bg-white rounded-[10px] shadow m-4 ' key={rewards.id}>
                 <div className='columns-2'>
                   <div className='flex rewards-container overflow-hidden'>
                   <img
@@ -161,8 +168,8 @@ function Rewards() {
                   />
                   </div>
                   <div className='container py-5'>
-                  <div className='flex flex-col justify-center  '>
-                    <span className=' text-primary text-[20px] font-bold py-2 pr-5  text-center'>{rewards.name}</span>
+                  <div className='flex flex-col justify-center   '>
+                    <div className='container '><p className=' text-primary md:text-[20px] text-[15px] font-bold py-2 pr-5  text-center'>{rewards.name}</p></div>
                     <span className=' text-primary text-[12px]  py-2 pr-5 text-center'> Quantity: {rewards.quantity} </span>
                   </div>
                   </div>

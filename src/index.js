@@ -26,7 +26,7 @@ import ActivityAdmin from './Pages/ActivityPage/ActivityAdmin';
 import AnnnouncementHub from './Pages/AnnouncementPage/AnnouncmentHub';
 import UserList from './Pages/UserListsPage/UserList';
 import TeamMembers from './Pages/TeamMembersPage/TeamMember';
-
+import UserTransactions from './Pages/RewardsPage/UserTransactions';
 
 const router = createHashRouter(
   createRoutesFromElements(
@@ -48,6 +48,8 @@ const router = createHashRouter(
         <Route path="/rewardsAdmin" element={<RewardsAdmin />} />
         <Route path="/teamMembers" element={<TeamMembers />} />
         <Route path="/userlist" element={<UserList />} />
+        <Route path="/usertransactions" element={<UserTransactions />} 
+        />
         <Route path="/transactions" element={<Transactions />} 
         />
       </Route>
