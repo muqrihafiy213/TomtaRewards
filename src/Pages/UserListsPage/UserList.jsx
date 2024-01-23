@@ -41,6 +41,10 @@ function UserList() {
         alert('Please choose at least one user');
         return;
       }
+      if ( selectedUsers.superior === "isSuperior") {
+        alert('This User is already a Superior');
+        return;
+      }
       for (const userId of selectedUsers) {
         try {
           const userRef = collection(db, 'Roles', 'Users', 'UserProfile');
@@ -54,6 +58,7 @@ function UserList() {
 
             await updateDoc(userProfileRef, {
               user_type: "0003",
+              superior: "isSuperior"
             });
             await setDoc(doc(superiorUserRef, userId), user.data());
             alert('User Promoted Successfully');  
@@ -218,7 +223,10 @@ function UserList() {
                     )}
                 </div>
                 <p className='m-auto text-white'>{user.firstName}{user.lastName}</p>
-              
+                <Checkbox className="h-8 w-8 rounded-full border-gray-900/20 bg-buttons transition-all hover:scale-105 hover:before:opacity-0"
+                  checked={selectedUsers.includes(user.id)}
+                  onChange={() => handleUserClick(user.id)}
+                />
                 </div>
             </div>
             )))
