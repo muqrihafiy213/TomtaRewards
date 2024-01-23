@@ -7,7 +7,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { store, persistor } from './store';
 import reportWebVitals from './reportWebVitals';
 import { 
-  createBrowserRouter,
+  createHashRouter,
   createRoutesFromElements,
   RouterProvider,
   Route,
@@ -28,7 +28,7 @@ import UserList from './Pages/UserListsPage/UserList';
 import TeamMembers from './Pages/TeamMembersPage/TeamMember';
 
 
-const router = createBrowserRouter(
+const router = createHashRouter(
   createRoutesFromElements(
     <Route path="/" element={ 
     <Provider store={store}>
