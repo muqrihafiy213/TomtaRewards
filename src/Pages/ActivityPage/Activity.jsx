@@ -96,7 +96,7 @@ function Activity() {
                 <p className='font-bold text-primary md:text-[28px] text-[20px]'>UPCOMING PARTICIPATED ACTIVITIES</p>
                 </div>
       {upcomingActivities.length === 0 ? (
-        <div key="key" className='m-auto container flex justify-center'>
+        <div key={upcomingActivities.id} className='m-auto container flex justify-center'>
           <div className='p-10'>No Upcoming Activities</div>
         </div>
       ) : (

@@ -98,13 +98,13 @@ function AnnnouncementHub() {
             
             <div className='m-auto  flex justify-between p-3'>
                 <div className=' flex '>
-                <p className='font-bold text-primary text-[28px]'>ANNOUNCEMENTS HUB</p>
+                <h1 className='font-bold text-primary text-[28px]'>ANNOUNCEMENTS HUB</h1>
                 
                 </div>
                     <Button
                             className='bg-buttons text-white '
                             size="md"
-                            ripple="light"
+                            ripple={true}
                             color='white'
                             onClick= {() => setOpenPopup(true)}
                             >
@@ -225,7 +225,7 @@ function AnnnouncementHub() {
                           <Button
                             className="bg-primary m-2 text-white"
                             size="sm"
-                            ripple="light"
+                            ripple={true}
                             onClick={() => handleOpen(announce)}
                           >
                             delete

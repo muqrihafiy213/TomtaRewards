@@ -1,5 +1,4 @@
 import React,{useEffect,useState} from 'react'
-import MainLayout from '../../Layouts/MainLayout'
 import img from '../../Assets/stockprofile.jpg'
 import { getDocs, collection, query, where , onSnapshot, updateDoc , doc} from 'firebase/firestore';
 import { db,auth } from '../../firebaseConfig';
@@ -8,13 +7,14 @@ import { selectUser } from '../../userSlice';
 import { Checkbox, Button  } from "@material-tailwind/react";
 import AddMember from './Components/AddMembers';
 import Avatar from '../../MainComponents/Avatar';
+import SuperiorLayout from '../../Layouts/SuperiorLayout';
 
 function TeamMembers() {
 
     const userNow = useSelector(selectUser);
     const userId = userNow?.userProfile?.uid;
     const userName = userNow?.userProfile?.firstName + ' ' + userNow?.userProfile?.lastName;
-    const [userData, setUserData ] = useState([])
+   
     const [teamData, setTeamData ] = useState([])
     const [selectedUser, setSelectedUser] = useState([]);
     const [addPopup, setAddPopup] = useState(false);
@@ -66,16 +66,13 @@ function TeamMembers() {
     
             try {
                 const userRef = collection(db, 'Roles', 'Users', 'UserProfile');
-                const q = query(userRef, where('uid', '==', userId));
                 const team = query(userRef, where('superior', '==', userId));
-                const querySnapshot = await getDocs(q);
                 const queryTeam = await getDocs(team);
-                const data = querySnapshot.docs[0].data();
                 const tData = queryTeam.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                
-                setUserData(data);
+                
                 setTeamData(tData);
-                return data;
+                return tData;
 
             } catch (error) {
               console.error('Error fetching user profile document:', error);
@@ -97,14 +94,14 @@ function TeamMembers() {
 
   return (
     <div>
-      <MainLayout>
+      <SuperiorLayout>
        <div className='container m-auto '>
        <div className='m-auto  flex justify-between p-3 '>
-                <p className='font-bold text-primary text-[28px]'>My Team</p>
+                <p className='font-bold text-primary md:text-[28px] text-[20px]'>My Team</p>
                 </div>
             <div className='flex column'>
             <div className='w-1/4 container items-center' >
-                <div className='bg-primary rounded-md m-3 flex flex-col items-center text-white'>
+                <div className='bg-primary rounded-md m-3 flex flex-col items-center text-white text-[10px] md:text-[18px]'>
                         <h1 className='font-bold'>Team Leader</h1>
                         <div><Avatar /></div>
                         <p className='m-3'>{userName}</p>
@@ -120,9 +117,9 @@ function TeamMembers() {
                                     Recognize
                     </Button> 
                 </div>
-                <div className='flex justify-center '>
+                <div className='md:flex justify-center '>
                     <Button
-                                    className='bg-buttons m-2 text-white w-full'
+                                    className='bg-buttons my-2 md:mx-2 text-white w-full '
                                     size="md"
                                     ripple="light"
                                     color='white'
@@ -131,7 +128,7 @@ function TeamMembers() {
                                     Add Members 
                     </Button> 
                     <Button
-                                    className=' m-2 text-white w-full'
+                                    className=' my-2 md:mx-2 text-white md:w-full'
                                     size="md"
                                     ripple="light"
                                     color='red'
@@ -157,7 +154,7 @@ function TeamMembers() {
               ) : (
             teamData.map((teammate) => (
                         
-                            <div className='bg-white rounded-md m-2 flex flex-col items-center p-2 text-primary'>
+                            <div key={teammate.id} className='bg-white rounded-md m-2 flex flex-col items-center p-2 text-primary'>
                             <img
                             className='shadow m-auto   w-16 h-16 rounded-full'
                             src={img}
@@ -184,7 +181,7 @@ function TeamMembers() {
          
         }
        
-      </MainLayout>
+      </SuperiorLayout>
     </div>
   )
 }

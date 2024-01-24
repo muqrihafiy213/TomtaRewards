@@ -84,7 +84,7 @@ const Announcement = () => {
                 <h1 className='text-[40px] font-bold text-white'>{announce.name}</h1>
                 <p className='text-[16px] text-white'>{announce.quote}</p>
                 <Button
-                  color="lightBlue"
+                  color="light-blue"
                   size="lg"
                   onClick={() => handleButtonClick(announce)}
                   ripple="light"
@@ -132,7 +132,7 @@ const Announcement = () => {
             </div>
             <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
               <Button
-                color="lightBlue"
+                color="white"
                 onClick={closeModal}
                 ripple= {true}
               >
