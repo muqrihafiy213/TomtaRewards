@@ -259,7 +259,7 @@ function UserList() {
                       />
                     )}
                 </div>
-                <p className='m-auto text-[10px] md:text-[18px] text-white'>{user.firstName} {user.lastName}</p>
+                <p className='m-auto text-[10px] md:text-[18px] text-secondary'>{user.firstName} {user.lastName}</p>
                 <button onClick={() => handleOpenDemote(user.id)}><UserMinusIcon className='w-6 h-6 text-red-500'/></button>
                 <Checkbox className="h-8 w-8 rounded-full border-gray-900/20 bg-buttons transition-all hover:scale-105 hover:before:opacity-0"
                   checked={selectedUsers.includes(user.id)}
@@ -317,7 +317,7 @@ function UserList() {
                       />
                     )}
                 </div>
-                <p className='m-auto text-white text-[10px] md:text-[18px]'>{user.firstName} {user.lastName}</p>
+                <p className='m-auto text-secondary text-[10px] md:text-[18px]'>{user.firstName} {user.lastName}</p>
                 <button onClick={() => handleOpenGrant(user.id)}><ChevronDoubleUp className='w-6 h-6 text-secondary'/></button>
                 <Checkbox className="h-8 w-8 rounded-full border-gray-900/20 bg-buttons transition-all hover:scale-105 hover:before:opacity-0"
                   checked={selectedUsers.includes(user.id)}
