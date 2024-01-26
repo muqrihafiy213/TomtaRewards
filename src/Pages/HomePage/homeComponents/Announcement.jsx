@@ -84,7 +84,8 @@ const Announcement = () => {
                 <h1 className='text-[40px] font-bold text-white'>{announce.name}</h1>
                 <p className='text-[16px] text-white'>{announce.quote}</p>
                 <Button
-                  color="light-blue"
+                  className='bg-buttons'
+                  color="white"
                   size="lg"
                   onClick={() => handleButtonClick(announce)}
                   ripple="light"

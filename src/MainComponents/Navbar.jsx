@@ -110,7 +110,7 @@ const Navbar = ({userRole}) => {
             <div onClick={handleNav} className='block ' ref={buttonRef}>
               {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
             </div>
-            <span className="text-white mx-auto"><Points /></span>
+            <span className="text-secondary mx-auto"><Points /></span>
           </div>
         </li>
         <div className='bg-secondary text-buttons'>

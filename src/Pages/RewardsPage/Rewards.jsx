@@ -144,7 +144,7 @@ function Rewards() {
                 </div>
             <div key="key" className='w-4/12 container p-4'>
               <div className='m-auto flex justify-center bg-primary rounded-[99px] shadow-xl p-2'>
-                <span className='text-white font-bold '>
+                <span className='text-secondary font-bold '>
                   <Points />
                 </span>
               </div>
@@ -169,8 +169,8 @@ function Rewards() {
                   </div>
                   <div className='container py-5'>
                   <div className='flex flex-col justify-center   '>
-                    <div className='container '><p className=' text-primary md:text-[20px] text-[15px] font-bold py-2 pr-5  text-center'>{rewards.name}</p></div>
-                    <span className=' text-primary text-[12px]  py-2 pr-5 text-center'> Quantity: {rewards.quantity} </span>
+                    <div className='container '><p className=' text-secondary md:text-[20px] text-[15px] font-bold py-2 pr-5  text-center'>{rewards.name}</p></div>
+                    <span className=' text-secondary text-[12px]  py-2 pr-5 text-center'> Quantity: {rewards.quantity} </span>
                   </div>
                   </div>
                 </div>
