@@ -66,7 +66,7 @@ const Navbar = ({userRole}) => {
 
    
   return (
-    <div className='flex relative justify-between items-center h-24 max-w-[1240px] mx-auto px-4 text-secondary bg-primary drop-shadow-md z-50'>
+    <div className='flex relative justify-between items-center h-24 mx-auto px-4 text-secondary bg-primary drop-shadow-md z-50'>
     
       <div onClick={handleNav} className='flex '>
         {nav ? <AiOutlineClose size={20} className='my-auto' /> : <AiOutlineMenu size={20} className='my-auto' />}

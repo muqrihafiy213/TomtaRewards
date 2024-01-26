@@ -10,7 +10,8 @@ import { db, imgDB } from '../../firebaseConfig';
 import { collection, addDoc ,getDocs} from 'firebase/firestore';
 import { getDownloadURL, ref as storageRef, uploadBytesResumable } from "firebase/storage";
 import emailjs from '@emailjs/browser';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const NewAnnouncement = ({ openPopUp, closePopUp }) => {
@@ -57,6 +58,13 @@ const NewAnnouncement = ({ openPopUp, closePopUp }) => {
       console.error('Error sending emails', error);
     }
   };
+
+  const showToastMessage = () => {
+    toast.success("Publish Success", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
+
 
   const handlelosePopUp = (e) => {
     if (e.target.id === 'ModelContainer') {
@@ -110,12 +118,13 @@ const NewAnnouncement = ({ openPopUp, closePopUp }) => {
           setText('');
           setImage(null);
           setImportance(false);
-         
+          
           closePopUp();
-        }
+        },
+        showToastMessage(),
       );
     } catch (error) {
-      console.error("Listing Error", error);
+      console.error("Publish Error", error);
     }
   };
 
@@ -228,6 +237,7 @@ const NewAnnouncement = ({ openPopUp, closePopUp }) => {
           </Card>
         </div>
       </div>
+      <ToastContainer />
     </div>
     
   );

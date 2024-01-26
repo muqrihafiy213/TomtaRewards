@@ -77,7 +77,7 @@ const Announcement = () => {
                 </div>
               ) : (announceData.map((announce) => (
           <div key={announce.id}>
-            <div className={`w-full h-96 bg-cover bg-center ${announce.is_important ? 'border-4 border-yellow-400' : ''}`} style={{ backgroundImage: `url(${announce.imageUrl})` }}>
+            <div className={`w-full h-96 bg-cover bg-center ${announce.is_important ? 'border-4 border-yellow-400' : ''}`} style={{ backgroundImage: `url(${announce.header_image})` }}>
               <div className='flex flex-col items-center justify-center h-full bg-black bg-opacity-50'>
               <h1 className='text-[40px] font-bold text-white'>{announce.title}</h1>
               {announce.is_important && <StarIcon className='text-yellow-400 w-8 h-8 mb-2' />}
