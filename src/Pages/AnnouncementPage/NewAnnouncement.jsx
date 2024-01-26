@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import {
   Checkbox,
   Card,
@@ -7,9 +7,9 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import { db, imgDB } from '../../firebaseConfig';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc ,getDocs} from 'firebase/firestore';
 import { getDownloadURL, ref as storageRef, uploadBytesResumable } from "firebase/storage";
-
+import emailjs from '@emailjs/browser';
 
 
 
@@ -19,8 +19,44 @@ const NewAnnouncement = ({ openPopUp, closePopUp }) => {
   const [quote, setQuote] = useState('');
   const [image, setImage] = useState(null);
   const [importance, setImportance] = useState(false);
+  const [emails,setEmail] = useState([])
   
-  
+
+  useEffect(() => {   
+    const fetchEmail = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, 'Roles', 'Users', 'UserProfile'));
+        const emails = querySnapshot.docs.map(doc => doc.data().email);
+        setEmail(emails);
+      } catch (error) {
+        console.error('Error fetching rewards:', error);
+        return [];
+      }
+    };
+    fetchEmail();
+  }, []);
+
+  const sendEmails = async () => {
+    try {
+      for (const email of emails) {
+        const templateParams = {
+          recipient: email,
+          title:title,
+          quote:quote,
+          message:text,
+        };
+
+        await emailjs.send(
+          'service_g75bz1l',
+          'template_f964rh9',
+          templateParams,
+          'ZTHToJsyTTCdorWeZ'
+        );
+      }
+    } catch (error) {
+      console.error('Error sending emails', error);
+    }
+  };
 
   const handlelosePopUp = (e) => {
     if (e.target.id === 'ModelContainer') {
@@ -59,7 +95,7 @@ const NewAnnouncement = ({ openPopUp, closePopUp }) => {
         async () => {
           // File uploaded successfully
           const url = await getDownloadURL(uploadTask.snapshot.ref);
-          
+          sendEmails();
           // Add the document with the download URL
           await addDoc(collection(db, "announcements"), {
             title: title,
@@ -103,7 +139,7 @@ const NewAnnouncement = ({ openPopUp, closePopUp }) => {
       onClick={handlelosePopUp}
       className='absolute inset-0 z-50 bg-black flex justify-center items-center bg-opacity-20 backdrop-blur-sm'>
       <div
-        className='p-5 bg-secondary shadow-inner border-e-emerald-600 rounded-lg py-5'>
+        className='p-5 bg-primary shadow-inner border-e-emerald-600 rounded-lg py-5'>
         <div>
           <Card color="transparent" shadow={false}>
             <Typography variant="h4" color="blue-gray">

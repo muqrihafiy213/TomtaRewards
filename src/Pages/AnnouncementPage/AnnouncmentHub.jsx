@@ -223,7 +223,7 @@ function AnnnouncementHub() {
                         >
                         
                           <Button
-                            className="bg-primary m-2 text-white"
+                            className="bg-secondary m-2 text-white"
                             size="sm"
                             ripple={true}
                             onClick={() => handleOpen(announce)}
