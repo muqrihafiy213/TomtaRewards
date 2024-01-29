@@ -26,23 +26,31 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-     
-      const user = userCredential.user;
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+    if(user.emailVerified){
+      try {
       
-      localStorage.setItem('token', user.accessToken);
-      localStorage.setItem('user', JSON.stringify(user));
-      await fetchUserProfile(user.uid);
-      navigate("/");
-
-    } catch (error) {
-        if (error.code === "auth/invalid-credential") {
-            alert("the email address or password is incorrect ");
-        }
-        dispatch(setError(error.message));
-      console.error(error);
+      
+        localStorage.setItem('token', user.accessToken);
+        localStorage.setItem('user', JSON.stringify(user));
+        await fetchUserProfile(user.uid);
+        navigate("/");
+  
+      } catch (error) {
+          if (error.code === "auth/invalid-credential") {
+              alert("the email address or password is incorrect ");
+          }
+          dispatch(setError(error.message));
+        console.error(error);
+      }
     }
+    else{
+      return(
+        alert("Please verify your email")
+      )
+    }
+  
   }
   console.log('User from Redux in component:', currentUser);
   return (

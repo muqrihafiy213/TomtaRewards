@@ -133,7 +133,10 @@ const UpcomingActivity = () => {
                     <div className='grid grid-cols-2 p-3'>
                       <div className=' flex justify-center'>
                         <MdTimelapse className='h-5 w-5 m-1' />
-                        {dateofevent ? new Date(dateofevent).toLocaleTimeString() : 'Invalid Date'}
+                        {dateofevent ? new Date(dateofevent).toLocaleTimeString([], {
+                          hour: '2-digit',
+                          minute: '2-digit',
+                        },) : 'Invalid Date'}
                       </div>
                       <div className='flex justify-center'>
                         <button
