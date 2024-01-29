@@ -45,7 +45,7 @@ const EditListing = ({ openPopUp, closePopUp, selectedReward, onSaveChanges }) =
       onClick={handleLosePopUp}
       className='absolute inset-0 z-50 bg-black flex justify-center items-center bg-opacity-20 backdrop-blur-sm'>
       <div
-        className='p-5 bg-secondary shadow-inner border-e-emerald-600 rounded-lg py-5'>
+        className='p-5 bg-primary shadow-inner border-e-emerald-600 rounded-lg py-5'>
         <div>
           <Card color="transparent" shadow={false}>
             <Typography variant="h4" color="blue-gray">

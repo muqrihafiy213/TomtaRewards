@@ -141,12 +141,14 @@ const sendEmails = async () => {
                   Title
                 </Typography>
                 <Input
+                 
                   size="lg"
                   placeholder="Activity Title"
                   className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                   labelProps={{
                     className: "before:content-none after:content-none",
                   }}
+                  
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                 />

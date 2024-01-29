@@ -138,19 +138,11 @@ function Activity() {
                       </div>
                     </div>
                     <div className='grid grid-cols-2 p-3'>
-                      <div className=' flex justify-center'>
-                        <MdTimelapse className='h-5 w-5 m-1' />
-                        {dateofevent ? new Date(dateofevent).toLocaleTimeString() : 'Invalid Date'}
+                      <div className=' flex justify-center '>
+                        <MdTimelapse className='h-5 w-5 my-0.5 mx-2' />
+                        <p>{dateofevent ? new Date(dateofevent).toLocaleTimeString() : 'Invalid Date'}</p>
                       </div>
-                      {/* <div className='flex justify-center'>
-                        <button
-                          
-                          className={`text-buttons`}
-                          onClick={() => handleButtonClick(activity)}
-                        >
-                          PARTICIPANTS
-                        </button>
-                      </div> */}
+                     
                     </div>
                   </div>
                 </div>

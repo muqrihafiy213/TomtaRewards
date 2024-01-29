@@ -159,18 +159,18 @@ function Rewards() {
             rewardsData.map((rewards) => (
               <div className='container mx-auto'>
                 <div className=' bg-white rounded-[10px] shadow m-4 ' key={rewards.id}>
+                <div className='container py-2'><p className=' text-secondary md:text-[20px] text-[15px] font-bold text-center '>{rewards.name}</p></div>
                 <div className='columns-2'>
                   <div className='flex rewards-container overflow-hidden'>
                   <img
-                    className='p-2 shadow-inner max-h-fit m-auto object-contain'
+                    className='px-2 shadow-inner max-h-fit m-auto object-contain'
                     src={rewards.imageUrl }
                     alt='placeholder'
                   />
                   </div>
-                  <div className='container py-5'>
-                  <div className='flex flex-col justify-center   '>
-                    <div className='container '><p className=' text-secondary md:text-[20px] text-[15px] font-bold py-2 pr-5  text-center'>{rewards.name}</p></div>
-                    <span className=' text-secondary text-[12px]  py-2 pr-5 text-center'> Quantity: {rewards.quantity} </span>
+                  <div className='container py-12'>
+                  <div className='flex flex-col justify-center '>
+                    <span className=' text-secondary text-[12px] text-center'> Quantity: {rewards.quantity} </span>
                   </div>
                   </div>
                 </div>
