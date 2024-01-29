@@ -8,7 +8,7 @@ import {
 } from "@material-tailwind/react";
 import { db } from '../../../firebaseConfig';
 import { collection, addDoc,getDocs } from 'firebase/firestore';
-import {  DateTimePicker , LocalizationProvider} from '@mui/x-date-pickers';
+import {  DateTimePicker , LocalizationProvider,renderTimeViewClock} from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import emailjs from '@emailjs/browser';
 import { ToastContainer, toast } from 'react-toastify';
@@ -124,7 +124,7 @@ const sendEmails = async () => {
     <div
       id='ModelContainer'
       onClick={handlelosePopUp}
-      className='absolute inset-0 z-50 bg-black flex justify-center items-center bg-opacity-20 backdrop-blur-sm'>
+      className='fixed inset-0 z-50 bg-black flex justify-center items-center bg-opacity-20 backdrop-blur-sm'>
       <div
         className='p-5 bg-primary shadow-inner border-e-emerald-600 rounded-lg py-5'>
         <div>
@@ -172,6 +172,11 @@ const sendEmails = async () => {
                     label="Controlled picker"
                     value={formatDate(dateTime)}
                     onChange={(newValue) => setDateTime(newValue)}
+                    viewRenderers={{
+                      hours: renderTimeViewClock,
+                      minutes: renderTimeViewClock,
+                      
+                    }}
                     />
                
                 <Typography variant="h6" color="blue-gray" className="-mb-3">

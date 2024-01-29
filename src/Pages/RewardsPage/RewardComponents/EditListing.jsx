@@ -43,7 +43,7 @@ const EditListing = ({ openPopUp, closePopUp, selectedReward, onSaveChanges }) =
     <div
       id='ModelContainer'
       onClick={handleLosePopUp}
-      className='absolute inset-0 z-50 bg-black flex justify-center items-center bg-opacity-20 backdrop-blur-sm'>
+      className='fixed inset-0 z-50 bg-black flex justify-center items-center bg-opacity-20 backdrop-blur-sm overscroll-y-none overflow-hidden '>
       <div
         className='p-5 bg-primary shadow-inner border-e-emerald-600 rounded-lg py-5'>
         <div>

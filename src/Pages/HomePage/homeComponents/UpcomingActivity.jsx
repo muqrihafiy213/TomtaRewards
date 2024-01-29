@@ -123,7 +123,7 @@ const UpcomingActivity = () => {
                     <div className='grid grid-cols-2 p-3 '>
                       <div className=' flex justify-center'>
                         <CiLocationOn className='h-5 w-5 m-1' />
-                        <p className='text-primary '>{activity.location}</p>
+                        <p className=''>{activity.location}</p>
                       </div>
                       <div className=' flex justify-center'>
                         <CiCalendarDate className='h-5 w-5 m-1 ' />

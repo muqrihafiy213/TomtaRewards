@@ -104,7 +104,7 @@ const NewListing = ({ openPopUp, closePopUp }) => {
     <div
       id='ModelContainer'
       onClick={handlelosePopUp}
-      className='absolute inset-0 z-50 bg-black flex justify-center items-center bg-opacity-20 backdrop-blur-sm'>
+      className='fixed inset-0 z-50 bg-black flex justify-center items-center bg-opacity-20 backdrop-blur-sm'>
       <div
         className='p-5 bg-primary shadow-inner border-e-emerald-600 rounded-lg py-5'>
         <div>
