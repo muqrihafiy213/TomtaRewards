@@ -131,7 +131,7 @@ const ImageUploader = () => {
       {/* <button className="invisible group-hover:visible  
             absolute top-1/2 bottom-1/2 left-0 right-0 bg-blue-500 text-white">Button</button> */}
       </div>
-      <button className={`pb-1 ${imageUrl === "null"  ? "invisible" : "text-buttons visible"}`} onClick={handleOpen}>
+      <button className={`pb-1 ${imageUrl === "null" || null ? "invisible" : "text-buttons visible"}`} onClick={handleOpen}>
         Remove Image
       </button>
       {/* <input

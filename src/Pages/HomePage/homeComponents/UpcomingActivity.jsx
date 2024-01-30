@@ -104,7 +104,7 @@ const UpcomingActivity = () => {
         </div>
       ) : filteredActivities.length === 0 ? (
         <div className='m-auto container flex justify-center'>
-          <div className='p-10'>No Upcoming Activities</div>
+          <div className='p-10'>No Upcoming Activities/All Activites Participaated</div>
         </div>
       ) : (
         <div className='max-w-[1240px] mx-auto grid md:grid-cols-2 gap-6'>
@@ -114,7 +114,7 @@ const UpcomingActivity = () => {
 
             return (
               <div key={activity.id}>
-                <div className='animate-pulse bg-white rounded-[20px] shadow m-4'>
+                <div className=' bg-white rounded-[20px] shadow m-4'>
                   <div className=''>
                   <ImageCategory value={activity.category}/>
                   </div>
