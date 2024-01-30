@@ -12,6 +12,9 @@ const ImageUploader = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isWarningOpen, setIsWarningOpen] = useState(false);
+
+  const handleOpen = () => setIsWarningOpen(!isWarningOpen);
 
   useEffect(() => {
     // Fetch the image URL when the component mounts
@@ -81,15 +84,57 @@ const ImageUploader = () => {
     }
   };
 
+  const handleDeleteImage = async () => {
+    try {
+      const user = auth.currentUser;
+      const userId = user.uid;
+      const userProfileRef = doc(collection(db, 'Roles', 'Users', 'UserProfile'), userId);
+
+      await updateDoc(userProfileRef, {
+        profile_image: "null",
+      });
+      fetchImageUrl();
+      setIsWarningOpen(false)
+    } catch (error) {
+      console.error('Delete Error', error);
+    }
+  };
+
   return (
     <div className="text-center">
+      <div className='group relative '>
       <img
         alt="avatar"
-        src={imageUrl || img}
-        className="w-52 h-52 mx-6 my-10 rounded-full shadow"
+        src={imageUrl ? imageUrl : img}
+        className="w-52 h-52 mx-6 mt-10 mb-5 rounded-full shadow"
+        onError={(e) => {
+          e.target.onerror = null;
+          e.target.src = img;
+          e.target.alt = 'placeholder';
+        }}
       />
-
       <input
+        type="file"
+        id="uploadInput"
+        accept="image/*"
+        style={{ display: 'none' }}
+        onChange={handleImageChange}
+      />
+      <label
+        htmlFor="uploadInput"
+        className="invisible group-hover:visible  
+        absolute top-1/2 bottom-1/2 left-0 right-0 bg-blue-500 text-buttons cursor-pointer"
+       
+      >
+        Change Avatar
+      </label> 
+      {/* <button className="invisible group-hover:visible  
+            absolute top-1/2 bottom-1/2 left-0 right-0 bg-blue-500 text-white">Button</button> */}
+      </div>
+      <button className={`pb-1 ${imageUrl === "null"  ? "invisible" : "text-buttons visible"}`} onClick={handleOpen}>
+        Remove Image
+      </button>
+      {/* <input
         type="file"
         id="uploadInput"
         accept="image/*"
@@ -102,8 +147,8 @@ const ImageUploader = () => {
        
       >
         Change Avatar
-      </label>
-
+      </label> */}
+      
       
       {/* {isModalOpen && (
         <div className="modal">
@@ -112,15 +157,12 @@ const ImageUploader = () => {
           <button onClick={() => setIsModalOpen(false)}>Cancel</button>
         </div>
       )} */}
-      <Dialog open={isModalOpen} >
+      <Dialog open={isModalOpen} handler={handleOpen}>
         <DialogHeader>Confirm Profile</DialogHeader>
         <DialogBody>
         <div className="flex fixed-container  overflow-hidden">
         <img className="p-5 shadow m-auto object-contain image" src={selectedImage && URL.createObjectURL(selectedImage)} alt="Selected" />
         </div>
-         
-          
-        
         </DialogBody>
         <DialogFooter>
           <Button
@@ -132,6 +174,29 @@ const ImageUploader = () => {
             <span>Cancel</span>
           </Button>
           <Button variant="gradient" color="green"  onClick={handleImageUpload}>
+            <span>Confirm</span>
+          </Button>
+        </DialogFooter>
+      </Dialog>
+
+      {/* Warning dialog */}
+      <Dialog size="xs" open={isWarningOpen} >
+        <DialogHeader>Confirm Delete</DialogHeader>
+        <DialogBody>
+        <div className="flex   m-auto overflow-hidden">
+         Are you sure to remove current photo?
+        </div>
+        </DialogBody>
+        <DialogFooter>
+          <Button
+            variant="text"
+            color="red"
+            onClick={() => setIsWarningOpen(false)}
+            className="mr-1"
+          >
+            <span>Cancel</span>
+          </Button>
+          <Button variant="gradient" color="green"  onClick={handleDeleteImage}>
             <span>Confirm</span>
           </Button>
         </DialogFooter>
