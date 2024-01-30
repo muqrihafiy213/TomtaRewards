@@ -118,7 +118,7 @@ const UpcomingActivity = () => {
                   <div className=''>
                   <ImageCategory value={activity.category}/>
                   </div>
-                  <div className='bg-secondary text-center text-black text-[16px] font-light'>{activity.title}</div>
+                  <div className='bg-secondary text-center text-white text-[16px] font-light'>{activity.title}</div>
                   <div className='p-3 text-[16px] '>
                     <div className='grid grid-cols-2 p-3 '>
                       <div className=' flex justify-center'>
