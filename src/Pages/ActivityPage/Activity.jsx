@@ -127,17 +127,18 @@ function Activity() {
                   </div>
                   <div className='bg-secondary text-center text-primary text-[16px] font-light'>{activity.title}</div>
                   <div className='p-3 text-[16px] '>
-                    <div className='grid grid-cols-2 p-3 '>
+                    <div className=' p-3 '>
                       <div className=' flex justify-center'>
                         <CiLocationOn className='h-5 w-5 m-1' />
                         <p className=' '>{activity.location}</p>
                       </div>
-                      <div className=' flex justify-center'>
+                      
+                    </div>
+                    <div className='grid grid-cols-2 p-3'>
+                    <div className=' flex justify-center'>
                         <CiCalendarDate className='h-5 w-5 m-1 ' />
                         {dateofevent ? new Date(dateofevent).toLocaleDateString() : 'Invalid Date'}
                       </div>
-                    </div>
-                    <div className='grid grid-cols-2 p-3'>
                       <div className=' flex justify-center '>
                         <MdTimelapse className='h-5 w-5 my-0.5 mx-2' />
                         <p>{dateofevent ? new Date(dateofevent).toLocaleTimeString([], {
@@ -186,28 +187,11 @@ function Activity() {
             <SwiperSlide>
               <div key={activity.id}>
                 <div className=' bg-primary rounded-[20px] shadow m-4'>
-                  <div className='flex fixed-container  overflow-hidden'>
-                    {activity.imageUrl ? (
-                      <img
-                        className='p-5 shadow m-auto object-contain image'
-                        src={activity.imageUrl}
-                        alt={activity.title}
-                        onError={(e) => {
-                          e.target.onerror = null;
-                          e.target.src = 'https://placehold.co/400x200/png';
-                          e.target.alt = 'placeholder';
-                        }}
-                      />
-                    ) : (
-                      <img
-                        className='p-5 shadow  max-h-fit m-auto object-contain image'
-                        src='https://placehold.co/400x200/png'
-                        alt='placeholder'
-                      />
-                    )}
+                  <div className=''>
+                  <ImageCategory value={activity.category}/>
                   </div>
-                  <div className='bg-secondary text-center text-black text-[16px] font-light'>{activity.title}</div>
-                  <div className='p-3 text-[16px] text-white '>
+                  <div className='bg-secondary text-center text-white text-[16px] font-light'>{activity.title}</div>
+                  <div className='p-3 text-[16px]  '>
                     <div className='grid grid-cols-2 p-3 '>
                       <div className=' flex justify-center'>
                         <CiLocationOn className='h-5 w-5 m-1' />

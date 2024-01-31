@@ -104,12 +104,18 @@ const Navbar = ({userRole}) => {
 
        {/* sidebar */}
       <div ref={navRef} className={nav ? ' left-0 top-0 md:w-[30%] w-[50%] h-screen border-r absolute bg-secondary ease-in-out duration-500 z-50 ' : 'fixed left-[-100%] z-50 '}>
-      
+        <div className='bg-primary h-24 items-center py-7'>
+        <div onClick={handleNav} className=' flex justify-center'>
+        {nav ? <AiOutlineClose size={20} className='my-auto' /> : <AiOutlineMenu size={20} className='my-auto' />}
+        <Link to="/" className="">
+          <p className='text-3xl font-bold text-secondary px-2  '>
+            Tomta Rewards
+          </p>
+        </Link>
+      </div></div>
         <li className='font-bold p-4'>
           <div className=" flex  bg-primary rounded-[99px] shadow-xl  p-2" >
-            <div onClick={handleNav} className='block ' ref={buttonRef}>
-              {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
-            </div>
+            
             <span className="text-secondary mx-auto"><Points /></span>
           </div>
         </li>

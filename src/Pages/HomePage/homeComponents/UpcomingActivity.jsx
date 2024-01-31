@@ -91,9 +91,7 @@ const UpcomingActivity = () => {
     }
   };
 
-  const filteredActivities = activityData.filter(
-    (activity) => !activity.participants?.some((participant) => participant.uid === userId)
-  );
+  
 
   return (
     <div className='container mx-auto'>
@@ -102,64 +100,58 @@ const UpcomingActivity = () => {
         <div className='m-auto container flex justify-center'>
           <div className='p-10'>Loading...</div>
         </div>
-      ) : filteredActivities.length === 0 ? (
-        <div className='m-auto container flex justify-center'>
-          <div className='p-10'>No Upcoming Activities/All Activites Participaated</div>
-        </div>
       ) : (
         <div className='max-w-[1240px] mx-auto grid md:grid-cols-2 gap-6'>
-          {filteredActivities.slice(0, 4).map((activity) => {
-            const dateofevent =
-              activity?.event_date instanceof Timestamp ? activity.event_date.toDate() : null;
+          {activityData.slice(0, 4).map((activity) => {
+              const dateofevent =
+                activity?.event_date instanceof Timestamp ? activity.event_date.toDate() : null;
 
-            return (
-              <div key={activity.id}>
-                <div className=' bg-white rounded-[20px] shadow m-4'>
-                  <div className=''>
-                  <ImageCategory value={activity.category}/>
-                  </div>
-                  <div className='bg-secondary text-center text-white text-[16px] font-light'>{activity.title}</div>
-                  <div className='p-3 text-[16px] '>
-                    <div className='grid grid-cols-2 p-3 '>
-                      <div className=' flex justify-center'>
-                        <CiLocationOn className='h-5 w-5 m-1' />
-                        <p className=''>{activity.location}</p>
-                      </div>
-                      <div className=' flex justify-center'>
-                        <CiCalendarDate className='h-5 w-5 m-1 ' />
-                        {dateofevent ? new Date(dateofevent).toLocaleDateString() : 'Invalid Date'}
-                      </div>
+              return (
+                <div key={activity.id}>
+                  <div className=' bg-white rounded-[20px] shadow m-4'>
+                    <div className=''>
+                      <ImageCategory value={activity.category}/>
                     </div>
-                    <div className='grid grid-cols-2 p-3'>
-                      <div className=' flex justify-center'>
-                        <MdTimelapse className='h-5 w-5 m-1' />
-                        {dateofevent ? new Date(dateofevent).toLocaleTimeString([], {
-                          hour: '2-digit',
-                          minute: '2-digit',
-                        },) : 'Invalid Date'}
+                    <div className='bg-secondary text-center text-white text-[16px] font-light'>{activity.title}</div>
+                    <div className='p-3 text-[16px] '>
+                      <div className='grid grid-cols-2 p-3 '>
+                        <div className=' flex justify-center'>
+                          <CiLocationOn className='h-5 w-5 m-1' />
+                          <p className=''>{activity.location}</p>
+                        </div>
+                        <div className=' flex justify-center'>
+                          <CiCalendarDate className='h-5 w-5 m-1 ' />
+                          {dateofevent ? new Date(dateofevent).toLocaleDateString() : 'Invalid Date'}
+                        </div>
                       </div>
-                      <div className='flex justify-center'>
-                        <button
-                          type='submit'
-                          className={`rounded-[20px] w-[200px] shadow ${
-                            activity.participantStatus
-                              ? 'bg-green-300 opacity-50 cursor-not-allowed'
-                              : 'bg-green-300 hover:bg-green-200 border-b-4 border-green-400 hover:border-green-300'
-                          }`}
-                          onClick={() => participateInActivity(activity.id)}
-                          disabled={activity.participantStatus}
-                        >
-                          {activity.participantStatus ? 'PARTICIPATED' : 'PARTICIPATE'}
-                          
-                        </button>
+                      <div className='grid grid-cols-2 p-3'>
+                        <div className=' flex justify-center'>
+                          <MdTimelapse className='h-5 w-5 m-1' />
+                          {dateofevent ? new Date(dateofevent).toLocaleTimeString([], {
+                            hour: '2-digit',
+                            minute: '2-digit',
+                          },) : 'Invalid Date'}
+                        </div>
+                        <div className='flex justify-center'>
+                          <button
+                            type='submit'
+                            className={`rounded-[20px] w-[200px] shadow ${
+                              activity.participantStatus
+                                ? 'bg-green-300 opacity-50 cursor-not-allowed'
+                                : 'bg-green-300 hover:bg-green-200 border-b-4 border-green-400 hover:border-green-300'
+                            }`}
+                            onClick={() => participateInActivity(activity.id)}
+                            disabled={activity.participantStatus}  
+                          >
+                            {activity.participantStatus ? 'PARTICIPATED' : 'PARTICIPATE'}
+                          </button>
+                        </div>
                       </div>
-                      
                     </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+              })}
         </div>
       )}
     </div>
