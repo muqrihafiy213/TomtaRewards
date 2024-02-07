@@ -55,7 +55,7 @@ const Login = () => {
   console.log('User from Redux in component:', currentUser);
   return (
     
-    <div class="area">
+    <div class="area w-full  justify-center  flex items-center">
 			<ul class="circles">
 				<li></li>
 				<li></li>
@@ -68,28 +68,35 @@ const Login = () => {
 				<li></li>
 				<li></li>
 			</ul>
-    <div className='w-full p-[2.3rem] px-4  justify-center items-center inline-flex'>
-    <div className='w-[480px] h-[500px] relative'>
-        <div className='w-2/3 justify-center items-center bg-white mx-auto mt-20 shadow-xl flex flex-col p-4  rounded-lg hover:scale-105 duration-300'>
-        <h1 className=' text-secondary text-[30px] font-medium items-center justify-center'>Tomta Rewards</h1>
+    <div className=' md:w-1/3 mx-1'>
+    <div className='relative '>
+        <div className='  bg-white mx-auto shadow-xl   p-4  rounded-lg hover:scale-105 duration-300'>
+        <p className=' text-secondary lg:text-[28px] xs:text-[18px] font-bold text-center'>Tomta Rewards</p>
             <form onSubmit={handleSubmit} className='flex flex-col'>
-                <input className='my-4 rounded-[5px] border border-black'
+                <label htmlFor='email' className='mt-2 font-bold'>
+                 Email
+               </label>
+                <input className=' rounded-[5px] w-full border border-black p-2 text-[12px] md:text-[14px]'
                 type="email"
-                placeholder="Your Email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                
                 />
-                <input className=' rounded-[5px] border border-black'
+                <label htmlFor='password' className='mt-2 font-bold'>
+                 Password
+               </label>
+                <input className='w-full rounded-[5px] border border-black p-2'
                 type="password"
                 placeholder="Your Password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 />
-                <button  type="submit" className='bg-buttons rounded-md shadow w-[200px] text-white my-3 mx-auto py-3'>Sign In</button>
+               
+                <button  type="submit" className='bg-buttons rounded-md shadow  text-white my-3 mx-auto p-3'>Sign In</button>
             </form>
-            <p>No Existing Account? <Link to="/signup" className='text-buttons'>Create Account</Link></p>
+            <p className='text-center'>New User? <Link to="/signup" className='text-buttons '>Join Now</Link></p>
         </div>
   </div>
  </div>

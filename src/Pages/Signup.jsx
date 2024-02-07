@@ -81,7 +81,7 @@ const Signup = () => {
 };
 
   return (
-    <div class="area">
+    <div class="area w-full  justify-center  flex items-center">
 			<ul class="circles">
 				<li></li>
 				<li></li>
@@ -94,16 +94,16 @@ const Signup = () => {
 				<li></li>
 				<li></li>
 			</ul>
-    <div className='w-full p-[2.3rem] px-4  justify-center items-center inline-flex'>
-      <div className='w-[480px] h-[500px] relative'>
-        <div className='w-2/3 justify-center items-center bg-white mx-auto mt-20 shadow-xl flex flex-col p-4  rounded-lg hover:scale-105 duration-300'>
-          <h1 className='text-secondary text-[30px] font-medium items-center justify-center'>Registration</h1>
+    <div className='md:w-1/3 mx-1 w-full'>
+      <div className=' relative '>
+        <div className='  bg-white mx-auto shadow-xl  p-4  rounded-lg  '>
+          <h1 className='text-secondary text-[30px] font-medium items-center justify-center'>Login Details</h1>
           <form onSubmit={handleSubmit} className='flex flex-col'>
           <label htmlFor='firstName' className='mt-2'>
               First Name:
             </label>
             <input
-              className='rounded-[5px] border border-black'
+              className='rounded-[5px] border border-black px-1'
               type='text'
               required
               value={firstName}
@@ -113,17 +113,17 @@ const Signup = () => {
               Last Name:
             </label>
             <input
-              className='rounded-[5px] border border-black'
+              className='rounded-[5px] border border-black px-2'
               type='text'
               required
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
             />
-            <label htmlFor='email' className='mt-2'>
+            <label htmlFor='email' className='mt-2 '>
               Email:
             </label>
             <input
-              className='rounded-[5px] border border-black'
+              className='rounded-[5px] border border-black px-2'
               type='email'
               required
               value={email}
@@ -133,7 +133,7 @@ const Signup = () => {
               Password:
             </label>
             <input
-              className='rounded-[5px] border border-black'
+              className='rounded-[5px] border border-black px-2'
               type='password'
               required
               value={password}

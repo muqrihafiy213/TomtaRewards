@@ -16,6 +16,9 @@ module.exports = withMT({
       fontFamily: {
         sans: ['Roboto', 'ui-sans-serif', 'system-ui', '-apple-system'],
       },
+      screens: {
+        'sm': {'max': '639px'},
+      }
     },
   },
   plugins: [],

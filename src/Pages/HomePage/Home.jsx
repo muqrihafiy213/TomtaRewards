@@ -3,6 +3,7 @@ import MainLayout from '../../Layouts/MainLayout'
 import Announcement from './homeComponents/Announcement'
 import UpcomingActivity
  from './homeComponents/UpcomingActivity'
+import NextActivity from './homeComponents/NextActivity'
 
 
 function Home() {
@@ -13,20 +14,17 @@ function Home() {
   return (
     <div>
       <MainLayout >
-        <div>
+        <div className='flex'>
+        <div className='w-3/5'>
         <Announcement />
         </div>
-        <div >
+        <div className='w-2/5 py-2'>
+            <NextActivity />
             <UpcomingActivity />     
         </div>
         
-      {/* <div className="flex min-h-screen ">
-        <div className="w-4/12  bg-red-200 rounded shadow  " >
-            <ObjectiveAnnouncement />
-
         </div>
-        
-    </div> */}
+     
       
       
       </MainLayout>

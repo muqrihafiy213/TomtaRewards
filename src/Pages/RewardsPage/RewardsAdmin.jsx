@@ -150,9 +150,7 @@ function RewardsAdmin () {
                             >
                             New Listing
                             </Button>    
-                    {/* <div className=" m-auto flex justify-center bg-primary rounded-[99px] shadow-xl  p-2" >
-                        <span className="text-white font-bold "><Points /></span>
-                    </div> */}
+                    
                     
                 </div>
                 

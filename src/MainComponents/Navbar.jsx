@@ -71,14 +71,14 @@ const Navbar = ({userRole}) => {
       <div onClick={handleNav} className='flex '>
         {nav ? <AiOutlineClose size={20} className='my-auto' /> : <AiOutlineMenu size={20} className='my-auto' />}
         <Link to="/" className="">
-          <p className='text-3xl font-bold text-secondary px-2 mb-[5px] '>
+          <p className='md:text-[28px] text-[20px] font-extrabold text-secondary px-2  uppercase'>
             Tomta Rewards
           </p>
         </Link>
       </div>
 
 
-      <ul className='hidden items-center md:flex'>
+      <ul className='hidden items-center uppercase md:flex'>
         <CustomLink to="/">
           <li className='font-bold p-4'>Home</li>
         </CustomLink>
@@ -89,26 +89,30 @@ const Navbar = ({userRole}) => {
           <li className='font-bold p-4'>Activity</li>
         </CustomLink>
         <CustomLink to="/profile">
-          <li className="p-4 m-auto bg-secondary rounded-full shadow hover:scale-105 duration-300">
+          <li className="border-2 border-buttons m-auto bg-secondary rounded-full shadow hover:scale-105 duration-300">
             <Avatar />
           </li>
         </CustomLink>
       </ul>
       <div className='md:hidden'>
         <CustomLink to="/profile">
-          <div className="p-4 m-auto bg-secondary rounded-full shadow hover:scale-105 duration-300 ">
+          <div className="border-2 border-buttons m-auto bg-secondary rounded-full shadow hover:scale-105 duration-300 ">
             <Avatar />
           </div>
         </CustomLink>
       </div>
 
        {/* sidebar */}
-      <div ref={navRef} className={nav ? ' left-0 top-0 md:w-[30%] w-[50%] h-screen border-r absolute bg-secondary ease-in-out duration-500 z-50 ' : 'fixed left-[-100%] z-50 '}>
-        <div className='bg-primary h-24 items-center py-7'>
+      <div ref={navRef}  className={`${
+    nav
+      ? 'left-0 top-0 md:w-[30%] w-[50%] h-screen  absolute bg-secondary ease-in-out duration-500 z-50'
+      : 'left-[-100%] top-0 md:w-[30%] w-[50%] h-screen  absolute bg-secondary ease-in-out duration-1000 z-50'
+  }`}>
+        <div className='bg-primary h-24 items-center py-7 sm:px-2'>
         <div onClick={handleNav} className=' flex justify-center'>
         {nav ? <AiOutlineClose size={20} className='my-auto' /> : <AiOutlineMenu size={20} className='my-auto' />}
         <Link to="/" className="">
-          <p className='text-3xl font-bold text-secondary px-2  '>
+          <p className='md:text-3xl text-[18px] font-bold text-secondary px-2  sm:text-center '>
             Tomta Rewards
           </p>
         </Link>
@@ -120,7 +124,7 @@ const Navbar = ({userRole}) => {
           </div>
         </li>
         <div className='bg-secondary text-buttons'>
-          <ul className='pt-3 uppercase'>
+          <ul className='pt-3 uppercase sm:text-[12px]'>
           {renderSidebarItems()}
 
           </ul>

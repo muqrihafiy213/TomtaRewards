@@ -42,7 +42,7 @@ const Avatar = () => {
       <img
         alt="name"
         src={imageUrl ? imageUrl : img}
-        className="shadow m-auto w-16 h-16 rounded-full"
+        className="shadow m-auto md:w-16 md:h-16 w-14 h-14 rounded-full"
         onError={(e) => {
           e.target.onerror = null;
           e.target.src = img;

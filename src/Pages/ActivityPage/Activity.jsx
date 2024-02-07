@@ -23,19 +23,19 @@ function Activity() {
     const user = useSelector(selectUser);
     const userName = user?.userProfile?.firstName + ' ' + user?.userProfile?.lastName;
     const currentDate = new Date();
-    const upcomingActivities = activityData.filter((activity) => {
+    const upcomingActivities =activityData ? activityData.filter((activity) => {
       const dateofevent = activity?.event_date instanceof Timestamp ? activity.event_date.toDate()
       : null;
       const eventDate = new Date(dateofevent);
       return eventDate > currentDate;
-    });
+    }) : [];
     
-    const pastActivities = activityData.filter((activity) => {
+    const pastActivities =activityData ? activityData.filter((activity) => {
       const dateofevent = activity?.event_date instanceof Timestamp ? activity.event_date.toDate()
       : null;
       const eventDate = new Date(dateofevent);
       return eventDate <= currentDate;
-    });
+    }) : [];
 
     const closeModal = () => {
       setModalOpen(false);
@@ -101,9 +101,22 @@ function Activity() {
         </div>
       ) : (
         <Swiper
-          
-          slidesPerView={3}
-          spaceBetween={30}
+        slidesPerView={1}
+        spaceBetween={10}
+        breakpoints={{
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 30,
+          },
+        }}
           pagination={{
             clickable: true,
           }}
@@ -167,8 +180,21 @@ function Activity() {
         </div>
       ) : (
         <Swiper
-          slidesPerView={3}
-          spaceBetween={30}
+       
+        breakpoints={{
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 30,
+          },
+        }}
           pagination={{
             clickable: true,
           }}

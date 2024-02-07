@@ -10,7 +10,7 @@ const Points = () => {
         <p>Loading user data...</p>
       ) : (
         <div>
-          Points: {userPoints}
+          Pts: {userPoints}
           {/* Include other fields as needed */}
         </div>
       )}

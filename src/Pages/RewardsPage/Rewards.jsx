@@ -137,20 +137,20 @@ function Rewards() {
         <div className='container mx-auto'>
           <div className='m-auto column flex justify-between'>
           <div className=' flex my-auto'>
-                <p className='font-bold text-primary md:text-[28px] text-[20px]'>REWARDS</p>
+                <p className='font-bold text-primary md:text-[28px] text-[16px]'>REWARDS</p>
                 <Link to="/usertransactions">
-                <p className='px-3 font-bold text-white md:text-[28px] text-[20px]'>TRANSACTIONS</p>
+                <p className='md:px-3 px-1 font-bold text-white md:text-[28px] text-[16px]'>TRANSACTIONS</p>
                   </Link> 
                 </div>
             <div key="key" className='w-4/12 container p-4'>
               <div className='m-auto flex justify-center bg-primary rounded-[99px] shadow-xl p-2'>
-                <span className='text-secondary font-bold '>
+                <span className='text-secondary font-bold sm:text-[12px] '>
                   <Points />
                 </span>
               </div>
             </div>
           </div>
-          <div className='max-w-[1240px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-6' >
+          <div className='max-w-[1240px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-3' >
             { rewardsData.length === 0 ? (
                 <div className='m-auto container flex justify-center'>
                   <div className='p-10'>No Rewards Available</div>
@@ -177,7 +177,7 @@ function Rewards() {
                 <div className='container flex'>
                   <Button
                     className='bg-buttons flex justify-center w-full h-full text-white '
-                    size='lg'
+                    
                     ripple='light'
                     color='white'
                     onClick={() => handleButtonClick(rewards)}
