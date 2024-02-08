@@ -1,13 +1,12 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { CiLocationOn } from 'react-icons/ci';
-import { CiCalendarDate } from 'react-icons/ci';
 import { MdTimelapse } from 'react-icons/md';
 import {  db } from '../../../firebaseConfig';
 import { collection,  onSnapshot, Timestamp } from 'firebase/firestore';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../../userSlice';
 import { List, ListItem, Card  } from "@material-tailwind/react";
-import IconCategory from '../../ActivityPage/ActivityComponents/IconCategory';
+import { CalendarIcon } from 'react-calendar-icon';
 
 const NextActivity = () => {
   const [activityData, setActivityData] = useState([]);
@@ -69,9 +68,9 @@ const NextActivity = () => {
 
   return (
     <div>
-      <h1 className='m-3 font-bold text-secondary md:text-[28px] text-[20px]'>Next Activity</h1>
-      <Card className='px-1 mx-1 my-4 rounded-xl z-0 overflow-auto '>
-        <List className='md:h-28 h-32 '>
+      <h1 className='m-2.5 font-bold text-secondary md:text-[28px] text-[20px]'>Next Activity</h1>
+      <Card className='px-1 mx-1 my-1 rounded-xl z-0 overflow-auto border-primary border-4'>
+        <List className='md:h-32 h-32 '>
         {loading ? (
         <div className='m-auto container flex justify-center'>
           <div className='p-10'>Loading...</div>
@@ -84,28 +83,25 @@ const NextActivity = () => {
                   return (
                     <div key={activity.id}>
                       <button className="w-full" >
-                      <ListItem  >
-                        <div className='flex justify-around w-full bg-opacity-50'>
-                            <div className=' my-auto  '>
-                                <IconCategory value={activity.category}/>
+                      <ListItem>
+                        <div className='flex justify-around w-full bg-opacity-50 items-center'>
+                            <div >
+                            <CalendarIcon  date={dateofevent}/>
                               </div>
-                            <div className='flex-col text-[12px]'>
-                            <div className='flex text-black items-center'><CiCalendarDate className='h-5 w-5 m-1 ' />
-                          {dateofevent ? new Date(dateofevent).toLocaleDateString() : 'Invalid Date'}</div>
-                              <h1 className='flex  font-bold text-black items-center'>{activity.title}</h1>
-                              <div className='flex justify-center '>
-                                <div className='flex items-center'>
+                            <div className='flex-col ]'>
+                              <h1 className='flex text-[18px] font-bold text-black items-center'>{activity.title}</h1>
+                                <div className='flex text-[12px] items-center'>
                                 <CiLocationOn className='h-5 w-5 m-1' />
                                 <p className=''>{activity.location}</p>
                                 </div>
-                                <div className='flex items-center'>
+                                <div className='flex text-[12px] items-center'>
                                     <MdTimelapse className='h-5 w-5 m-1' />
                                     {dateofevent ? new Date(dateofevent).toLocaleTimeString([], {
                                         hour: '2-digit',
                                         minute: '2-digit',
                                     },) : 'Invalid Date'}
                                 </div>
-                              </div>
+                              
                             </div>
                             <div className='flex items-center'>
                         </div>

@@ -44,7 +44,7 @@ function Transactions () {
             <Link to="/RewardsAdmin">
                 <p className='font-bold text-white text-[28px]'>REWARDS LISTING</p>
                 </Link>
-                <p className='px-3 font-bold text-primary text-[28px]'>TRANSACTIONS</p>
+                <p className='px-3 font-bold text-secondary text-[28px]'>TRANSACTIONS</p>
                   
                 </div>
                     

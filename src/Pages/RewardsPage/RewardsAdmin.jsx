@@ -136,7 +136,7 @@ function RewardsAdmin () {
          <div className='container m-auto'>
             <div className='m-auto  flex justify-between p-3'>
                 <div className=' flex '>
-                <p className='font-bold text-primary md:text-[28px] text-[20px]'>REWARDS LISTING</p>
+                <p className='font-bold text-secondary md:text-[28px] text-[20px]'>REWARDS LISTING</p>
                 <Link to="/transactions">
                 <p className='px-3 font-bold text-white md:text-[28px] text-[20px]'>TRANSACTIONS</p>
                   </Link> 

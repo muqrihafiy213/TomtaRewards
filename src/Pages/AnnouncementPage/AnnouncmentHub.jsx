@@ -98,7 +98,7 @@ function AnnnouncementHub() {
             
             <div className='m-auto  flex justify-between p-3'>
                 <div className=' flex '>
-                <h1 className='font-bold text-primary text-[28px]'>ANNOUNCEMENTS HUB</h1>
+                <h1 className='font-bold text-secondary text-[28px]'>ANNOUNCEMENTS HUB</h1>
                 
                 </div>
                     <Button

@@ -215,7 +215,7 @@ function UserList() {
       <div className='m-auto container'>
         <div className='container m-3'>
           <div className='m-auto  flex justify-between p-3'>
-            <h1 className='m-3 font-bold text-primary md:text-[28px] text-[20px]'>Superiors</h1>
+            <h1 className='m-3 font-bold text-secondary md:text-[28px] text-[20px]'>Superiors</h1>
             <div className='flex '>
             <Button
                             className='bg-buttons m-2 text-white '
@@ -273,7 +273,7 @@ function UserList() {
         </div>
       <div className='container m-3 '>
           <div className='m-auto  flex justify-between p-3'>
-            <h1 className='m-3 font-bold text-primary md:text-[28px] text-[20px]'>Users</h1>
+            <h1 className='m-3 font-bold text-secondary md:text-[28px] text-[20px]'>Users</h1>
             <div className='flex '>
             {/* <Button
                             className='bg-buttons m-2 text-white '

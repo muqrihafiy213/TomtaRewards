@@ -52,7 +52,7 @@ function UserTransactions () {
             <Link to="/Rewards">
                 <p className='font-bold text-white md:text-[28px] text-[20px]'>REWARDS</p>
                 </Link>
-                <p className='px-3 font-bold text-primary md:text-[28px] text-[20px]'>TRANSACTIONS</p>
+                <p className='px-3 font-bold text-secondary md:text-[28px] text-[20px]'>TRANSACTIONS</p>
                   
                 </div>
                     

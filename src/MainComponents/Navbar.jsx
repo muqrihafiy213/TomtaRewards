@@ -50,18 +50,32 @@ const Navbar = ({userRole}) => {
   ];
 
   const renderSidebarItems = () => {
-    return sidebarItems.map((item) => {
+    let renderedItems = [];
+    let adminPageRendered = false; // Flag to track if admin page is rendered
+    
+    sidebarItems.forEach((item, index) => {
       const isAllowed =
         !item.roles || (userRole && item.roles.includes(userRole.toLowerCase()));
-
-      return (
-        isAllowed && (
+  
+      if (isAllowed) {
+        
+        if (userRole === 'admin' && item.roles && item.roles.includes('admin') && !adminPageRendered) {
+          renderedItems.push(
+            <div key={`admin-label`} className="text-sm text-gray-500 uppercase font-semibold px-4 py-1">Admin</div>
+          );
+          renderedItems.push(<hr key={`separator-${index}`} className="my-2 border-t border-gray-400" />);
+          adminPageRendered = true; // Set flag to true after rendering the first admin page
+        }
+  
+        renderedItems.push(
           <CustomLink key={item.to} to={item.to}>
-            <li className='p-4 border-b border-gray-600'>{item.label}</li>
+            <li className='p-4'>{item.label}</li>
           </CustomLink>
-        )
-      );
+        );
+      }
     });
+  
+    return renderedItems;
   };
 
    
@@ -105,7 +119,7 @@ const Navbar = ({userRole}) => {
        {/* sidebar */}
       <div ref={navRef}  className={`${
     nav
-      ? 'left-0 top-0 md:w-[30%] w-[50%] h-screen  absolute bg-secondary ease-in-out duration-500 z-50'
+      ? 'left-0 top-0 md:w-[30%] w-[50%] h-screen  absolute bg-secondary ease-in-out duration-500 z-50 overflow-y-auto'
       : 'left-[-100%] top-0 md:w-[30%] w-[50%] h-screen  absolute bg-secondary ease-in-out duration-1000 z-50'
   }`}>
         <div className='bg-primary h-24 items-center py-7 sm:px-2'>

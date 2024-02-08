@@ -101,7 +101,7 @@ function ActivityAdmin () {
             
             <div className='m-auto  flex justify-between p-3'>
                 <div className=' flex '>
-                <p className='font-bold text-primary md:text-[28px] text-[20px]'>ACTIVITY LISTING</p>
+                <p className='font-bold text-secondary md:text-[28px] text-[20px]'>ACTIVITY LISTING</p>
                 
                 </div>
                     <Button

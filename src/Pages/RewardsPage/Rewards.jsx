@@ -137,14 +137,14 @@ function Rewards() {
         <div className='container mx-auto'>
           <div className='m-auto column flex justify-between'>
           <div className=' flex my-auto'>
-                <p className='font-bold text-primary md:text-[28px] text-[16px]'>REWARDS</p>
+                <p className='font-bold text-secondary md:text-[28px] text-[16px]'>REWARDS</p>
                 <Link to="/usertransactions">
                 <p className='md:px-3 px-1 font-bold text-white md:text-[28px] text-[16px]'>TRANSACTIONS</p>
                   </Link> 
                 </div>
             <div key="key" className='w-4/12 container p-4'>
-              <div className='m-auto flex justify-center bg-primary rounded-[99px] shadow-xl p-2'>
-                <span className='text-secondary font-bold sm:text-[12px] '>
+              <div className='m-auto flex justify-center bg-secondary rounded-[99px] shadow-xl p-2'>
+                <span className='text-primary font-bold sm:text-[12px] '>
                   <Points />
                 </span>
               </div>
