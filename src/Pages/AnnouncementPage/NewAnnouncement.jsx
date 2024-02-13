@@ -5,6 +5,7 @@ import {
   Input,
   Button,
   Typography,
+  Textarea,
 } from "@material-tailwind/react";
 import { db, imgDB } from '../../firebaseConfig';
 import { collection, addDoc ,getDocs} from 'firebase/firestore';
@@ -17,7 +18,6 @@ import 'react-toastify/dist/ReactToastify.css';
 const NewAnnouncement = ({ openPopUp, closePopUp }) => {
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
-  const [quote, setQuote] = useState('');
   const [image, setImage] = useState(null);
   const [importance, setImportance] = useState(false);
   const [emails,setEmail] = useState([])
@@ -43,7 +43,6 @@ const NewAnnouncement = ({ openPopUp, closePopUp }) => {
         const templateParams = {
           recipient: email,
           title:title,
-          quote:quote,
           message:text,
         };
 
@@ -81,7 +80,7 @@ const NewAnnouncement = ({ openPopUp, closePopUp }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
   
-    if (!title || !quote|| !text || !image) {
+    if (!title || !text || !image) {
       alert("Please fill in all fields");
       return;
     }
@@ -107,14 +106,12 @@ const NewAnnouncement = ({ openPopUp, closePopUp }) => {
           // Add the document with the download URL
           await addDoc(collection(db, "announcements"), {
             title: title,
-            quote : quote,
             text : text,
             header_image: url, 
             publish_date: new Date(),
             is_important : importance,
           });
           setTitle('');
-          setQuote('');
           setText('');
           setImage(null);
           setImportance(false);
@@ -146,7 +143,7 @@ const NewAnnouncement = ({ openPopUp, closePopUp }) => {
     <div
       id='ModelContainer'
       onClick={handlelosePopUp}
-      className='absolute inset-0 z-50 bg-black flex justify-center items-center bg-opacity-20 backdrop-blur-sm'>
+      className='fixed inset-0 z-50 bg-black flex justify-center items-center bg-opacity-20 backdrop-blur-sm'>
       <div
         className='p-5 bg-primary shadow-inner border-e-emerald-600 rounded-lg py-5'>
         <div>
@@ -157,13 +154,14 @@ const NewAnnouncement = ({ openPopUp, closePopUp }) => {
             <Typography color="gray" className="mt-1 font-normal">
               Enter Announcement Details
             </Typography>
-            <form onSubmit={handleSubmit} className="mt-8 mb-2 w-80 max-w-screen-md sm:w-96">
-              <div className="mb-1 flex flex-col gap-4">
-                <Typography variant="h6" color="blue-gray" className="-mb-3">
+            <form onSubmit={handleSubmit} className="mt-5 mb-2  max-w-screen-md sm:min-w-fit">
+              <div className="mb-1 grid grid-rows-1 grid-flow-col sm:flex sm:flex-col gap-4 sm:text-[10px]">
+                <div>
+                <Typography variant="h6" color="blue-gray" className="">
                   Title
                 </Typography>
                 <Input
-                  size="lg"
+                  size="md"
                   placeholder="Listing Title"
                   className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                   labelProps={{
@@ -171,31 +169,6 @@ const NewAnnouncement = ({ openPopUp, closePopUp }) => {
                   }}
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                />
-                <Typography variant="h6" color="blue-gray" className="-mb-3">
-                 Quote
-                </Typography>
-                <Input
-                  
-                  size="lg"
-                  className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-                  labelProps={{
-                    className: "before:content-none after:content-none",
-                  }}
-                  value={quote}
-                  onChange={(e) => setQuote(e.target.value)}
-                />
-                <Typography variant="h6" color="blue-gray" className="-mb-3">
-                  Text
-                </Typography>
-                <Input
-                  size="lg"
-                  className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-                  labelProps={{
-                    className: "before:content-none after:content-none",
-                  }}
-                  value={text}
-                  onChange={(e) => setText(e.target.value)}
                 />
                 <Typography variant="h6" color="blue-gray" className="-mb-3">
                   Image
@@ -207,8 +180,7 @@ const NewAnnouncement = ({ openPopUp, closePopUp }) => {
                   variant="standard"
                   onChange={handleImageChange}
                 />
-              </div>
-              <Checkbox
+                  <Checkbox
                 checked={importance}
                 onChange={handleCheckboxChange}
                 label={
@@ -222,7 +194,24 @@ const NewAnnouncement = ({ openPopUp, closePopUp }) => {
                 }
                 containerProps={{ className: "-ml-2.5" }}
               />
-              <Button
+                </div>
+                
+               
+              <div className=''>
+              <Typography variant="h6" color="blue-gray" className="">
+                  Description
+                </Typography>
+                <Textarea
+                  
+                  className=" !border-t-blue-gray-200 focus:!border-t-gray-900 md:w-72 md:h-28"
+                  labelProps={{
+                    className: "before:content-none after:content-none",
+                  }}
+                  value={text}
+                  onChange={(e) => setText(e.target.value)}
+                  
+                />
+                 <Button
                 type="submit"
                 color='white'
                 onClick={handleFileUpload}
@@ -231,6 +220,10 @@ const NewAnnouncement = ({ openPopUp, closePopUp }) => {
               >
                 Upload
               </Button>
+              </div>
+             
+              </div>
+             
             </form>
            
             

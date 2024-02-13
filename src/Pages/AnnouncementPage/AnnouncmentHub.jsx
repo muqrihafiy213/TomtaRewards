@@ -19,6 +19,12 @@ function AnnnouncementHub() {
   const [openPopup, setOpenPopup] = useState(false);
   const [selectedAnnouncement, setSelectedAnnouncement] = useState(null);
   const [open, setOpen] = React.useState(false);
+  const [expanded, setExpanded] = useState(false);
+
+  const toggleExpanded = () => {
+    setExpanded(!expanded);
+  };
+
 
   const handleOpen = (announce) => {
     setSelectedAnnouncement(announce);
@@ -26,6 +32,7 @@ function AnnnouncementHub() {
   };
 
   const HandleRemovePopUp = () => setOpenPopup(false);
+
 
   const fetchData = async () => {
     try {
@@ -177,10 +184,13 @@ function AnnnouncementHub() {
                         <Typography
                             variant="small"
                             color="blue-gray"
-                            className="font-normal"
+                            className="font-normal break-words"
                         >
-                            <div className='flex justify-center'>
-                            {announce.text}
+                          <div className='line-clamp-container align-middle '>  
+                          
+                          <p onClick={toggleExpanded} style={{ cursor: 'pointer' }} className=''>
+                            {expanded ? announce.text : announce.text.substring(0, 100) + '...'}
+                          </p>
                             </div>
                         </Typography>
                         </td>

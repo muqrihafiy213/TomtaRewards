@@ -115,7 +115,7 @@ const UpcomingActivity = () => {
       <ToastContainer />
       <h1 className='m-3 font-bold text-secondary md:text-[28px] text-[20px]'>Upcoming Activity</h1>
       <Card className='p-1 mx-1 my-4 rounded-xl z-0 overflow-auto '>
-        <List className='md:h-52 h-32 '>
+        <List className='md:h-56 h-28 '>
         
         {loading ? (
         <div className='m-auto container flex justify-center'>
@@ -127,8 +127,8 @@ const UpcomingActivity = () => {
               const dateofevent =
                 activity?.event_date instanceof Timestamp ? activity.event_date.toDate() : null;
                   return (
-                    <div key={activity.id}>
-                      <button className="w-full" >
+                    <div key={activity.id} className='p-1'>
+                      <button className="w-full bg-gray-100 rounded-md" >
                       <ListItem  >
                         <div className='flex justify-around w-full bg-opacity-50'>
                             <div className=' my-auto  '>

@@ -5,6 +5,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch,useSelector } from 'react-redux';
 import { setUser, selectUser ,setError } from '../userSlice';
 import { doc, getDoc, collection } from 'firebase/firestore';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Login = () => {
   
@@ -13,6 +16,24 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const currentUser = useSelector(selectUser);
   const navigate = useNavigate();
+  
+  const showToastMessage = (status) => {
+    if(status === "success"){
+      toast.success("Thanks For Participating", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+    else if(status === "incorrect"){
+      toast.error("The email address or password is incorrect!", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+    else if(status === "unverified"){
+      toast.warning("Please Verify Email!", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+  };
   
   const fetchUserProfile = async (userId) => {
     const userProfileRef = doc(collection(db, 'Roles', 'Users', 'UserProfile'), userId);
@@ -35,27 +56,30 @@ const Login = () => {
         localStorage.setItem('token', user.accessToken);
         localStorage.setItem('user', JSON.stringify(user));
         await fetchUserProfile(user.uid);
+        showToastMessage("success");
         navigate("/");
+        
   
-      } catch (error) {
-          if (error.code === "auth/invalid-credential") {
-              alert("the email address or password is incorrect ");
+      } catch (e) {
+          if (e.code === "auth/invalid-credential") {
+           return showToastMessage("incorrect");
           }
-          dispatch(setError(error.message));
-        console.error(error);
+          dispatch(setError(e.message));
+        
       }
     }
     else{
       return(
-        alert("Please verify your email")
+        showToastMessage("unverified")
       )
     }
   
   }
-  console.log('User from Redux in component:', currentUser);
+  
   return (
     
     <div class="area w-full  justify-center  flex items-center">
+      <ToastContainer />
 			<ul class="circles">
 				<li></li>
 				<li></li>

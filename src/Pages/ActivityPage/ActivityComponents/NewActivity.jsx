@@ -5,6 +5,8 @@ import {
   Button,
   Typography,
   Radio,
+  Select,
+  Option,
 } from "@material-tailwind/react";
 import { db } from '../../../firebaseConfig';
 import { collection, addDoc,getDocs } from 'firebase/firestore';
@@ -19,6 +21,7 @@ const NewActivity = ({ openPopUp, closePopUp }) => {
   const [title, setTitle] = useState('');
   const [location, setLocation] = useState('');
   const [dateTime, setDateTime] = useState('');
+  const [duration, setDuration] = useState('1 Hour');
   const [category, setCategory] = useState("Company") 
   const [emails,setEmail] = useState([])
 
@@ -57,6 +60,7 @@ const sendEmails = async () => {
         location:location,
         category:category,
         date:dateTime.toDate(),
+        // duration:duration,
       };
 
       await emailjs.send(
@@ -86,7 +90,7 @@ const sendEmails = async () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
   
-    if (!title || !location || !dateTime ||!category) {
+    if (!title || !location || !dateTime ||!category ) {
       alert("Please fill in all fields");
       return;
     }
@@ -100,6 +104,7 @@ const sendEmails = async () => {
             location: location,
             category: category, 
             event_date: dateTime.toDate(),
+            duration:duration,
             
           });
           
@@ -126,18 +131,16 @@ const sendEmails = async () => {
       onClick={handlelosePopUp}
       className='fixed inset-0 z-50 bg-black flex justify-center items-center bg-opacity-20 backdrop-blur-sm'>
       <div
-        className='p-5 bg-primary shadow-inner border-e-emerald-600 rounded-lg py-5'>
+        className='p-5 bg-primary shadow-inner border-e-emerald-600 rounded-lg md:py-5'>
         <div>
           <Card color="transparent" shadow={false}>
-            <Typography variant="h4" color="blue-gray">
+            <Typography variant="h4" color="blue-gray" className='sm:text-[14px]'>
               New Activity
             </Typography>
-            <Typography color="gray" className="mt-1 font-normal">
-              Enter your details to publish.
-            </Typography>
-            <form onSubmit={handleSubmit} className="mt-8 mb-2 w-80 max-w-screen-md sm:w-96">
-              <div className="mb-1 flex flex-col gap-4">
-                <Typography variant="h6" color="blue-gray" className="-mb-3">
+            <form onSubmit={handleSubmit} className="mt-5 mb-2  max-w-screen-md sm:min-w-fit ">
+              <div className="mb-1 grid grid-rows-3 grid-flow-col sm:flex sm:flex-col gap-4 sm:text-[10px]">
+                <div>
+                <Typography variant="h6" color="blue-gray" className=" sm:text-[12px]">
                   Title
                 </Typography>
                 <Input
@@ -152,7 +155,9 @@ const sendEmails = async () => {
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                 />
-                <Typography variant="h6" color="blue-gray" className="-mb-3">
+                </div>
+               <div>
+               <Typography variant="h6" color="blue-gray" className=" sm:text-[12px]">
                  Location
                 </Typography>
                 <Input
@@ -165,11 +170,23 @@ const sendEmails = async () => {
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
                 />
-                <Typography variant="h6" color="blue-gray" className="-mb-3">
+               </div>
+               <div>
+                <Typography variant="h6" color="blue-gray" className=" sm:text-[12px]">
+                  Category
+                </Typography>
+                <div className="flex gap-2">
+                  <Radio name="type" value="Sport" checked={category === "Sport"} onChange={onValueChange}  label="Sports" />
+                  <Radio name="type" value="Food" checked={category === "Food"} onChange={onValueChange} label="Food"  />
+                  <Radio name="type" value="Company" checked={category === "Company"} onChange={onValueChange} label="Company Related"  />
+              </div>
+                </div>
+              <div >
+              <Typography variant="h6" color="blue-gray" className=" sm:text-[12px]">
                   Date and Time
                 </Typography>
                 <DateTimePicker
-                    label="Controlled picker"
+                    className='sm:text-[12px]'
                     value={formatDate(dateTime)}
                     onChange={(newValue) => setDateTime(newValue)}
                     viewRenderers={{
@@ -178,25 +195,29 @@ const sendEmails = async () => {
                       
                     }}
                     />
-               
-                <Typography variant="h6" color="blue-gray" className="-mb-3">
-                  Category
-                </Typography>
-                <div className="flex gap-2">
-                  <Radio name="type" value="Sport" checked={category === "Sport"} onChange={onValueChange}  label="Sports" />
-                  <Radio name="type" value="Food" checked={category === "Food"} onChange={onValueChange} label="Food"  />
-                  <Radio name="type" value="Company" checked={category === "Company"} onChange={onValueChange} label="Company Related"  />
-              </div>
-              </div>
-              <Button
+                </div>
+                <Select
+                  label="Select Duration"
+                  value={duration}
+                  onChange={(val) => setDuration(val)}
+                >
+                  <Option value="1 Hour">1 Hour</Option>
+                  <Option value="1 Hour and a half">1 Hour and a half</Option>
+                  <Option value="2 Hours">2 Hours</Option>
+                  <Option value="2 Hours and a half">2 Hours and a half</Option>
+                  <Option value="Whole Day">Whole Day</Option>
+                </Select>
+                <Button
                 type="submit"
-                color='white'
+                color='blue-gray'
                 
                 className="mt-6 bg-buttons"
                 fullWidth
               >
                 Upload
               </Button>
+              </div>
+             
             </form>
            
             

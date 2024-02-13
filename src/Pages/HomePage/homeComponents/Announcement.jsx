@@ -143,10 +143,10 @@ const Announcement = () => {
                   <div className='my-auto px-2 text-[12px]  text-gray-500'>{selectedAnnouncement?.publish_date ? new Date(selectedAnnouncement?.publish_date instanceof Timestamp ? selectedAnnouncement.publish_date.toDate() : null).toLocaleDateString() : 'Invalid Date'}</div>
                 </div>
                 <div className='flex container  '>
-                      <div className="mt-3 text-center sm:mt-0 sm:ml-4 p-1 h-56 w-56 bg-gray-300 container rounded-md">
+                      <div className="mt-3 text-center sm:mt-0 sm:ml-4 p-1   bg-gray-300 container rounded-md">
                             <h3 className="text-lg leading-6 font-medium text-gray-900">{selectedAnnouncement?.title}</h3>
                             <div className="mt-2">
-                              <p className="text-sm text-gray-700">{selectedAnnouncement?.text}</p>
+                              <p className="text-sm text-gray-700 ">{selectedAnnouncement?.text}</p>
                             </div>
                           </div>
                           {/* <div className='flex rewards-admin-container items-center overflow-hidden'>

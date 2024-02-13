@@ -11,6 +11,11 @@ import { CalendarIcon } from 'react-calendar-icon';
 const NextActivity = () => {
   const [activityData, setActivityData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [expanded, setExpanded] = useState(false);
+
+  const toggleExpanded = () => {
+    setExpanded(!expanded);
+  };
 
   const user = useSelector(selectUser);
   const userId = user?.userProfile?.uid;
@@ -88,8 +93,8 @@ const NextActivity = () => {
                             <div >
                             <CalendarIcon  date={dateofevent}/>
                               </div>
-                            <div className='flex-col ]'>
-                              <h1 className='flex text-[18px] font-bold text-black items-center'>{activity.title}</h1>
+                            <div className='flex-col '>
+                              <h1 onClick={toggleExpanded} style={{ cursor: 'pointer' }} className='flex text-[18px] font-bold text-black items-center overflow-hidden text-ellipsis'>{expanded ? activity.title : activity.title.substring(0, 15) + '...'}</h1>
                                 <div className='flex text-[12px] items-center'>
                                 <CiLocationOn className='h-5 w-5 m-1' />
                                 <p className=''>{activity.location}</p>

@@ -106,18 +106,16 @@ const NewListing = ({ openPopUp, closePopUp }) => {
       onClick={handlelosePopUp}
       className='fixed inset-0 z-50 bg-black flex justify-center items-center bg-opacity-20 backdrop-blur-sm'>
       <div
-        className='p-5 bg-primary shadow-inner border-e-emerald-600 rounded-lg py-5'>
+        className='p-5  bg-primary shadow-inner border-e-emerald-600 rounded-lg md:py-5'>
         <div>
           <Card color="transparent" shadow={false}>
-            <Typography variant="h4" color="blue-gray">
+            <Typography variant="h4" color="blue-gray" className='sm:text-[16px]'>
               New Listing
             </Typography>
-            <Typography color="gray" className="mt-1 font-normal">
-              Enter your details to list.
-            </Typography>
-            <form onSubmit={handleSubmit} className="mt-8 mb-2 w-80 max-w-screen-md sm:w-96">
-              <div className="mb-1 flex flex-col gap-4">
-                <Typography variant="h6" color="blue-gray" className="-mb-3">
+            <form onSubmit={handleSubmit} className="mt-5 mb-2  max-w-screen-md sm:min-w-fit ">
+              <div className="mb-1 grid grid-rows-3 grid-flow-col sm:flex sm:flex-col gap-4 sm:text-[16px]">
+                <div>
+                <Typography variant="h6" color="blue-gray" className="">
                   Title
                 </Typography>
                 <Input
@@ -130,7 +128,9 @@ const NewListing = ({ openPopUp, closePopUp }) => {
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                 />
-                <Typography variant="h6" color="blue-gray" className="-mb-3">
+                </div>
+                <div>
+                <Typography variant="h6" color="blue-gray" className="">
                   Total Points
                 </Typography>
                 <Input
@@ -143,7 +143,9 @@ const NewListing = ({ openPopUp, closePopUp }) => {
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
                 />
-                <Typography variant="h6" color="blue-gray" className="-mb-3">
+                </div>
+                <div>
+                <Typography variant="h6" color="blue-gray" className="">
                   Quantity
                 </Typography>
                 <Input
@@ -157,6 +159,8 @@ const NewListing = ({ openPopUp, closePopUp }) => {
                   value={quantity}
                   onChange={(e) => setQuantity(e.target.value)}
                 />
+                </div>
+                <div>
                 <Typography variant="h6" color="blue-gray" className="-mb-3">
                   Image
                 </Typography>
@@ -167,8 +171,8 @@ const NewListing = ({ openPopUp, closePopUp }) => {
                   variant="standard"
                   onChange={handleImageChange}
                 />
-              </div>
-              <Checkbox
+                </div>
+                 <Checkbox
                 checked={active}
                 onChange={handleCheckboxChange}
                 label={
@@ -186,11 +190,13 @@ const NewListing = ({ openPopUp, closePopUp }) => {
                 type="submit"
                 color='white'
                 onClick={handleFileUpload}
-                className="mt-6 bg-buttons"
+                className="mt-4 bg-buttons"
                 fullWidth
               >
                 Upload
               </Button>
+              </div>
+             
             </form>
            
             
