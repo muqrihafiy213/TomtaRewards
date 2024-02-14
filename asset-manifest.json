@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/TomtaRewards/static/css/main.1c88bc46.css",
-    "main.js": "/TomtaRewards/static/js/main.a0971c41.js",
+    "main.css": "/TomtaRewards/static/css/main.ff5757fa.css",
+    "main.js": "/TomtaRewards/static/js/main.e79d6145.js",
     "static/js/787.7300a5ba.chunk.js": "/TomtaRewards/static/js/787.7300a5ba.chunk.js",
     "static/media/Food.jpg": "/TomtaRewards/static/media/Food.f5d0cede0fa64d873ef1.jpg",
     "static/media/logo-ori-transparent.png": "/TomtaRewards/static/media/logo-ori-transparent.051d51eeffcf2857a6f1.png",
@@ -33,12 +33,12 @@
     "static/media/roboto-latin-400.woff2": "/TomtaRewards/static/media/roboto-latin-400.176f8f5bd5f02b3abfcf.woff2",
     "static/media/roboto-latin-900.woff2": "/TomtaRewards/static/media/roboto-latin-900.870c8c1486f76054301a.woff2",
     "index.html": "/TomtaRewards/index.html",
-    "main.1c88bc46.css.map": "/TomtaRewards/static/css/main.1c88bc46.css.map",
-    "main.a0971c41.js.map": "/TomtaRewards/static/js/main.a0971c41.js.map",
+    "main.ff5757fa.css.map": "/TomtaRewards/static/css/main.ff5757fa.css.map",
+    "main.e79d6145.js.map": "/TomtaRewards/static/js/main.e79d6145.js.map",
     "787.7300a5ba.chunk.js.map": "/TomtaRewards/static/js/787.7300a5ba.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1c88bc46.css",
-    "static/js/main.a0971c41.js"
+    "static/css/main.ff5757fa.css",
+    "static/js/main.e79d6145.js"
   ]
 }
