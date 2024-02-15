@@ -9,6 +9,7 @@ export const redeemReward = async (userId,userName, rewardId, quantity,totalpoin
       rewardId,
       quantity,
       totalpoints,
+      type : "redeem",
     };
 
     // Add redemption information to Firestore

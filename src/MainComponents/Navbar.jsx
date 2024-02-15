@@ -44,9 +44,9 @@ const Navbar = ({userRole}) => {
     { to: '/rewards', label: 'Rewards' },
     { to: '/teamMembers', label: 'Team Members', roles: ['superior'] },
     { to: '/announcements', label: 'Announcement Hub', roles: [ 'admin'] },
-    { to: '/rewardsAdmin', label: 'Rewards Table', roles: ['admin'] },
-    { to: '/activityAdmin', label: 'Activity Table', roles: ['admin'] },
-    { to: '/userlist', label: 'User Lists', roles: ['admin'] },
+    { to: '/rewardsAdmin', label: 'Rewards Hub', roles: ['admin'] },
+    { to: '/activityAdmin', label: 'Activity Hub', roles: ['admin'] },
+    { to: '/userlist', label: 'User Hub', roles: ['admin'] },
   ];
 
   const renderSidebarItems = () => {

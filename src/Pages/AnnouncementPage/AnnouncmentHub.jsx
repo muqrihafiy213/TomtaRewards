@@ -14,7 +14,7 @@ import AdminLayout from '../../Layouts/AdminLayout';
 function AnnnouncementHub() {
    
     
-  const TABLE_HEAD = ["Title", "Image", "Text", "Quote", "Date Publish", "Importance", ""];
+  const TABLE_HEAD = ["Title", "Text", "Importance", "Image", "Date Publish", ""];
   const [announcementData, setAnnouncementData] = useState([]);
   const [openPopup, setOpenPopup] = useState(false);
   const [selectedAnnouncement, setSelectedAnnouncement] = useState(null);
@@ -169,21 +169,6 @@ function AnnnouncementHub() {
                         <Typography
                             variant="small"
                             color="blue-gray"
-                            className="font-normal"
-                        >
-                            <div className='flex rewards-admin-container overflow-hidden'>
-                              <img
-                                className='p-2 shadow-inner max-h-fit m-auto object-contain'
-                                src={announce.header_image}
-                                alt='placeholder'
-                              />
-                              </div>
-                        </Typography>
-                        </td>
-                        <td className={classes}>
-                        <Typography
-                            variant="small"
-                            color="blue-gray"
                             className="font-normal break-words"
                         >
                           <div className='line-clamp-container align-middle '>  
@@ -200,9 +185,22 @@ function AnnnouncementHub() {
                             color="blue-gray"
                             className="font-normal"
                         >
-                        <div className='flex justify-center'>
-                           {announce.quote}
-                           </div>
+                        {announce.is_important && <StarIcon className='text-yellow-400 w-8 h-8 m-auto' />}
+                        </Typography>
+                        </td>
+                        <td className={classes}>
+                        <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal"
+                        >
+                            <div className='flex rewards-admin-container overflow-hidden'>
+                              <img
+                                className='p-2 shadow-inner max-h-fit m-auto object-contain'
+                                src={announce.header_image}
+                                alt='placeholder'
+                              />
+                              </div>
                         </Typography>
                         </td>
                         <td className={classes}>
@@ -216,15 +214,7 @@ function AnnnouncementHub() {
                             </div>
                         </Typography>
                         </td>
-                        <td className={classes}>
-                        <Typography
-                            variant="small"
-                            color="blue-gray"
-                            className="font-normal"
-                        >
-                        {announce.is_important && <StarIcon className='text-yellow-400 w-8 h-8 m-auto' />}
-                        </Typography>
-                        </td>
+                      
                         <td className={classes}>
                         <Typography
                             variant="small"

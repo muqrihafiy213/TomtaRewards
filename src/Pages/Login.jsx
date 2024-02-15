@@ -3,7 +3,7 @@ import { auth, db } from '../firebaseConfig';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch,useSelector } from 'react-redux';
-import { setUser, selectUser ,setError } from '../userSlice';
+import { setUser, selectUser } from '../userSlice';
 import { doc, getDoc, collection } from 'firebase/firestore';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -47,34 +47,27 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    const user = userCredential.user;
-    if(user.emailVerified){
-      try {
-      
-      
-        localStorage.setItem('token', user.accessToken);
-        localStorage.setItem('user', JSON.stringify(user));
-        await fetchUserProfile(user.uid);
-        showToastMessage("success");
-        navigate("/");
-        
-  
-      } catch (e) {
-          if (e.code === "auth/invalid-credential") {
-           return showToastMessage("incorrect");
-          }
-          dispatch(setError(e.message));
-        
-      }
+    try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+        if (user.emailVerified) {
+            localStorage.setItem('token', user.accessToken);
+            localStorage.setItem('user', JSON.stringify(user));
+            await fetchUserProfile(user.uid);
+            showToastMessage("success");
+            navigate("/");
+        } else {
+            showToastMessage("unverified");
+        }
+    } catch (e) {
+        if (e.code === "auth/invalid-credential") {
+            showToastMessage("incorrect");
+        } else {
+            showToastMessage("error: " + e.code); // Handle other Firebase errors
+        }
+        console.log("error", e.message);
     }
-    else{
-      return(
-        showToastMessage("unverified")
-      )
-    }
-  
-  }
+}
   
   return (
     

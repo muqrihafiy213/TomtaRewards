@@ -65,13 +65,10 @@ body{
 	text-overflow: ellipsis;
 	
 	max-width: 200px; 
-	word-break: break-word;/* Adjust as needed */
+	word-break: break-word;
   }
 
-.vertical-input {
-	writing-mode: vertical-rl;
-  }
-  
+
 
 /*Start Animations*/
 @-webkit-keyframes animatetop {

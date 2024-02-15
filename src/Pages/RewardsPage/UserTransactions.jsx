@@ -4,7 +4,7 @@ import {  db } from '../../firebaseConfig';
 import { getDocs, collection ,query , where} from 'firebase/firestore';
 import { Link } from 'react-router-dom';
 import MainLayout from '../../Layouts/MainLayout';
-
+import Points from '../../MainComponents/Points';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../userSlice';
 
@@ -47,16 +47,22 @@ function UserTransactions () {
         <MainLayout>
         
          <div className='container m-auto'>
-            <div className='m-auto  flex justify-between p-3'>
-            <div className=' flex '>
-            <Link to="/Rewards">
-                <p className='font-bold text-white md:text-[28px] text-[20px]'>REWARDS</p>
-                </Link>
-                <p className='px-3 font-bold text-secondary md:text-[28px] text-[20px]'>TRANSACTIONS</p>
+         <div className='m-auto column flex justify-between'>
+          <div className=' flex sm:m-auto my-auto'>
+          <Link to="/rewards">
+                <p className='font-bold text-white md:text-[28px] text-[14px]'>REWARDS</p>
+                </Link> 
+                <p className='md:px-3 px-1 font-bold text-secondary md:text-[28px] text-[14px]'>MY TRANSACTIONS</p>
                   
                 </div>
-                    
-                </div>
+            <div key="key" className='w-4/12 container p-4'>
+              <div className='m-auto flex justify-center bg-secondary rounded-[99px] shadow-xl p-2'>
+                <span className='text-primary font-bold sm:text-[12px] '>
+                  <Points />
+                </span>
+              </div>
+            </div>
+          </div>
                 
             <div className=''>
             <Card className="h-full w-full overflow-scroll ">
@@ -82,7 +88,7 @@ function UserTransactions () {
                 <tbody>
                 {transactionData.map((transactions,index) => {
                     const isLast = index === transactionData.length - 1;
-                    const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
+                    const classes = isLast ? "p-4 " : "p-4 border-b border-blue-gray-50 ";
         
                     return (
                     <tr key={transactions.id}>
@@ -99,7 +105,7 @@ function UserTransactions () {
                         <Typography
                             variant="small"
                             color="blue-gray"
-                            className="font-normal"
+                            className={`font-normal ${transactions.type === 'redeem' ? 'text-red-500' : ''}`}
                         >
                             {transactions.totalpoints}
                         </Typography>

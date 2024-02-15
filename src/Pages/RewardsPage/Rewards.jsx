@@ -7,6 +7,8 @@ import { getDocs, collection, doc, updateDoc,getDoc , onSnapshot, where ,query} 
 import Points from '../../MainComponents/Points';
 import { ref , getDownloadURL as getImgDownloadURL } from 'firebase/storage';
 import { redeemReward } from './RewardComponents/RedeemReward';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
 
 function Rewards() {
@@ -15,6 +17,23 @@ function Rewards() {
   const [modalOpen, setModalOpen] = useState(false);
   const [quantity, setQuantity] = useState(1); // Initialize quantity to 1
 
+  const showToastMessage = (status) => {
+    if(status === "success"){
+      toast.success("Purchase Success", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+    else if(status === "lowpoints"){
+      toast.warning("Not Enough Points!", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+    else if(status === "error"){
+      toast.error("Purchase Failed", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+  };
   
   useEffect(() => {
     // Fetch data function
@@ -95,13 +114,14 @@ function Rewards() {
         await updateDoc(rewardDocRef, { quantity: newDeductQuantity });
         await redeemReward(userId,userName,selectedRewards.name,selectedQuantity,pointsToDeduct);
         setModalOpen(false);
-        alert('Purchase Success')
+        showToastMessage("success")
       } else {
         // Display an error message to the user
-        alert('Not enough points to redeem the reward');
+        showToastMessage("lowpoints")
       }
     } catch (error) {
-      alert('Error redeeming reward:', error);
+      showToastMessage("error")
+      console.log('Error redeeming reward:', error);
     }
   };
   
@@ -134,12 +154,13 @@ function Rewards() {
   return (
     <div>
       <MainLayout>
+        <ToastContainer />
         <div className='container mx-auto'>
           <div className='m-auto column flex justify-between'>
-          <div className=' flex my-auto'>
-                <p className='font-bold text-secondary md:text-[28px] text-[16px]'>REWARDS</p>
+          <div className=' flex sm:m-auto my-auto'>
+                <p className='font-bold text-secondary md:text-[28px] text-[14px]'>REWARDS</p>
                 <Link to="/usertransactions">
-                <p className='md:px-3 px-1 font-bold text-white md:text-[28px] text-[16px]'>TRANSACTIONS</p>
+                <p className='md:px-3 px-1 font-bold text-white md:text-[28px] text-[14px]'>MY TRANSACTIONS</p>
                   </Link> 
                 </div>
             <div key="key" className='w-4/12 container p-4'>
@@ -150,25 +171,25 @@ function Rewards() {
               </div>
             </div>
           </div>
-          <div className='max-w-[1240px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-3' >
+          <div className='max-w-[1240px] mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-3' >
             { rewardsData.length === 0 ? (
                 <div className='m-auto container flex justify-center'>
                   <div className='p-10'>No Rewards Available</div>
                 </div>
               ) : (
             rewardsData.map((rewards) => (
-              <div className='container mx-auto'>
-                <div className=' bg-white rounded-[10px] shadow m-4 ' key={rewards.id}>
-                <div className='container py-2'><p className=' text-secondary md:text-[20px] text-[15px] font-bold text-center '>{rewards.name}</p></div>
-                <div className='columns-2'>
-                  <div className='flex rewards-container overflow-hidden'>
+              <div className='container mx-auto bg-white sm:h-2/3 rounded-[8px] shadow m-4' key={rewards.id}>
+                <div className='flex rewards-container sm:h-2/3 sm:w-2/3 py-2 m-auto overflow-hidden'>
                   <img
                     className='px-2 shadow-inner max-h-fit m-auto object-contain'
                     src={rewards.imageUrl }
                     alt='placeholder'
                   />
                   </div>
-                  <div className='container py-12'>
+                
+                <div className='grid grid-cols-1 md:py-4 '>
+                <div className=''><p className=' text-secondary md:text-[18px] text-[12px] font-bold text-center '>{rewards.name.substring(0, 20)}</p></div>
+                  <div className=' '>
                   <div className='flex flex-col justify-center '>
                     <span className=' text-secondary text-[12px] text-center'> Quantity: {rewards.quantity} </span>
                   </div>
@@ -185,7 +206,7 @@ function Rewards() {
                     {rewards.price} Points
                   </Button>
                 </div>
-              </div>
+              
               </div>
             )))
           }
@@ -193,7 +214,7 @@ function Rewards() {
           
         </div>
         <Transition show={modalOpen} as="div" className="fixed inset-0 z-10 overflow-y-auto">
-        <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center  ">
           <Transition.Child
             as="div"
             className="fixed inset-0 transition-opacity"
@@ -203,14 +224,14 @@ function Rewards() {
           </Transition.Child>
 
           
-          <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+          <span className="hidden "></span>
           &#8203;
           <Transition.Child
               as="div"
-              className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:w-full sm:max-w-lg"
+              className="inline-block align-center bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all "
             >
-              <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                <div className="sm:flex sm:items-start">
+              <div className="bg-white px-4 pt-5 pb-4 ">
+                <div className="">
                   
                   <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                     <h3 className="text-lg leading-6 font-medium text-gray-900">{selectedRewards?.name}</h3>
@@ -235,7 +256,7 @@ function Rewards() {
                   </div>
                 </div>
               </div>
-              <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+              <div className="bg-gray-50 px-4 py-3 ">
                 <Button
                   color="blue"
                   onClick={() => handleRedeemReward(selectedRewards.price, quantity)}

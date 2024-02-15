@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { CiLocationOn } from 'react-icons/ci';
 import { CiCalendarDate } from 'react-icons/ci';
 import { MdTimelapse } from 'react-icons/md';
+import { MdTimeline } from 'react-icons/md';
 import { Hand } from '@emotion-icons/heroicons-solid';
 import { ThumbUp } from '@emotion-icons/heroicons-solid';
 import {  db } from '../../../firebaseConfig';
@@ -135,15 +136,12 @@ const UpcomingActivity = () => {
                                 <IconCategory value={activity.category}/>
                               </div>
                               <Link to='/activity ' >
-                            <div className='flex-col text-[12px]'>
-                            <div className='flex text-black items-center'><CiCalendarDate className='h-5 w-5 m-1 ' />
-                          {dateofevent ? new Date(dateofevent).toLocaleDateString() : 'Invalid Date'}</div>
-                              <h1 className='flex  font-bold text-black items-center'>{activity.title}</h1>
-                              <div className='flex justify-center '>
-                                <div className='flex items-center'>
-                                <CiLocationOn className='h-5 w-5 m-1' />
-                                <p className=''>{activity.location}</p>
-                                </div>
+                            <div className='flex-col text-[10px]'>
+                            <h1 className='flex text-[16px] font-bold text-black items-center'>{activity.title.substring(0, 25)}</h1>
+                            
+                             <div className='flex  '>
+                             <div className='flex text-black items-center'><CiCalendarDate className='h-5 w-5 m-1 ' />
+                              {dateofevent ? new Date(dateofevent).toLocaleDateString() : 'Invalid Date'}</div> 
                                 <div className='flex items-center'>
                                     <MdTimelapse className='h-5 w-5 m-1' />
                                     {dateofevent ? new Date(dateofevent).toLocaleTimeString([], {
@@ -152,6 +150,14 @@ const UpcomingActivity = () => {
                                     },) : 'Invalid Date'}
                                 </div>
                               </div>
+                              <div className='flex items-center'>
+                                <CiLocationOn className='h-5 w-5 m-1' />
+                                <p className=''>{activity.location.substring(0,25)}</p>
+                                </div>
+                                <div className='flex items-center'>
+                                <MdTimeline className='h-5 w-5 m-1' />
+                                <p className=''>{activity.duration}</p>
+                                </div>
                             </div>
                             </Link>
                             <div className='flex items-center'>

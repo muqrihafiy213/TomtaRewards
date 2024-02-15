@@ -94,7 +94,7 @@ const NextActivity = () => {
                             <CalendarIcon  date={dateofevent}/>
                               </div>
                             <div className='flex-col '>
-                              <h1 onClick={toggleExpanded} style={{ cursor: 'pointer' }} className='flex text-[18px] font-bold text-black items-center overflow-hidden text-ellipsis'>{expanded ? activity.title : activity.title.substring(0, 15) + '...'}</h1>
+                              <h1 onClick={toggleExpanded} style={{ cursor: 'pointer' }} className='flex text-[18px] font-bold text-black items-center overflow-hidden text-ellipsis'>{expanded ? activity.title : activity.title.substring(0, 15) }</h1>
                                 <div className='flex text-[12px] items-center'>
                                 <CiLocationOn className='h-5 w-5 m-1' />
                                 <p className=''>{activity.location}</p>

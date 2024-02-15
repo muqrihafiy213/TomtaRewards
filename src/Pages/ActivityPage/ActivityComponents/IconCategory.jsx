@@ -11,7 +11,7 @@ const IconCategory = ({value}) => {
         IconToShow = <MdSportsSoccer className='h-10 w-10'/>
     }
     else if(value === "Food"){
-        IconToShow = <CiBurger className='h-10 w-10'/>
+        IconToShow = <CiBurger className='h-12 w-12'/>
     }
     else if(value === "Company"){
         IconToShow = <MdMiscellaneousServices className='h-10 w-10'/>
