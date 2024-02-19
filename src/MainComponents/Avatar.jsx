@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import img from '../Assets/No_avatar.png';
 import { collection, doc, onSnapshot } from 'firebase/firestore';
-import { db, auth } from '../firebaseConfig'; // Assuming you have 'storage' from Firebase
+import { db, auth } from '../firebaseConfig';
 
 const Avatar = () => {
   const [imageUrl, setImageUrl] = useState(null);

@@ -11,7 +11,7 @@ body{
 
 .fixed-container {
      /* Set your desired fixed width */
-    height: 200px; /* Set your desired fixed height */
+    height: 100px; /* Set your desired fixed height */
      /* Optional: add a border for better visibility */
     overflow: hidden; /* Optional: hide content that exceeds the fixed size */
   }

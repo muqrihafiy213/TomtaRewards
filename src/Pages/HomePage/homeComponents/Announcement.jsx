@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { List, ListItem, Card , Button } from "@material-tailwind/react";
+import { List, ListItem, Card , Button, 
+  Dialog, DialogHeader, DialogBody, DialogFooter,} from "@material-tailwind/react";
 import { imgDB, db } from '../../../firebaseConfig';
 import { getDocs, collection, Timestamp  } from 'firebase/firestore';
 import { ref, getDownloadURL } from "firebase/storage";
-import { Transition } from '@headlessui/react';
 import { StarIcon } from '@heroicons/react/24/solid';
 import logo from '../../../Assets/logo-ori-transparent.png'
 
@@ -69,10 +69,10 @@ const Announcement = () => {
   };
 
   return (
-    <div>
-      <h1 className='m-3 font-bold text-secondary md:text-[28px] text-[20px]'>Announcements</h1>
+    <div >
+      <h1 className='m-3 font-bold text-secondary md:text-[28px] text-[20px] 2xl:text-[38px]'>Announcements</h1>
       <Card className=' p-1 mx-2 my-4 rounded-xl z-0 overflow-auto '>
-        <List className='md:h-96 h-64 '>
+        <List className='2xl:h-[42rem] md:h-96 h-64 '>
         {announceData.length === 0 ? (
                 <div className='m-auto container flex justify-center'>
                   <div className='p-10'>No Announcements</div>
@@ -85,15 +85,15 @@ const Announcement = () => {
                   return (
                     <div key={announce.id} className='p-1'>
                       <button className="w-full" onClick={() => handleButtonClick(announce)}>
-                      <ListItem className={` ${announce.is_important ? 'bg-yellow-800' : 'bg-gray-300'}`} >
-                        <div className='flex justify-between h-full w-full bg-opacity-50'>
+                      <ListItem className={` ${announce.is_important ? 'bg-yellow-800' : 'bg-gray-300'} `} >
+                        <div className=' justify-between h-full w-full bg-opacity-50 grid grid-cols-2'>
                             <div className='flex-col'>
-                            <p className='md:text-[16px] text-[12px] text-white'>{dateofevent ? new Date(dateofevent).toLocaleDateString() : 'Invalid Date'}</p>
-                              <h1 className='flex md:text-[38px] text-[20px] font-bold text-white'>{announce.is_important && <StarIcon className='text-yellow-400 w-4 h-4 md:w-8 md:h-8 m-2 ' />}{announce.title.substring(0, 27)}</h1>
+                            <p className='flex 2xl:text-[32px] md:text-[16px] text-[12px] text-white items-center'>{dateofevent ? new Date(dateofevent).toLocaleDateString() : 'Invalid Date'}{announce.is_important && <StarIcon className='text-yellow-400 w-4 h-4  m-2 ' />}</p>
+                              <h1 className='flex  2xl:text-[42px] md:text-[28px] text-[20px] font-bold text-white'>{announce.title.substring(0, 27)}</h1>
                             </div>
-                            <div className='flex rewards-admin-container overflow-hidden'>
+                            <div className='flex h-fit w-fit m-auto overflow-hidden'>
                               <img
-                                className='p-2 shadow-inner max-h-fit m-auto object-contain'
+                                className='p-2 shadow-inner  m-auto object-contain'
                                 src={announce.header_image}
                                 alt='placeholder'
                               />
@@ -116,62 +116,51 @@ const Announcement = () => {
               </div>)}
         </List>
       </Card>
-
-      <Transition show={modalOpen} as="div" className="fixed inset-0 z-10 overflow-y-auto">
-        <div className="flex items-center justify-center min-h-screen pt-10 px-4  sm:block sm:p-0">
-          <Transition.Child
-            as="div"
-            className="fixed inset-0 transition-opacity"
-            onClick={closeModal}
-          >
-            <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
-          </Transition.Child>
-
-          
-          <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
-          &#8203;
-          <Transition.Child
-            as="div"
-            className="inline-block align-bottom bg-white w-2/3 md:max-h-80 overflow-y-auto rounded-lg text-left  shadow-xl transform transition-all sm:my-8 sm:align-middle sm:w-full sm:max-w-lg"
-          >
-            <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 h-auto">
-              <div className=" sm:items-start">
-                <div className='flex'>
-                  <div className=" flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-secondary sm:mx-0 sm:h-10 sm:w-10">
-                    <img src={logo} alt='logo'></img>
-                  </div>
-                  <div className='my-auto px-2 text-[12px]   text-gray-500'>{selectedAnnouncement?.publish_date ? new Date(selectedAnnouncement?.publish_date instanceof Timestamp ? selectedAnnouncement.publish_date.toDate() : null).toLocaleDateString() : 'Invalid Date'}</div>
-                </div>
-                <div className='flex container  '>
-                      <div className="mt-3 text-center sm:mt-0 sm:ml-4 p-1   bg-gray-300 container rounded-md">
-                            <h3 className="text-lg leading-6 font-medium text-gray-900">{selectedAnnouncement?.title}</h3>
-                            <div className="mt-2">
-                              <p className="text-sm text-gray-700 whitespace-pre-line">{selectedAnnouncement?.text}</p>
-                            </div>
-                          </div>
-                          {/* <div className='flex rewards-admin-container items-center overflow-hidden'>
-                                        <img
-                                          className='p-1 shadow-inner max-h-fit mx-2  object-contain'
-                                          src={selectedAnnouncement.header_image}
-                                          alt='placeholder'
-                                        />
-                      </div> */}
-                </div>
-              </div>
-              
-            </div>
-            <div className="bg-gray-50 flex justify-center py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-              <Button
-                color="white"
-                onClick={closeModal}
-                ripple= {true}
-              >
-                Close
-              </Button>
-            </div>
-          </Transition.Child>
+      <Dialog open={modalOpen} className='pb-1 overflow-y-auto'>
+  <DialogHeader>
+    {/* Header content */}
+    <div className='flex pt-5'>
+      <div className="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-secondary sm:mx-0 sm:h-10 sm:w-10">
+        <img src={logo} alt='logo'></img>
+      </div>
+      <div className='my-auto px-2 text-[12px] 2xl:text-[24px] text-gray-500'>
+        {/* Display publish date */}
+        {selectedAnnouncement?.publish_date ? 
+          new Date(selectedAnnouncement?.publish_date instanceof Timestamp ? 
+          selectedAnnouncement.publish_date.toDate() : null).toLocaleDateString() 
+          : 'Invalid Date'}
+      </div>
+    </div>
+  </DialogHeader>
+  {/* Wrapper div for scrolling */}
+  <div className="overflow-y-auto max-h-[60vh] 2xl:max-h-fit ">
+    <DialogBody>
+      <div className='flex justify-center overflow-hidden'>
+        {/* Announcement content */}
+        <div className="text-center text-sm 2xl:text-[24px] sm:mt-0 sm:ml-4 p-1 sm:min-w-[40vh] md:min-w-[100vh] 2xl:min-w-full bg-gray-300 rounded-md">
+          <h3 className="leading-6 text-md font-medium text-gray-900">{selectedAnnouncement?.title}</h3>
+          <div className="mt-2 ">
+            <p className="md:text-sm  2xl:text-[28px]  text-gray-700 whitespace-pre-line">{selectedAnnouncement?.text}</p>
+          </div>
         </div>
-      </Transition>
+      </div>
+    </DialogBody>
+  </div>
+  <DialogFooter className='flex justify-center'>
+    {/* Close button */}
+    <Button
+      size='lg'
+      color="white"
+      onClick={closeModal}
+      ripple={true}
+      className='2xl:text-[28px] bg-buttons'
+    >
+      Close
+    </Button>
+  </DialogFooter>
+</Dialog>
+
+      
     </div>
   );
 };

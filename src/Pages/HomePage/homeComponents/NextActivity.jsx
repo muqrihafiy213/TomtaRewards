@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { CiLocationOn } from 'react-icons/ci';
 import { MdTimelapse } from 'react-icons/md';
+import { MdTimeline } from 'react-icons/md';
 import {  db } from '../../../firebaseConfig';
 import { collection,  onSnapshot, Timestamp } from 'firebase/firestore';
 import { useSelector } from 'react-redux';
@@ -73,9 +74,9 @@ const NextActivity = () => {
 
   return (
     <div>
-      <h1 className='m-2.5 font-bold text-secondary md:text-[28px] text-[20px]'>Next Activity</h1>
+      <h1 className='m-2.5 font-bold text-secondary md:text-[28px] text-[20px] 2xl:text-[38px]'>Next Activity</h1>
       <Card className='px-1 mx-1 my-1 rounded-xl z-0 overflow-auto border-primary border-4'>
-        <List className='md:h-32 h-32 '>
+        <List className='2xl:h-auto md:h-32 h-32 '>
         {loading ? (
         <div className='m-auto container flex justify-center'>
           <div className='p-10'>Loading...</div>
@@ -89,24 +90,27 @@ const NextActivity = () => {
                     <div key={activity.id}>
                       <button className="w-full" >
                       <ListItem>
-                        <div className='flex justify-around w-full bg-opacity-50 items-center'>
+                        <div className='flex justify-around w-full bg-opacity-50 items-center 2xl:h-48'>
                             <div >
                             <CalendarIcon  date={dateofevent}/>
                               </div>
-                            <div className='flex-col '>
-                              <h1 onClick={toggleExpanded} style={{ cursor: 'pointer' }} className='flex text-[18px] font-bold text-black items-center overflow-hidden text-ellipsis'>{expanded ? activity.title : activity.title.substring(0, 15) }</h1>
-                                <div className='flex text-[12px] items-center'>
+                            <div className='flex-col 2xl:text-[28px] text-[10px]'>
+                              <h1 onClick={toggleExpanded} style={{ cursor: 'pointer' }} className='flex text-[14px] sm:text-[12px] 2xl:text-[32px] font-bold text-black items-center overflow-hidden text-ellipsis'>{expanded ? activity.title : activity.title.substring(0, 25) }</h1>
+                                <div className='flex  items-center'>
                                 <CiLocationOn className='h-5 w-5 m-1' />
                                 <p className=''>{activity.location}</p>
                                 </div>
-                                <div className='flex text-[12px] items-center'>
+                                <div className='flex  items-center'>
                                     <MdTimelapse className='h-5 w-5 m-1' />
                                     {dateofevent ? new Date(dateofevent).toLocaleTimeString([], {
                                         hour: '2-digit',
                                         minute: '2-digit',
                                     },) : 'Invalid Date'}
                                 </div>
-                              
+                                <div className='flex items-center'>
+                                <MdTimeline className='h-5 w-5 m-1' />
+                                <p className=''>{activity.duration}</p>
+                                </div>
                             </div>
                             <div className='flex items-center'>
                         </div>

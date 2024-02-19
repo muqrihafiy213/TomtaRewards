@@ -61,7 +61,7 @@ const Navbar = ({userRole}) => {
         
         if (userRole === 'admin' && item.roles && item.roles.includes('admin') && !adminPageRendered) {
           renderedItems.push(
-            <div key={`admin-label`} className="text-sm text-gray-500 uppercase font-semibold px-4 py-1">Admin</div>
+            <div key={`admin-label`} className="text-sm 2xl:text-xl text-gray-500 uppercase font-semibold px-4 py-1">Admin</div>
           );
           renderedItems.push(<hr key={`separator-${index}`} className="my-2 border-t border-gray-400" />);
           adminPageRendered = true; // Set flag to true after rendering the first admin page
@@ -80,19 +80,19 @@ const Navbar = ({userRole}) => {
 
    
   return (
-    <div className='flex relative justify-between items-center h-24 mx-auto px-4 text-secondary bg-primary drop-shadow-md z-50 '>
+    <div className='flex relative justify-between items-center h-24 2xl:h-32 mx-auto px-4 text-secondary bg-primary drop-shadow-md z-50 '>
     
       <div onClick={handleNav} className='flex '>
         {nav ? <AiOutlineClose size={20} className='my-auto' /> : <AiOutlineMenu size={20} className='my-auto' />}
         <Link to="/" className="">
-          <p className='md:text-[28px] text-[20px] font-extrabold text-secondary px-2  uppercase'>
+          <p className='md:text-[28px] 2xl:text-[32px] text-[20px] font-extrabold text-secondary px-2  uppercase'>
             Tomta Rewards
           </p>
         </Link>
       </div>
 
 
-      <ul className='hidden items-center uppercase md:flex'>
+      <ul className='hidden items-center 2xl:text-[28px] uppercase md:flex '>
         <CustomLink to="/">
           <li className='font-bold p-4'>Home</li>
         </CustomLink>
@@ -134,11 +134,11 @@ const Navbar = ({userRole}) => {
         <li className='font-bold p-4'>
           <div className=" flex  bg-primary rounded-[99px] shadow-xl  p-2" >
             
-            <span className="text-secondary mx-auto"><Points /></span>
+            <span className="text-secondary 2xl:text-[28px] mx-auto"><Points /></span>
           </div>
         </li>
         <div className='bg-secondary text-buttons'>
-          <ul className='pt-3 uppercase sm:text-[12px]'>
+          <ul className='pt-3 uppercase sm:text-[12px] 2xl:text-[28px]'>
           {renderSidebarItems()}
 
           </ul>

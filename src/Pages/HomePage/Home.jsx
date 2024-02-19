@@ -14,8 +14,8 @@ function Home() {
   return (
     <div>
       <MainLayout >
-        <div className='md:flex'>
-        <div className='md:w-3/5'>
+        <div className='md:flex h-screen'>
+        <div className='md:w-3/5 '>
         <Announcement />
         </div>
         <div className='md:w-2/5 md:py-2'>

@@ -114,9 +114,9 @@ const UpcomingActivity = () => {
   return (
     <div>
       <ToastContainer />
-      <h1 className='m-3 font-bold text-secondary md:text-[28px] text-[20px]'>Upcoming Activity</h1>
+      <h1 className='m-3 font-bold text-secondary 2xl:text-[38px] md:text-[28px] text-[20px]'>Upcoming Activity</h1>
       <Card className='p-1 mx-1 my-4 rounded-xl z-0 overflow-auto '>
-        <List className='md:h-56 h-28 '>
+        <List className='2xl:h-auto md:h-56 h-28 '>
         
         {loading ? (
         <div className='m-auto container flex justify-center'>
@@ -131,13 +131,13 @@ const UpcomingActivity = () => {
                     <div key={activity.id} className='p-1'>
                       <button className="w-full bg-gray-100 rounded-md" >
                       <ListItem  >
-                        <div className='flex justify-around w-full bg-opacity-50'>
+                        <div className='flex justify-around w-full bg-opacity-50 2xl:h-48'>
                             <div className=' my-auto  '>
                                 <IconCategory value={activity.category}/>
                               </div>
                               <Link to='/activity ' >
-                            <div className='flex-col text-[10px]'>
-                            <h1 className='flex text-[16px] font-bold text-black items-center'>{activity.title.substring(0, 25)}</h1>
+                            <div className='flex-col text-[10px] 2xl:text-[28px] 2xl:py-6'>
+                            <h1 className='flex text-[16px] 2xl:text-[32px] font-bold text-black items-center'>{activity.title.substring(0, 25)}</h1>
                             
                              <div className='flex  '>
                              <div className='flex text-black items-center'><CiCalendarDate className='h-5 w-5 m-1 ' />
@@ -171,7 +171,7 @@ const UpcomingActivity = () => {
                                 onClick={() => participateInActivity(activity.id)}
                                 disabled={activity.participantStatus}  
                               >
-                                {activity.participantStatus ? <Tooltip  content="You have Participated"><ThumbUp className='w-8 h-8 text-green-300' /></Tooltip> : <Hand className='w-8 h-8 text-yellow-300 hover:text-white'/>}
+                                {activity.participantStatus ? <Tooltip  content="You have Participated"><ThumbUp className='w-8 h-8 2xl:h-16 2xl:w-16 text-green-300' /></Tooltip> : <Hand className='w-8 h-8 2xl:h-16 2xl:w-16 text-yellow-300 hover:text-white'/>}
                               </button>
                         </div>
                         </div>

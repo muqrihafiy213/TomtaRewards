@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { CiLocationOn } from 'react-icons/ci';
 import { CiCalendarDate } from 'react-icons/ci';
 import { MdTimelapse } from 'react-icons/md';
+import { MdTimeline } from 'react-icons/md';
 import { db, auth} from "../../firebaseConfig";
 import { getDocs, collection , onSnapshot, Timestamp , where, query } from 'firebase/firestore';
 import { useSelector } from 'react-redux';
@@ -11,7 +12,7 @@ import { selectUser } from '../../userSlice';
 import ImageCategory from './ActivityComponents/ImageCategory';
 import 'swiper/css';
 import 'swiper/css/pagination';
-
+import { CalendarIcon } from 'react-calendar-icon';
 import { Pagination } from 'swiper/modules';
 import Participants from './ActivityComponents/Participants';
 
@@ -113,9 +114,15 @@ function Activity() {
             spaceBetween: 20,
           },
           1024: {
+            slidesPerView: 2,
+            spaceBetween: 30,
+          },
+          1440: {
             slidesPerView: 3,
             spaceBetween: 30,
           },
+          
+
         }}
           pagination={{
             clickable: true,
@@ -134,34 +141,33 @@ function Activity() {
           return (
             <SwiperSlide>
               <div key={activity.id}>
-                <div className=' bg-white rounded-[20px] shadow m-4'>
+                <div className=' bg-white  rounded-[20px] shadow m-4'>
                   <div className=''>
                     <ImageCategory value={activity.category}/>
                   </div>
-                  <div className='bg-secondary text-center text-primary text-[16px] font-light'>{activity.title}</div>
-                  <div className='p-3 text-[16px] '>
-                    <div className=' p-3 '>
-                      <div className=' flex justify-center'>
-                        <CiLocationOn className='h-5 w-5 m-1' />
-                        <p className=' '>{activity.location}</p>
+                 <div className='flex'>
+                    <div className='p-2'>
+                      <CalendarIcon  date={dateofevent}/>
                       </div>
-                      
-                    </div>
-                    <div className='grid grid-cols-2 p-3'>
-                    <div className=' flex justify-center'>
-                        <CiCalendarDate className='h-5 w-5 m-1 ' />
-                        {dateofevent ? new Date(dateofevent).toLocaleDateString() : 'Invalid Date'}
-                      </div>
-                      <div className=' flex justify-center '>
-                        <MdTimelapse className='h-5 w-5 my-0.5 mx-2' />
-                        <p>{dateofevent ? new Date(dateofevent).toLocaleTimeString([], {
-                            hour: '2-digit',
-                            minute: '2-digit',
-                          },) : 'Invalid Date'}</p>
-                      </div>
-                     
-                    </div>
-                  </div>
+                      <div className='mt-2 text-[12px] sm:text-[10px] flex-col '>
+                        <h1 className=' text-secondary text-[14px] sm:text-[12px]  font-bold flex'>{activity.title.substring(0,25)}</h1>
+                        <div className='flex items-center'>
+                        <CiLocationOn className='h-5 w-5 mt-1' />
+                        <p>{activity.location}</p>
+                        </div>
+                        <div className='flex items-center'>
+                                    <MdTimelapse className='h-5 w-5 mt-1' />
+                                    {dateofevent ? new Date(dateofevent).toLocaleTimeString([], {
+                                        hour: '2-digit',
+                                        minute: '2-digit',
+                                    },) : 'Invalid Date'}
+                                </div>
+                        <div className='flex items-center'>
+                                  <MdTimeline className='h-5 w-5 mt-1' />
+                                  <p className=''>{activity.duration}</p>
+                                  </div>
+                        </div>
+                 </div>
                 </div>
               </div>
               </SwiperSlide>
@@ -217,24 +223,27 @@ function Activity() {
                   <ImageCategory value={activity.category}/>
                   </div>
                   <div className='bg-secondary text-center text-white text-[16px] font-light'>{activity.title}</div>
-                  <div className='p-3 text-[16px]  '>
-                    <div className='grid grid-cols-2 p-3 '>
+                  <div className='p-3 text-[12px]  '>
+                    
                       <div className=' flex justify-center'>
-                        <CiLocationOn className='h-5 w-5 m-1' />
+                        <CiLocationOn className='h-5 w-5 ' />
                         <p>{activity.location}</p>
                       </div>
-                      <div className=' flex justify-center'>
+                      {/* <div className=' flex justify-center'>
                         <CiCalendarDate className='h-5 w-5 m-1 ' />
                         {dateofevent ? new Date(dateofevent).toLocaleDateString() : 'Invalid Date'}
-                      </div>
-                    </div>
+                      </div> */}
+                    
                     <div className='grid grid-cols-2 p-3'>
                       <div className=' flex justify-center'>
-                        <MdTimelapse className='h-5 w-5 m-1' />
+                        <MdTimelapse className='h-5 w-5 ' />
                         {dateofevent ? new Date(dateofevent).toLocaleTimeString([], {
                             hour: '2-digit',
                             minute: '2-digit',
                           },) : 'Invalid Date'}
+                      </div>
+                      <div className='flex text-black justify-center'><CiCalendarDate className='h-5 w-5  ' />
+                      {dateofevent ? new Date(dateofevent).toLocaleDateString() : 'Invalid Date'}
                       </div>
                       {/* <div className='flex justify-center'>
                         <button
