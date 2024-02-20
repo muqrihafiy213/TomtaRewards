@@ -6,7 +6,7 @@ import {  db } from '../../../firebaseConfig';
 import { collection,  onSnapshot, Timestamp } from 'firebase/firestore';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../../userSlice';
-import { List, ListItem, Card  } from "@material-tailwind/react";
+import { List, ListItem, Card, Tooltip  } from "@material-tailwind/react";
 import { CalendarIcon } from 'react-calendar-icon';
 import { Link } from 'react-router-dom';
 
@@ -96,6 +96,7 @@ const NextActivity = () => {
                             <CalendarIcon  date={dateofevent}/>
                               </div>
                               <Link to='/activity ' >
+                              <Tooltip  content="Click to See More">
                             <div className='flex-col 2xl:text-[28px] text-[10px]'>
                               <h1 onClick={toggleExpanded} style={{ cursor: 'pointer' }} className='flex text-[14px] sm:text-[12px] 2xl:text-[32px] font-bold text-black items-center overflow-hidden text-ellipsis'>{expanded ? activity.title : activity.title.substring(0, 25) }</h1>
                                 <div className='flex  items-center'>
@@ -114,6 +115,7 @@ const NextActivity = () => {
                                 <p className=''>{activity.duration}</p>
                                 </div>
                             </div>
+                            </Tooltip>
                             </Link>
                             <div className='flex items-center'>
                         </div>

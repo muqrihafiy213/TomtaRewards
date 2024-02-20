@@ -5,6 +5,7 @@ import { CiLocationOn } from 'react-icons/ci';
 import { CiCalendarDate } from 'react-icons/ci';
 import { MdTimelapse } from 'react-icons/md';
 import { MdTimeline } from 'react-icons/md';
+import { UsersIcon } from '@heroicons/react/24/solid';
 import { db, auth} from "../../firebaseConfig";
 import { getDocs, collection , onSnapshot, Timestamp , where, query } from 'firebase/firestore';
 import { useSelector } from 'react-redux';
@@ -15,6 +16,7 @@ import 'swiper/css/pagination';
 import { CalendarIcon } from 'react-calendar-icon';
 import { Pagination } from 'swiper/modules';
 import Participants from './ActivityComponents/Participants';
+
 
 
 function Activity() {
@@ -92,9 +94,9 @@ function Activity() {
   return (
     <div>
       <MainLayout>
-      <div className='container mx-auto'>
+      <div className=''>
       <div className='m-auto  flex justify-between p-3 '>
-                <p className='font-bold text-secondary md:text-[28px] text-[20px]'>UPCOMING PARTICIPATED ACTIVITIES</p>
+                <p className='font-bold text-secondary 2xl:text-[38px] md:text-[28px] text-[20px]'>UPCOMING PARTICIPATED ACTIVITIES</p>
                 </div>
       {upcomingActivities.length === 0 ? (
         <div key={upcomingActivities.id} className='m-auto container flex justify-center'>
@@ -128,7 +130,7 @@ function Activity() {
             clickable: true,
           }}
           modules={[Pagination]}
-          className="mySwiper"
+          className="mySwiper bg-primary"
         >
           {upcomingActivities.length === 0 ? (
                 <div className='m-auto container flex justify-center'>
@@ -139,18 +141,18 @@ function Activity() {
            ? activity.event_date.toDate()
            : null;
           return (
-            <SwiperSlide>
-              <div key={activity.id}>
-                <div className=' bg-white  rounded-[20px] shadow m-4'>
+            <SwiperSlide >
+              <div key={activity.id} >
+                <div className='bg-white  rounded-[20px] shadow m-4'>
                   <div className=''>
                     <ImageCategory value={activity.category}/>
                   </div>
                  <div className='flex'>
-                    <div className='p-2'>
+                    <div className='p-2 my-auto'>
                       <CalendarIcon  date={dateofevent}/>
                       </div>
-                      <div className='mt-2 text-[12px] sm:text-[10px] flex-col '>
-                        <h1 className=' text-secondary text-[14px] sm:text-[12px]  font-bold flex'>{activity.title.substring(0,25)}</h1>
+                      <div className='my-2 2xl:text-[24px] text-[12px] sm:text-[10px] flex-col '>
+                        <h1 className=' text-secondary 2xl:text-[28px] text-[14px] sm:text-[12px]  font-bold flex'>{activity.title.substring(0,25)}</h1>
                         <div className='flex items-center'>
                         <CiLocationOn className='h-5 w-5 mt-1' />
                         <p>{activity.location}</p>
@@ -178,7 +180,7 @@ function Activity() {
         </Swiper>
       )}
         <div className='m-auto  flex justify-between p-3 '>
-                <p className='font-bold text-secondary md:text-[28px] text-[20px]'>PAST PARTICPATED ACTIVITIES</p>
+                <p className='font-bold text-secondary 2xl:text-[38px] md:text-[28px] text-[20px]'>PAST PARTICPATED ACTIVITIES</p>
                 </div>
       {pastActivities.length === 0 ? (
         <div className='m-auto container flex justify-center'>
@@ -205,7 +207,7 @@ function Activity() {
             clickable: true,
           }}
           modules={[Pagination]}
-          className="mySwiper"
+          className="mySwiper bg-primary"
         >
           {pastActivities.length === 0 ? (
                 <div className='m-auto container flex justify-center'>
@@ -215,6 +217,7 @@ function Activity() {
            const dateofevent = activity?.event_date instanceof Timestamp
            ? activity.event_date.toDate()
            : null;
+           const participants = activity.participants || [];
           return (
             <SwiperSlide>
               <div key={activity.id}>
@@ -222,10 +225,10 @@ function Activity() {
                   <div className=''>
                   <ImageCategory value={activity.category}/>
                   </div>
-                  <div className='bg-secondary text-center text-white text-[16px] font-light'>{activity.title}</div>
-                  <div className='p-3 text-[12px]  '>
+                  <div className='bg-secondary text-center text-white text-[16px] 2xl:text-[28px] font-light'>{activity.title}</div>
+                  <div className='p-3 text-[12px]  2xl:text-[24px]'>
                     
-                      <div className=' flex justify-center'>
+                      <div className=' flex justify-center items-center'>
                         <CiLocationOn className='h-5 w-5 ' />
                         <p>{activity.location}</p>
                       </div>
@@ -234,16 +237,12 @@ function Activity() {
                         {dateofevent ? new Date(dateofevent).toLocaleDateString() : 'Invalid Date'}
                       </div> */}
                     
-                    <div className='grid grid-cols-2 p-3'>
-                      <div className=' flex justify-center'>
-                        <MdTimelapse className='h-5 w-5 ' />
-                        {dateofevent ? new Date(dateofevent).toLocaleTimeString([], {
-                            hour: '2-digit',
-                            minute: '2-digit',
-                          },) : 'Invalid Date'}
-                      </div>
-                      <div className='flex text-black justify-center'><CiCalendarDate className='h-5 w-5  ' />
+                    <div className='grid grid-cols-2 p-3 '>
+                    <div className='flex text-black justify-center items-center'><CiCalendarDate className='h-5 w-5  ' />
                       {dateofevent ? new Date(dateofevent).toLocaleDateString() : 'Invalid Date'}
+                      </div>
+                      <div className='flex text-black justify-center items-center'><UsersIcon className='h-5 w-5 pr-1 ' />
+                      {participants.length} { participants.length === 1 ? "Participant" : "Participants"}
                       </div>
                       {/* <div className='flex justify-center'>
                         <button

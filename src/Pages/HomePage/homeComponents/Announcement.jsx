@@ -72,7 +72,7 @@ const Announcement = () => {
     <div >
       <h1 className='m-3 2xl:m-7 font-bold text-secondary md:text-[28px] text-[20px] 2xl:text-[38px]'>Announcements</h1>
       <Card className=' p-1 mx-2 my-4 rounded-xl z-0 overflow-auto '>
-        <List className='2xl:h-[42rem] md:h-96 h-64 '>
+        <List className='2xl:h-[50rem] md:h-[27rem] h-64 '>
         {announceData.length === 0 ? (
                 <div className='m-auto container flex justify-center'>
                   <div className='p-10'>No Announcements</div>
@@ -132,20 +132,20 @@ const Announcement = () => {
       </div>
     </div>
   </DialogHeader>
-  {/* Wrapper div for scrolling */}
-  <div className="overflow-y-auto max-h-[60vh] 2xl:max-h-fit ">
-    <DialogBody>
-      <div className='flex justify-center overflow-hidden'>
+ 
+  
+    <DialogBody className="flex justify-center  ">
+      <div className=' overflow-y-auto max-h-[60vh] 2xl:max-h-fit'>
         {/* Announcement content */}
-        <div className="text-center text-sm 2xl:text-[24px] sm:mt-0 sm:ml-4 p-1 sm:min-w-[40vh] md:min-w-[100vh] 2xl:min-w-full bg-gray-300 rounded-md">
+        <div className="overflow-hidden text-center text-sm 2xl:text-[24px] sm:mt-0 sm:ml-4 p-1 sm:min-w-[40vh] md:min-w-[100vh] 2xl:min-w-full bg-gray-300 rounded-md">
           <h3 className="leading-6 text-md font-medium text-gray-900">{selectedAnnouncement?.title}</h3>
           <div className="mt-2 ">
-            <p className="md:text-sm  2xl:text-[28px]  text-gray-700 whitespace-pre-line">{selectedAnnouncement?.text}</p>
+            <p className="md:text-sm  2xl:text-2xl  text-gray-700 whitespace-pre-line">{selectedAnnouncement?.text}</p>
           </div>
         </div>
       </div>
     </DialogBody>
-  </div>
+  
   <DialogFooter className='flex justify-center'>
     {/* Close button */}
     <Button

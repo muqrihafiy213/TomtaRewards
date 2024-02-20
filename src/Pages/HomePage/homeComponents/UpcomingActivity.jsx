@@ -116,7 +116,7 @@ const UpcomingActivity = () => {
       <ToastContainer />
       <h1 className='m-3 font-bold text-secondary 2xl:text-[38px] md:text-[28px] text-[20px]'>Upcoming Activity</h1>
       <Card className='p-1 mx-1 my-4 rounded-xl z-0 overflow-auto '>
-        <List className='2xl:h-[40vh] md:h-56 h-28 '>
+        <List className='2xl:h-[41vh] md:h-56 h-28 '>
         
         {loading ? (
         <div className='m-auto container flex justify-center'>
@@ -136,6 +136,7 @@ const UpcomingActivity = () => {
                                 <IconCategory value={activity.category}/>
                               </div>
                               <Link to='/activity ' >
+                              <Tooltip  content="Click to See More" placement="top" >
                             <div className='flex-col text-[10px] 2xl:text-[28px] 2xl:py-6'>
                             <h1 className='flex text-[16px] 2xl:text-[32px] font-bold text-black items-center'>{activity.title.substring(0, 25)}</h1>
                             
@@ -159,6 +160,7 @@ const UpcomingActivity = () => {
                                 <p className=''>{activity.duration}</p>
                                 </div>
                             </div>
+                            </Tooltip>
                             </Link>
                             <div className='flex items-center'>
                               <button
@@ -171,7 +173,7 @@ const UpcomingActivity = () => {
                                 onClick={() => participateInActivity(activity.id)}
                                 disabled={activity.participantStatus}  
                               >
-                                {activity.participantStatus ? <Tooltip  content="You have Participated"><ThumbUp className='w-8 h-8 2xl:h-16 2xl:w-16 text-green-300' /></Tooltip> : <Hand className='w-8 h-8 2xl:h-16 2xl:w-16 text-yellow-300 hover:text-white'/>}
+                                {activity.participantStatus ? <Tooltip  content="You have Participated"><ThumbUp className='w-8 h-8 2xl:h-16 2xl:w-16 text-green-300' /></Tooltip> : <Tooltip  content="Click to Participate"><Hand className='w-8 h-8 2xl:h-16 2xl:w-16 text-yellow-300 hover:text-white'/></Tooltip>}
                               </button>
                         </div>
                         </div>

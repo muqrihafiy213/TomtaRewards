@@ -21,7 +21,7 @@ const ImageCategory = ({value}) => {
     }
 
   return (
-    <div className='flex fixed-container  overflow-hidden'>
+    <div className='flex fixed-container 2xl:h-[15vh] overflow-hidden'>
         <img
                         className=' shadow m-auto object-contain image'
                         src={ImageToShow}
