@@ -46,7 +46,7 @@ const NewListing = ({ openPopUp, closePopUp }) => {
     }
   
     try {
-      const fileName = `rewards.${image.name.split('.').pop()}`;
+      const fileName = `${title}.${image.name.split('.').pop()}`;
       const fileRef = storageRef(imgDB, `rewards/${fileName}`);
       const uploadTask = uploadBytesResumable(fileRef, image);
   

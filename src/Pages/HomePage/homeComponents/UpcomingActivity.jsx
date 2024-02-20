@@ -116,7 +116,7 @@ const UpcomingActivity = () => {
       <ToastContainer />
       <h1 className='m-3 font-bold text-secondary 2xl:text-[38px] md:text-[28px] text-[20px]'>Upcoming Activity</h1>
       <Card className='p-1 mx-1 my-4 rounded-xl z-0 overflow-auto '>
-        <List className='2xl:h-auto md:h-56 h-28 '>
+        <List className='2xl:h-[40vh] md:h-56 h-28 '>
         
         {loading ? (
         <div className='m-auto container flex justify-center'>
@@ -131,7 +131,7 @@ const UpcomingActivity = () => {
                     <div key={activity.id} className='p-1'>
                       <button className="w-full bg-gray-100 rounded-md" >
                       <ListItem  >
-                        <div className='flex justify-around w-full bg-opacity-50 2xl:h-48'>
+                        <div className='flex justify-around w-full bg-opacity-50 2xl:h-'>
                             <div className=' my-auto  '>
                                 <IconCategory value={activity.category}/>
                               </div>

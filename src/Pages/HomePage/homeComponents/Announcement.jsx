@@ -70,7 +70,7 @@ const Announcement = () => {
 
   return (
     <div >
-      <h1 className='m-3 font-bold text-secondary md:text-[28px] text-[20px] 2xl:text-[38px]'>Announcements</h1>
+      <h1 className='m-3 2xl:m-7 font-bold text-secondary md:text-[28px] text-[20px] 2xl:text-[38px]'>Announcements</h1>
       <Card className=' p-1 mx-2 my-4 rounded-xl z-0 overflow-auto '>
         <List className='2xl:h-[42rem] md:h-96 h-64 '>
         {announceData.length === 0 ? (
@@ -91,9 +91,9 @@ const Announcement = () => {
                             <p className='flex 2xl:text-[32px] md:text-[16px] text-[12px] text-white items-center'>{dateofevent ? new Date(dateofevent).toLocaleDateString() : 'Invalid Date'}{announce.is_important && <StarIcon className='text-yellow-400 w-4 h-4  m-2 ' />}</p>
                               <h1 className='flex  2xl:text-[42px] md:text-[28px] text-[20px] font-bold text-white'>{announce.title.substring(0, 27)}</h1>
                             </div>
-                            <div className='flex h-fit w-fit m-auto overflow-hidden'>
+                            <div className='flex 2xl:w-[10vw] 2xl:h-[10vw] w-[15vw] h-[15vw] sm:w-[20vw] sm:h-[20vw]  m-auto overflow-hidden mr-5'>
                               <img
-                                className='p-2 shadow-inner  m-auto object-contain'
+                                className='p-2 shadow-inner   object-fit'
                                 src={announce.header_image}
                                 alt='placeholder'
                               />

@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { selectUser } from '../../../userSlice';
 import { List, ListItem, Card  } from "@material-tailwind/react";
 import { CalendarIcon } from 'react-calendar-icon';
+import { Link } from 'react-router-dom';
 
 const NextActivity = () => {
   const [activityData, setActivityData] = useState([]);
@@ -74,8 +75,8 @@ const NextActivity = () => {
 
   return (
     <div>
-      <h1 className='m-2.5 font-bold text-secondary md:text-[28px] text-[20px] 2xl:text-[38px]'>Next Activity</h1>
-      <Card className='px-1 mx-1 my-1 rounded-xl z-0 overflow-auto border-primary border-4'>
+      <h1 className='m-2.5 2xl:m-7 font-bold text-secondary md:text-[28px] text-[20px] 2xl:text-[38px]'>Next Activity</h1>
+      <Card className='px-1 mx-1 mb-1 rounded-xl z-0 overflow-auto border-primary border-4'>
         <List className='2xl:h-auto md:h-32 h-32 '>
         {loading ? (
         <div className='m-auto container flex justify-center'>
@@ -94,6 +95,7 @@ const NextActivity = () => {
                             <div >
                             <CalendarIcon  date={dateofevent}/>
                               </div>
+                              <Link to='/activity ' >
                             <div className='flex-col 2xl:text-[28px] text-[10px]'>
                               <h1 onClick={toggleExpanded} style={{ cursor: 'pointer' }} className='flex text-[14px] sm:text-[12px] 2xl:text-[32px] font-bold text-black items-center overflow-hidden text-ellipsis'>{expanded ? activity.title : activity.title.substring(0, 25) }</h1>
                                 <div className='flex  items-center'>
@@ -112,6 +114,7 @@ const NextActivity = () => {
                                 <p className=''>{activity.duration}</p>
                                 </div>
                             </div>
+                            </Link>
                             <div className='flex items-center'>
                         </div>
                         </div>

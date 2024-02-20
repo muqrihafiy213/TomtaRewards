@@ -21,6 +21,7 @@ const NewAnnouncement = ({ openPopUp, closePopUp }) => {
   const [image, setImage] = useState(null);
   const [importance, setImportance] = useState(false);
   const [emails,setEmail] = useState([])
+ 
   
 
   useEffect(() => {   
@@ -64,6 +65,10 @@ const NewAnnouncement = ({ openPopUp, closePopUp }) => {
     });
   };
 
+  const resetImage = () => {
+    setImage(null);
+  };
+
 
   const handlelosePopUp = (e) => {
     if (e.target.id === 'ModelContainer') {
@@ -72,7 +77,7 @@ const NewAnnouncement = ({ openPopUp, closePopUp }) => {
   };
 
   const handleCheckboxChange = () => {
-    setImportance(true);
+    setImportance((prev) => !prev);
   };
 
   if (!openPopUp) return null;
@@ -86,10 +91,11 @@ const NewAnnouncement = ({ openPopUp, closePopUp }) => {
     }
   
     try {
-      const fileName = `announcement.${image.name.split('.').pop()}`;
+      const fileName = `${title}.${image.name.split('.').pop()}`;
       const fileRef = storageRef(imgDB, `announcement/${fileName}`);
       const uploadTask = uploadBytesResumable(fileRef, image);
   
+      
       uploadTask.on(
         "state_changed",
         (snapshot) => {
@@ -98,28 +104,32 @@ const NewAnnouncement = ({ openPopUp, closePopUp }) => {
         (error) => {
           console.error("Error uploading file:", error);
           alert("Error uploading file. Please try again.");
+          
         },
         async () => {
-          // File uploaded successfully
+          
           const url = await getDownloadURL(uploadTask.snapshot.ref);
           sendEmails();
-          // Add the document with the download URL
+          
           await addDoc(collection(db, "announcements"), {
             title: title,
-            text : text,
-            header_image: url, 
+            text: text,
+            header_image: url,
             publish_date: new Date(),
-            is_important : importance,
+            is_important: importance,
           });
           setTitle('');
           setText('');
-          setImage(null);
-          setImportance(false);
           
+          setImportance(false);
           closePopUp();
+          
         },
+        resetImage(),
+      console.log("check", image),
         showToastMessage(),
       );
+      
     } catch (error) {
       console.error("Publish Error", error);
     }
@@ -130,13 +140,7 @@ const NewAnnouncement = ({ openPopUp, closePopUp }) => {
     setImage(e.target.files[0]);
   };
 
-  const handleFileUpload = async () => {
-    if (!image) {
-      alert("Please select an image");
-      return;
-    }
-
-  }
+ 
 
   return (
     
@@ -154,7 +158,8 @@ const NewAnnouncement = ({ openPopUp, closePopUp }) => {
             <Typography color="gray" className="mt-1 font-normal">
               Enter Announcement Details
             </Typography>
-            <form onSubmit={handleSubmit} className="mt-5 mb-2  max-w-screen-md sm:min-w-fit">
+            <form  className="mt-5 mb-2  max-w-screen-md sm:min-w-fit">
+          
               <div className="mb-1 grid grid-rows-1 grid-flow-col sm:flex sm:flex-col gap-4 sm:text-[10px]">
                 <div>
                 <Typography variant="h6" color="blue-gray" className="">
@@ -214,7 +219,7 @@ const NewAnnouncement = ({ openPopUp, closePopUp }) => {
                  <Button
                 type="submit"
                 color='white'
-                onClick={handleFileUpload}
+                onClick={handleSubmit}
                 className="mt-6 bg-buttons"
                 fullWidth
               >
