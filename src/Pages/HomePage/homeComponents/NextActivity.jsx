@@ -75,16 +75,20 @@ const NextActivity = () => {
 
   return (
     <div>
-      <h1 className='m-2.5 2xl:m-7 font-bold text-secondary md:text-[28px] text-[20px] 2xl:text-[38px]'>Next Activity</h1>
-      <Card className='px-1 mx-1 mb-1 rounded-xl z-0 overflow-auto border-primary border-4'>
-        <List className='2xl:h-auto md:h-32 h-32 '>
+      <h1 className='m-2.5 2xl:m-7 font-bold text-secondary 2xl:text-[38px] md:text-[28px] text-[20px]'>Next Activity</h1>
+      <Card className='px-1 mx-1 mb-1 rounded-xl z-0  border-primary border-4'>
+        <List className='2xl:h-auto md:h-36 h-32 '>
         {loading ? (
         <div className='m-auto container flex justify-center'>
           <div className='p-10'>Loading...</div>
         </div>
       ) : (
         <div className=' mx-auto w-full '>
-          {activityData.slice(0, 1).map((activity) => {
+          {activityData.length === 0 ? (
+            <div className='m-auto container flex justify-center'>
+              <div className='p-10'>No Activity At the Moment</div>
+            </div>
+          ) :activityData.slice(0, 1).map((activity) => {
               const dateofevent =
                 activity?.event_date instanceof Timestamp ? activity.event_date.toDate() : null;
                   return (
@@ -97,8 +101,8 @@ const NextActivity = () => {
                               </div>
                               <Link to='/activity ' >
                               <Tooltip  content="Click to See More">
-                            <div className='flex-col 2xl:text-[28px] text-[10px]'>
-                              <h1 onClick={toggleExpanded} style={{ cursor: 'pointer' }} className='flex text-[14px] sm:text-[12px] 2xl:text-[32px] font-bold text-black items-center overflow-hidden text-ellipsis'>{expanded ? activity.title : activity.title.substring(0, 25) }</h1>
+                            <div className='flex-col 2xl:text-[20px] text-[10px]'>
+                              <h1 onClick={toggleExpanded} style={{ cursor: 'pointer' }} className='flex text-[14px] sm:text-[12px] 2xl:text-[24px] font-bold text-black items-center overflow-hidden text-ellipsis'>{expanded ? activity.title : activity.title.substring(0, 25) }</h1>
                                 <div className='flex  items-center'>
                                 <CiLocationOn className='h-5 w-5 m-1' />
                                 <p className=''>{activity.location}</p>

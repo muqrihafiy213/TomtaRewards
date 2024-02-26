@@ -29,7 +29,7 @@ const Participants = ({ openPopUp, closePopUp, selectedActivity }) => {
     <div
       className='fixed inset-0 z-50 bg-black flex justify-center items-center bg-opacity-20 backdrop-blur-sm'>
       <Transition show={openPopUp} as="div" className="fixed inset-0 z-10 overflow-y-auto">
-        <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <div className="flex items-center justify-center min-h-screen min-w-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
           <Transition.Child
             as="div"
             className="fixed inset-0 transition-opacity"
@@ -66,7 +66,7 @@ const Participants = ({ openPopUp, closePopUp, selectedActivity }) => {
             </div>
           </div>
         </div>
-        <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+        <div className="bg-gray-50 flex justify-center py-6 sm:px-6 sm:flex sm:flex-row-reverse">
           <Button color="light-blue" onClick={closePopUp} ripple="light">
             Close
           </Button>

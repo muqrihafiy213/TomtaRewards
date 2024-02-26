@@ -134,11 +134,11 @@ const Navbar = ({userRole}) => {
         <li className='font-bold p-4'>
           <div className=" flex  bg-primary rounded-[99px] shadow-xl  p-2" >
             
-            <span className="text-secondary 2xl:text-[28px] mx-auto"><Points /></span>
+            <span className="text-secondary 2xl:text-[24px] mx-auto"><Points /></span>
           </div>
         </li>
         <div className='bg-secondary text-buttons'>
-          <ul className='pt-3 uppercase sm:text-[12px] 2xl:text-[28px]'>
+          <ul className='pt-3 uppercase sm:text-[12px] 2xl:text-[24px]'>
           {renderSidebarItems()}
 
           </ul>

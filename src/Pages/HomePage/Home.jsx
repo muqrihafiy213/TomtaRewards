@@ -14,13 +14,15 @@ function Home() {
   return (
     <div>
       <MainLayout >
-        <div className='md:flex h-screen'>
-        <div className='md:w-3/5 '>
+        <div>
         <Announcement />
-        </div>
-        <div className='md:w-2/5 md:py-2'>
-            <NextActivity />
-            <UpcomingActivity />     
+        <div className='md:flex '>
+          <div className='md:w-1/2'>
+          <NextActivity />
+          </div>
+           <div className='md:w-1/2'>
+           <UpcomingActivity />
+           </div>
         </div>
         
         </div>

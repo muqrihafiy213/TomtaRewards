@@ -95,9 +95,9 @@ function Activity() {
     <div>
       <MainLayout>
       <div className=''>
-      <div className='m-auto  flex justify-between p-3 '>
-                <p className='font-bold text-secondary 2xl:text-[38px] md:text-[28px] text-[20px]'>UPCOMING PARTICIPATED ACTIVITIES</p>
-                </div>
+      
+                <h1 className='m-3 2xl:m-7 font-bold text-secondary 2xl:text-[38px] md:text-[28px] text-[20px]'>UPCOMING PARTICIPATED ACTIVITIES</h1>
+                
       {upcomingActivities.length === 0 ? (
         <div key={upcomingActivities.id} className='m-auto container flex justify-center'>
           <div className='p-10'>No Upcoming Activities</div>
@@ -134,7 +134,7 @@ function Activity() {
         >
           {upcomingActivities.length === 0 ? (
                 <div className='m-auto container flex justify-center'>
-                  <div className='p-10'>No Activity At the Moment</div>
+                  <div className='p-10'>No Activity Participated At the Moment</div>
                 </div>
               ) : (upcomingActivities.map((activity) => {
            const dateofevent = activity?.event_date instanceof Timestamp
@@ -151,21 +151,21 @@ function Activity() {
                     <div className='p-2 my-auto'>
                       <CalendarIcon  date={dateofevent}/>
                       </div>
-                      <div className='my-2 2xl:text-[24px] text-[12px] sm:text-[10px] flex-col '>
-                        <h1 className=' text-secondary 2xl:text-[28px] text-[14px] sm:text-[12px]  font-bold flex'>{activity.title.substring(0,25)}</h1>
+                      <div className='my-2 text-[10px] 2xl:text-[20px]  flex-col '>
+                        <h1 className=' text-secondary text-[16px] 2xl:text-[24px] sm:text-[12px]  font-bold flex'>{activity.title.substring(0,25)}</h1>
                         <div className='flex items-center'>
-                        <CiLocationOn className='h-5 w-5 mt-1' />
+                        <CiLocationOn className='h-5 w-5  mx-1' />
                         <p>{activity.location}</p>
                         </div>
                         <div className='flex items-center'>
-                                    <MdTimelapse className='h-5 w-5 mt-1' />
+                                    <MdTimelapse className='h-5 w-5  mx-1' />
                                     {dateofevent ? new Date(dateofevent).toLocaleTimeString([], {
                                         hour: '2-digit',
                                         minute: '2-digit',
                                     },) : 'Invalid Date'}
                                 </div>
                         <div className='flex items-center'>
-                                  <MdTimeline className='h-5 w-5 mt-1' />
+                                  <MdTimeline className='h-5 w-5  mx-1' />
                                   <p className=''>{activity.duration}</p>
                                   </div>
                         </div>
@@ -180,7 +180,7 @@ function Activity() {
         </Swiper>
       )}
         <div className='m-auto  flex justify-between p-3 '>
-                <p className='font-bold text-secondary 2xl:text-[38px] md:text-[28px] text-[20px]'>PAST PARTICPATED ACTIVITIES</p>
+                <p className='font-bold text-secondary 2xl:text-[38px] md:text-[28px] text-[20px]'>PAST PARTICPATED ACTIVITIES {`(${pastActivities.length} Total)`}</p>
                 </div>
       {pastActivities.length === 0 ? (
         <div className='m-auto container flex justify-center'>
@@ -241,7 +241,7 @@ function Activity() {
                     <div className='flex text-black justify-center items-center'><CiCalendarDate className='h-5 w-5  ' />
                       {dateofevent ? new Date(dateofevent).toLocaleDateString() : 'Invalid Date'}
                       </div>
-                      <div className='flex text-black justify-center items-center'><UsersIcon className='h-5 w-5 pr-1 ' />
+                      <div className='flex text-primary justify-center items-center'><UsersIcon className='h-5 w-5 pr-1 ' />
                       {participants.length} { participants.length === 1 ? "Participant" : "Participants"}
                       </div>
                       {/* <div className='flex justify-center'>

@@ -8,6 +8,9 @@ import { deleteDoc, doc,getDocs, collection, Timestamp , onSnapshot,  } from 'fi
 import { ref, getDownloadURL } from "firebase/storage";
 import { StarIcon } from '@heroicons/react/24/solid';
 import NewAnnouncement from './NewAnnouncement';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import AdminLayout from '../../Layouts/AdminLayout';
 
 
@@ -20,6 +23,24 @@ function AnnnouncementHub() {
   const [selectedAnnouncement, setSelectedAnnouncement] = useState(null);
   const [open, setOpen] = React.useState(false);
   const [expanded, setExpanded] = useState(false);
+
+  const showToastMessage = (status) => {
+    if(status === "notfound"){
+      toast.warning(" No Reward Selected", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+    else if(status === "deleted"){
+      toast.success("Delete Success!", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+    else if(status === "error"){
+      toast.error("Delete Unsuccessfull", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+  };
 
   const toggleExpanded = () => {
     setExpanded(!expanded);
@@ -75,13 +96,13 @@ function AnnnouncementHub() {
   const handleDelete = async (announce) => {
     try {
       if (!announce) {
-        alert('No reward selected to delete');
+        showToastMessage("notfound");
         return;
       }
 
       const announceDocRef = doc(db, 'announcements', announce.id);
       await deleteDoc(announceDocRef);
-      alert('Document successfully deleted!');
+      showToastMessage("deleted");
 
       handleOpen(null);
       const updatedAnnounceData = await fetchData();
@@ -91,7 +112,7 @@ function AnnnouncementHub() {
         setSelectedAnnouncement(null);
       }
     } catch (error) {
-      alert('Error deleting document:', error.message);
+      showToastMessage("error");
       // Optionally, handle the error by showing a message to the user or logging it for debugging.
     }
   };
@@ -100,7 +121,7 @@ function AnnnouncementHub() {
     return (
       <div>
         <AdminLayout>
-        
+        <ToastContainer />
          <div className='container m-auto'>
             
             <div className='m-auto  flex justify-between p-3'>
@@ -109,7 +130,7 @@ function AnnnouncementHub() {
                 
                 </div>
                     <Button
-                            className='bg-buttons text-white '
+                            className='bg-buttons text-white  sm:text-[12px] 2xl:text-[16px] '
                             size="md"
                             ripple={true}
                             color='white'

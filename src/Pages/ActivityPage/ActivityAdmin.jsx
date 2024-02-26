@@ -105,7 +105,7 @@ function ActivityAdmin () {
                 
                 </div>
                     <Button
-                            className='bg-buttons text-white '
+                            className='bg-buttons text-white sm:text-[12px] 2xl:text-[16px] '
                             size="md"
                             ripple="light"
                             color='white'
@@ -184,7 +184,10 @@ function ActivityAdmin () {
                             color="blue-gray"
                             className="font-normal"
                         >
-                              {dateofevent ? new Date(dateofevent).toLocaleTimeString() : 'Invalid Date'}
+                              {dateofevent ? new Date(dateofevent).toLocaleTimeString([], {
+                                        hour: '2-digit',
+                                        minute: '2-digit',
+                                    },) : 'Invalid Date'}
                         </Typography>
                         </td>
                         <td className={classes}>

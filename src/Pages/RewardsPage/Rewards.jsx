@@ -19,7 +19,7 @@ function Rewards() {
 
   const showToastMessage = (status) => {
     if(status === "success"){
-      toast.success("Purchase Success", {
+      toast.success("Redeem Success", {
         position: toast.POSITION.TOP_RIGHT,
       });
     }
@@ -29,7 +29,7 @@ function Rewards() {
       });
     }
     else if(status === "error"){
-      toast.error("Purchase Failed", {
+      toast.error("Redeem Failed", {
         position: toast.POSITION.TOP_RIGHT,
       });
     }
@@ -155,23 +155,23 @@ function Rewards() {
     <div>
       <MainLayout>
         <ToastContainer />
-        <div className='container mx-auto'>
-          <div className='m-auto column flex justify-between'>
+        <div className=''>
+          <div className='m-auto column flex justify-between p-2 2xl:p-4'>
           <div className=' flex sm:m-auto my-auto'>
-                <p className='font-bold text-secondary md:text-[28px] text-[14px]'>REWARDS</p>
+                <p className='font-bold text-secondary 2xl:text-[38px] md:text-[28px] text-[20px] underline underline-offset-8'>REWARDS</p>
                 <Link to="/usertransactions">
-                <p className='md:px-3 px-1 font-bold text-white md:text-[28px] text-[14px]'>MY TRANSACTIONS</p>
+                <p className='md:px-3 px-1 font-bold text-white 2xl:text-[38px] md:text-[28px] text-[20px]'>MY TRANSACTIONS</p>
                   </Link> 
                 </div>
             <div key="key" className='w-4/12 container p-4'>
               <div className='m-auto flex justify-center bg-secondary rounded-[99px] shadow-xl p-2'>
-                <span className='text-primary font-bold sm:text-[12px] '>
+                <span className='text-primary font-bold sm:text-[12px] 2xl:text-[24px] '>
                   <Points />
                 </span>
               </div>
             </div>
           </div>
-          <div className='max-w-[1240px] mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-3' >
+          <div className=' mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-6 sm:gap-3 px-2' >
             { rewardsData.length === 0 ? (
                 <div className='m-auto container flex justify-center'>
                   <div className='p-10'>No Rewards Available</div>
@@ -179,25 +179,25 @@ function Rewards() {
               ) : (
             rewardsData.map((rewards) => (
               <div className='container mx-auto bg-white sm:h-2/3 rounded-[8px] shadow m-4' key={rewards.id}>
-                <div className='flex rewards-container sm:h-2/3 sm:w-2/3 py-2 m-auto overflow-hidden'>
+                <div className='flex rewards-container sm:h-2/3 sm:w-2/3 py-2 m-auto overflow-hidden object-center'>
                   <img
-                    className='px-2 shadow-inner max-h-fit m-auto object-contain'
+                    className='px-2 shadow-inner max-h-fit m-auto object-contain '
                     src={rewards.imageUrl }
                     alt='placeholder'
                   />
                   </div>
                 
                 <div className='grid grid-cols-1 md:py-4 '>
-                <div className=''><p className=' text-secondary md:text-[18px] text-[12px] font-bold text-center '>{rewards.name.substring(0, 20)}</p></div>
+                <div className=''><p className=' text-secondary text-[16px] 2xl:text-[24px] sm:text-[12px] font-bold text-center '>{rewards.name.substring(0, 20)}</p></div>
                   <div className=' '>
                   <div className='flex flex-col justify-center '>
-                    <span className=' text-secondary text-[12px] text-center'> Quantity: {rewards.quantity} </span>
+                    <span className=' text-secondary text-[10px] 2xl:text-[20px] text-center'> Quantity: {rewards.quantity} </span>
                   </div>
                   </div>
                 </div>
                 <div className='container flex'>
                   <Button
-                    className='bg-buttons flex justify-center w-full h-full text-white '
+                    className='bg-buttons flex justify-center w-full h-full text-white text-[16px] 2xl:text-[24px] sm:text-[12px] '
                     
                     ripple='light'
                     color='white'
@@ -236,7 +236,6 @@ function Rewards() {
                   <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                     <h3 className="text-lg leading-6 font-medium text-gray-900">{selectedRewards?.name}</h3>
                     <div className="mt-2">
-                      <p className="text-sm text-gray-500">Price: {selectedRewards?.price}</p>
 
                       {/* Quantity Counter */}
                       <div className="mt-2 flex items-center">
@@ -251,25 +250,26 @@ function Rewards() {
                       </div>
 
                       {/* Total Points */}
-                      <p className="text-sm text-gray-500">Total Points: {selectedRewards?.price * quantity}</p>
+                      <p className="text-md text-black">Total Points: {selectedRewards?.price * quantity}</p>
                     </div>
                   </div>
                 </div>
               </div>
               <div className="bg-gray-50 px-4 py-3 ">
-                <Button
-                  color="blue"
-                  onClick={() => handleRedeemReward(selectedRewards.price, quantity)}
-                  ripple={true}
-                >
-                  Confirm
-                </Button>
+               
                 <Button
                   color="blue"
                   onClick={closeModal}
                   ripple={true}
                 >
                   Close
+                </Button>
+                <Button
+                  color="blue"
+                  onClick={() => handleRedeemReward(selectedRewards.price, quantity)}
+                  ripple={true}
+                >
+                  Redeem
                 </Button>
               </div>
             </Transition.Child>

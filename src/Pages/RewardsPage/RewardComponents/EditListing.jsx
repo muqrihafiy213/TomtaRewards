@@ -49,19 +49,16 @@ const EditListing = ({ openPopUp, closePopUp, selectedReward, onSaveChanges }) =
         <div>
           <Card color="transparent" shadow={false}>
             <Typography variant="h4" color="blue-gray">
-              Edit Listing
-            </Typography>
-            <Typography color="gray" className="mt-1 font-normal">
-              Enter your details to list.
+              Edit Rewards
             </Typography>
             <form  className="mt-8 mb-2 w-80 max-w-screen-md sm:w-96">
               <div className="mb-1 flex flex-col gap-4">
                 <Typography variant="h6" color="blue-gray" className="-mb-3">
-                  Title
+                  Name
                 </Typography>
                 <p>{title}</p>
                 <Typography variant="h6" color="blue-gray" className="-mb-3">
-                  Total Points
+                  Points
                 </Typography>
                 <Input
                   type='number'
@@ -108,12 +105,11 @@ const EditListing = ({ openPopUp, closePopUp, selectedReward, onSaveChanges }) =
                 onClick ={() => {
                     onSaveChanges({ title, quantity, price, active, last_update: new Date() , 
                     edited_by: userName });
-                    alert('Edit successful'); // Display alert
                   }}
                 className="mt-6 bg-buttons"
                 fullWidth
               >
-                Submit
+                Save
               </Button>
             </form>
           </Card>

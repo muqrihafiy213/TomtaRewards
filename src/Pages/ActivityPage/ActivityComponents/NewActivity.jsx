@@ -31,7 +31,8 @@ const NewActivity = ({ openPopUp, closePopUp }) => {
 }
 
 const showToastMessage = () => {
-  toast.success("Publish Success", {
+  console.log("masukmessage")
+  toast.success("Activity Success", {
     position: toast.POSITION.TOP_RIGHT,
   });
 };
@@ -126,6 +127,7 @@ const sendEmails = async () => {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
+    <ToastContainer />
     <div
       id='ModelContainer'
       onClick={handlelosePopUp}
@@ -214,7 +216,7 @@ const sendEmails = async () => {
                 className="mt-6 bg-buttons"
                 fullWidth
               >
-                Upload
+                Create
               </Button>
               </div>
              
@@ -224,7 +226,7 @@ const sendEmails = async () => {
           </Card>
         </div>
       </div>
-    <ToastContainer />
+    
     </div>
     
     </LocalizationProvider>

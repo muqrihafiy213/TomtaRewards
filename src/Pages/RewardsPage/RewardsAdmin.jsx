@@ -25,11 +25,18 @@ function RewardsAdmin () {
       const [open, setOpen] = React.useState(false);
 
 
-      const showToastMessage = () => {
-        toast.success("Delete Success", {
-          position: toast.POSITION.TOP_RIGHT,
-        });
-      };
+      const showToastMessage = (status) => {
+        if(status === "editted"){
+          toast.success("Edit Success", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+        }
+        else if(status === "deleted"){
+          toast.success("Delete Success!", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+        };
+      }
 
       const handleOpen = (reward) => {
             setSelectedReward(reward);
@@ -98,7 +105,7 @@ function RewardsAdmin () {
     await updateDoc(rewardDocRef, updatedData);
 
     handleEditRemovePopup();
-
+    showToastMessage("editted");
     const updatedRewardsData = await fetchData();
     setRewardsData(updatedRewardsData);
   };
@@ -112,13 +119,13 @@ function RewardsAdmin () {
       
       const rewardDocRef = doc(db, 'rewards', reward.id);
       await deleteDoc(rewardDocRef);
-      
+      handleOpen(null);
   
       // Set a loading state to indicate that data is being updated
       setRewardsData([]);
       const updatedRewardsData = await fetchData();
       setRewardsData(updatedRewardsData);
-      showToastMessage();
+      showToastMessage("deleted");
       if (selectedReward && selectedReward.id === reward.id) {
         setSelectedReward(null);
        
@@ -133,22 +140,22 @@ function RewardsAdmin () {
       <div>
         <AdminLayout>
           <ToastContainer />
-         <div className='container m-auto'>
-            <div className='m-auto  flex justify-between p-3'>
-                <div className=' flex '>
-                <p className='font-bold text-secondary md:text-[28px] text-[20px]'>REWARDS LISTING</p>
+         <div className='p-2 2xl:p-4'>
+            <div className='m-auto column flex justify-between p-2'>
+                <div className=' flex sm:m-auto my-auto  '>
+                <p className='font-bold text-secondary 2xl:text-[38px] md:text-[28px] text-[20px] underline underline-offset-8 '>REWARDS LISTING</p>
                 <Link to="/transactions">
-                <p className='px-3 font-bold text-white md:text-[28px] text-[20px]'>TRANSACTIONS</p>
+                <p className='px-3 font-bold text-white 2xl:text-[38px] md:text-[28px] text-[20px]'>TRANSACTIONS</p>
                   </Link> 
                 </div>
                     <Button
-                            className='bg-buttons text-white '
+                            className='bg-buttons text-white  sm:text-[12px] 2xl:text-[16px] '
                             size="md"
                             ripple="light"
                             color='white'
                             onClick= {() => setOpenPopup(true)}
                             >
-                            New Listing
+                            New Reward
                             </Button>    
                     
                     
@@ -245,7 +252,7 @@ function RewardsAdmin () {
                             color="blue-gray"
                             className="font-normal"
                         >
-                           {dateedited ? new Date(dateedited).toLocaleDateString() : 'Not Updated'} {"by " + rewards.edited_by }
+                           {dateedited ? new Date(dateedited).toLocaleDateString() : 'None'} {rewards.edited_by === undefined ? "" : `by ${rewards.edited_by} ` }
                         </Typography>
                         </td>
                         <td className={classes}>

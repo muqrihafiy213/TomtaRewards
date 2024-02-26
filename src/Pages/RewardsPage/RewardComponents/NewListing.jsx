@@ -20,7 +20,7 @@ const NewListing = ({ openPopUp, closePopUp }) => {
   const [active, setActive] = useState(false);
   
   const showToastMessage = () => {
-    toast.success("Listing Success", {
+    toast.success("New Reward Added", {
       position: toast.POSITION.TOP_RIGHT,
     });
   };
@@ -110,17 +110,17 @@ const NewListing = ({ openPopUp, closePopUp }) => {
         <div>
           <Card color="transparent" shadow={false}>
             <Typography variant="h4" color="blue-gray" className='sm:text-[16px]'>
-              New Listing
+              New Reward
             </Typography>
             <form onSubmit={handleSubmit} className="mt-5 mb-2  max-w-screen-md sm:min-w-fit ">
               <div className="mb-1 grid grid-rows-3 grid-flow-col sm:flex sm:flex-col gap-4 sm:text-[16px]">
                 <div>
                 <Typography variant="h6" color="blue-gray" className="">
-                  Title
+                  Name
                 </Typography>
                 <Input
                   size="lg"
-                  placeholder="Listing Title"
+                  placeholder="Reward Title"
                   className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                   labelProps={{
                     className: "before:content-none after:content-none",
@@ -131,7 +131,7 @@ const NewListing = ({ openPopUp, closePopUp }) => {
                 </div>
                 <div>
                 <Typography variant="h6" color="blue-gray" className="">
-                  Total Points
+                  Points
                 </Typography>
                 <Input
                   type='number'
