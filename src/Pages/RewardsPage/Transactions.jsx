@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import AdminLayout from '../../Layouts/AdminLayout';
-import { Card, Typography, ButtonGroup, Button } from "@material-tailwind/react";
+import { Card, Typography, ButtonGroup, Button, CardFooter } from "@material-tailwind/react";
 import { db } from '../../firebaseConfig';
 import { onSnapshot, collection, query, orderBy, limit, startAfter, limitToLast, endBefore } from 'firebase/firestore';
 import { Link } from 'react-router-dom';
@@ -9,10 +9,11 @@ function Transactions() {
     const TABLE_HEAD = ["Name", "Points", "Quantity", "Reward Name", "Date"];
     const [transactionData, setTransactionData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    
+    const [hasNextPage, setHasNextPage] = useState(true)
+   
 
     useEffect(() => {
-        const q = query(collection(db, "Transactions"),orderBy("transaction_date"), limit(5));
+        const q = query(collection(db, "Transactions"), orderBy("transaction_date", "desc"), limit(5));
         const unsubscribe = onSnapshot(q, (documents) => {
             const data = [];
             documents.forEach((doc) => {
@@ -24,35 +25,55 @@ function Transactions() {
     }, []);
 
     const showNext = ({ item }) => {
-        if(transactionData.length === 0) {
-            alert("Thats all we have for now !")
-        } else {
-        const q = query(collection(db, "Transactions"),orderBy("transaction_date"), limit(5), startAfter(item.transaction_date));
+        const q = query(
+            collection(db, "Transactions"),
+            orderBy("transaction_date", "desc"),
+            limit(6), // Load 6 items
+            startAfter(item.transaction_date)
+        );
+        
         const unsubscribe = onSnapshot(q, (documents) => {
             const data = [];
             documents.forEach((doc) => {
                 data.push({ id: doc.id, ...doc.data() });
             });
-            setTransactionData(data);
-            setCurrentPage(currentPage + 1)
+            
+                setCurrentPage(currentPage + 1);
+                if(documents.size > 5){
+                    data.pop();
+                }
+                else{
+                    setHasNextPage(false)
+                }
+            
+            setTransactionData(data); 
+            
+           
+            
         });
+        
         return () => unsubscribe();
-            };
-        }
-    
+    };
 
-    const showPrevious = ({item}) => {
-        const q = query(collection(db, "Transactions"),orderBy("transaction_date"), endBefore(item.transaction_date) ,limitToLast(5));
+    const showPrevious = ({ item }) => {
+        const q = query(
+            collection(db, "Transactions"),
+            orderBy("transaction_date", "desc"),
+            endBefore(item.transaction_date),
+            limitToLast(5)
+        );
         const unsubscribe = onSnapshot(q, (documents) => {
             const data = [];
             documents.forEach((doc) => {
                 data.push({ id: doc.id, ...doc.data() });
             });
             setTransactionData(data);
-            setCurrentPage(currentPage - 1)
+            setCurrentPage(currentPage - 1);
+            setHasNextPage(true);
         });
         return () => unsubscribe();
     };
+
     return (
         <div>
             <AdminLayout>
@@ -66,7 +87,7 @@ function Transactions() {
                         </div>
                     </div>
                     <div className=''>
-                        <Card className="h-full w-full overflow-scroll ">
+                        <Card className="max-h-[60vh] h-auto w-11/12 mx-auto my-5 overflow-scroll  ">
                             <table className="w-full min-w-max table-auto text-left">
                                 <thead>
                                     <tr>
@@ -144,25 +165,28 @@ function Transactions() {
                                     })}
                                 </tbody>
                             </table>
-                        </Card>
-                        <ButtonGroup>
-                        {
-                //show previous button only when we have items
-                currentPage === 1 ? '' : 
-                <Button onClick={() => showPrevious({ item: transactionData[0] }) }>Previous</Button>
-            }
+                            <CardFooter>
+                                <ButtonGroup>
+                                    {
+                                        //show previous button only when we have items
+                                        currentPage === 1 ? '' :
+                                            <Button onClick={() => showPrevious({ item: transactionData[0] })}>Previous</Button>
+                                    }
 
-            {
-                //show next button only when we have items
-                transactionData.length < 5 ? '' :
-                <Button onClick={() => showNext({ item: transactionData[transactionData.length - 1] })}>Next</Button>
-            }
-                        </ButtonGroup>
+                                    {
+                                        //show next button only when we have items
+                                       hasNextPage ? 
+                                            <Button onClick={() => showNext({ item: transactionData[transactionData.length - 1] })}>Next</Button> : ""
+                                    }
+                                </ButtonGroup>
+                            </CardFooter>
+                        </Card>
+
                     </div>
                 </div>
             </AdminLayout>
         </div>
     );
-        };
+};
 
 export default Transactions;

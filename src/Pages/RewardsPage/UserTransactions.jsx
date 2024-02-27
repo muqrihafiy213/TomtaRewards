@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react'
-import { Card,Typography, ButtonGroup, Button } from "@material-tailwind/react";
+import { Card,Typography, ButtonGroup, Button, CardFooter } from "@material-tailwind/react";
 import {  db } from '../../firebaseConfig';
 import {  collection ,query , where , onSnapshot,  orderBy, limit, startAfter, limitToLast, endBefore} from 'firebase/firestore';
 import { Link } from 'react-router-dom';
@@ -17,6 +17,7 @@ function UserTransactions () {
       const TABLE_HEAD = ["Name", "Points", "Quantity","Reward Name", "Date" ];
       const [transactionData, setTransactionData] = useState([]);
       const [currentPage, setCurrentPage] = useState(1);
+      const [hasNextPage, setHasNextPage] = useState(true)
 
       useEffect(() => {
         const q = query(collection(db, "Transactions"), where('userId', '==', userId), orderBy("transaction_date"), limit(5));
@@ -40,8 +41,18 @@ function UserTransactions () {
             documents.forEach((doc) => {
                 data.push({ id: doc.id, ...doc.data() });
             });
-            setTransactionData(data);
-            setCurrentPage(currentPage + 1)
+            
+                setCurrentPage(currentPage + 1);
+                if(documents.size > 5){
+                    data.pop();
+                }
+                else{
+                    setHasNextPage(false)
+                }
+            
+            setTransactionData(data); 
+            
+           
         });
         return () => unsubscribe();
             };
@@ -57,6 +68,7 @@ function UserTransactions () {
             });
             setTransactionData(data);
             setCurrentPage(currentPage - 1)
+            setHasNextPage(true)
         });
         return () => unsubscribe();
     };
@@ -162,20 +174,22 @@ function UserTransactions () {
                 })}
                 </tbody>
             </table>
-            </Card>
+            <CardFooter>
             <ButtonGroup>
                         {
                 //show previous button only when we have items
                 currentPage === 1 ? '' : 
                 <Button onClick={() => showPrevious({ item: transactionData[0] }) }>Previous</Button>
-            }
-
-            {
-                //show next button only when we have items
-                transactionData.length < 5 ? '' :
-                <Button onClick={() => showNext({ item: transactionData[transactionData.length - 1] })}>Next</Button>
-            }
-                        </ButtonGroup>
+                         }
+                                    {
+                                        //show next button only when we have items
+                                       hasNextPage ? 
+                                            <Button onClick={() => showNext({ item: transactionData[transactionData.length - 1] })}>Next</Button> : ""
+                                    }
+            </ButtonGroup>
+            </CardFooter>
+            </Card>
+            
             </div>
          
          </div>

@@ -109,7 +109,7 @@ const sendEmails = async () => {
             
           });
           
-          alert("success")
+          
           sendEmails();
           showToastMessage();
           closePopUp();

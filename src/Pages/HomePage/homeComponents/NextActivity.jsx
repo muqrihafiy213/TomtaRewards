@@ -3,7 +3,7 @@ import { CiLocationOn } from 'react-icons/ci';
 import { MdTimelapse } from 'react-icons/md';
 import { MdTimeline } from 'react-icons/md';
 import {  db } from '../../../firebaseConfig';
-import { collection,  onSnapshot, Timestamp } from 'firebase/firestore';
+import { collection,  onSnapshot, query, Timestamp,where } from 'firebase/firestore';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../../userSlice';
 import { List, ListItem, Card, Tooltip  } from "@material-tailwind/react";
@@ -21,6 +21,7 @@ const NextActivity = () => {
 
   const user = useSelector(selectUser);
   const userId = user?.userProfile?.uid;
+  const userName = user?.userProfile?.firstName + ' ' + user?.userProfile?.lastName;
 
 
   // Use useMemo to memoize the currentDate
@@ -29,7 +30,8 @@ const NextActivity = () => {
   useEffect(() => {
     const fetchAndSubscribe = async () => {
       try {
-        const activitiesCollectionRef = collection(db, 'Activity');
+        const activitiesCollectionRef = query(collection(db, 'Activity'),where("participants", 'array-contains', {name:userName ,uid:userId}))
+        
         const unsubscribe = onSnapshot(activitiesCollectionRef, (snapshot) => {
           const activities = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
           const sortedActivities = activities.sort((a, b) => {
@@ -76,8 +78,7 @@ const NextActivity = () => {
   return (
     <div>
       <h1 className='m-2.5 2xl:m-7 font-bold text-secondary 2xl:text-[38px] md:text-[28px] text-[20px]'>Next Activity</h1>
-      <Card className='px-1 mx-1 mb-1 rounded-xl z-0  border-primary border-4'>
-        <List className='2xl:h-auto md:h-36 h-32 '>
+     
         {loading ? (
         <div className='m-auto container flex justify-center'>
           <div className='p-10'>Loading...</div>
@@ -88,10 +89,12 @@ const NextActivity = () => {
             <div className='m-auto container flex justify-center'>
               <div className='p-10'>No Activity At the Moment</div>
             </div>
-          ) :activityData.slice(0, 1).map((activity) => {
+          ) : activityData.slice(0, 1).map((activity) => {
               const dateofevent =
                 activity?.event_date instanceof Timestamp ? activity.event_date.toDate() : null;
                   return (
+                    <Card className='px-1 mx-1 mb-1 rounded-xl z-0  border-primary border-4'>
+                    <List className='2xl:h-auto md:h-36 h-32 '>
                     <div key={activity.id}>
                       <button className="w-full" >
                       <ListItem>
@@ -127,11 +130,12 @@ const NextActivity = () => {
                       </ListItem>
                       </button>
                     </div>
+                    </List>
+                    </Card>
                   )})
                 }
               </div>)}
-        </List>
-      </Card>
+        
 
       
     </div>

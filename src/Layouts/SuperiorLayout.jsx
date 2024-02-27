@@ -20,8 +20,7 @@ const SuperiorLayout = ({ children }) => {
   if (userrole === 'superior') {
     return (
       <div>
-        <Navbar userRole={userrole} />
-        {children}
+        <Navbar userRole={userrole} children={children}/>
       </div>
     );
   } else {

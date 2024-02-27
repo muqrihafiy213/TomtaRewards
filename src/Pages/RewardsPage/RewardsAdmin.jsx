@@ -162,7 +162,7 @@ function RewardsAdmin () {
                 </div>
                 
             <div className=''>
-            <Card className="h-full w-full overflow-scroll ">
+            <Card className="max-h-[60vh] h-auto w-11/12 mx-auto my-5 overflow-scroll ">
             <table className="w-full min-w-max table-auto text-left">
                 <thead>
                 <tr>
@@ -272,7 +272,7 @@ function RewardsAdmin () {
                         >
                           <div className='grid grid-cols-1'>
                           <Button
-                            className="bg-primary my-2 mx-4 text-white"
+                            className="bg-buttons my-2 mx-4 text-white"
                             size="sm"
                             ripple={true}
                             onClick={() => handleEditPopup(rewards)}
@@ -280,7 +280,7 @@ function RewardsAdmin () {
                             Edit
                           </Button>
                           <Button
-                            className="bg-primary my-2 mx-4 text-white"
+                            className="bg-buttons my-2 mx-4 text-white"
                             size="sm"
                             ripple={true}
                             onClick={() => handleOpen(rewards)}

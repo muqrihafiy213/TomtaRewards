@@ -43,6 +43,21 @@ function UserList() {
   const [selectedPoints, setSelectedPoints] = useState(null);
   const [open, setOpen] = useState(false);
 
+  const UserTypeLabel = (type) =>{
+    if(type === "0001"){
+      return "SuperAdmin"
+    }
+    else if(type === "0002"){
+      return "Admin"
+    }
+    else if(type === "0003"){
+      return "Superior User"
+    }
+    else if(type === "0004"){
+      return "Normal User"
+    }
+  }
+
   const showToastMessage = (status) => {
     if(status === "success"){
       toast.success("Points Given Success", {
@@ -202,7 +217,7 @@ function UserList() {
     <AdminLayout>
       <ToastContainer />
       <h1 className='m-3 2xl:m-7 font-bold text-secondary 2xl:text-[38px] md:text-[28px] text-[20px]'>USER HUB</h1>
-      <Card className="h-full w-11/12 mx-auto my-5">
+      <Card className=" w-11/12 mx-auto my-5">
         <CardHeader floated={false} shadow={false} className="rounded-none">
           <div className="mb-8 flex items-center justify-between gap-8"></div>
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
@@ -222,14 +237,14 @@ function UserList() {
             </div>
           </div>
         </CardHeader>
-        <CardBody className="overflow-scroll px-0">
-          <table className="mt-4 w-full min-w-max table-auto text-left">
+        <CardBody className="max-h-[60vh] h-auto overflow-scroll px-0">
+          <table className="mt-4 w-full  min-w-max table-auto text-left">
             <thead>
               <tr>
                 {TABLE_HEAD.map((head, index) => (
                   <th
                     key={head}
-                    className="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50"
+                    className="  cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50"
                   >
                     <Typography
                       variant="small"
@@ -245,9 +260,9 @@ function UserList() {
                 ))}
               </tr>
             </thead>
-            <tbody>
+            <tbody c>
               {usersData.length === 0 ? (
-                <div className='m-auto container flex justify-center'>
+                <div className='m-auto container flex justify-center '>
                   <div className='p-10'>No Users Available</div>
                 </div>
               ) : (
@@ -257,7 +272,7 @@ function UserList() {
                   return (
                     <tr key={user.id}>
                       <td className={classes}>
-                        <div className="flex items-center gap-3">
+                        <div className=" flex items-center gap-3">
                           {user.imageUrl ? (
                             <Avatar src={user.profile_image} alt={user.firstName} onError={(e) => {
                               e.target.onerror = null;
@@ -295,7 +310,7 @@ function UserList() {
                             color="blue-gray"
                             className="font-normal"
                           >
-                            {user.user_type}
+                            {UserTypeLabel(user.user_type)}
                           </Typography>
                         </div>
                       </td>
@@ -329,14 +344,14 @@ function UserList() {
           </table>
         </CardBody>
         <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
-          <div className="flex gap-2">
+          {/* <div className="flex gap-2">
             <Button variant="outlined" size="sm">
               Previous
             </Button>
             <Button variant="outlined" size="sm">
               Next
             </Button>
-          </div>
+          </div> */}
         </CardFooter>
       </Card>
       <Dialog open={open} handler={handleOpen}>

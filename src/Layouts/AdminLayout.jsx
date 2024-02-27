@@ -20,8 +20,8 @@ const AdminLayout = ({ children }) => {
   if (userrole === 'admin') {
     return (
       <div>
-        <Navbar userRole={userrole} />
-        {children}
+        <Navbar userRole={userrole} children={children}/>
+        
       </div>
     );
   } else {

@@ -122,11 +122,11 @@ function AnnnouncementHub() {
       <div>
         <AdminLayout>
         <ToastContainer />
-         <div className='container m-auto'>
+         <div className='p-2 2xl:p-4'>
             
-            <div className='m-auto  flex justify-between p-3'>
-                <div className=' flex '>
-                <h1 className='font-bold text-secondary text-[28px]'>ANNOUNCEMENTS HUB</h1>
+            <div className='m-auto column flex justify-between p-2'>
+                <div className=' flex sm:m-auto my-auto  '>
+                <h1 className='font-bold text-secondary 2xl:text-[38px] md:text-[28px] text-[20px]'>ANNOUNCEMENTS HUB</h1>
                 
                 </div>
                     <Button
@@ -142,7 +142,7 @@ function AnnnouncementHub() {
                 </div>
                 
             <div className=''>
-            <Card className="h-full w-full overflow-scroll ">
+            <Card className="max-h-[60vh] h-auto w-11/12 mx-auto my-5 overflow-scroll ">
             <table className="w-full min-w-max table-auto text-left">
                 <thead>
                 <tr>

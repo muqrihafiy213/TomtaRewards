@@ -4,17 +4,34 @@ import { Button,Card,Typography , Dialog,
     DialogBody,
     DialogFooter} from "@material-tailwind/react";
 import { db } from '../../firebaseConfig';
-import { deleteDoc, doc,getDocs, collection, Timestamp , onSnapshot,  } from 'firebase/firestore';
+import { deleteDoc, doc,getDocs, collection, Timestamp , onSnapshot, query, orderBy,  } from 'firebase/firestore';
 import NewActivity from './ActivityComponents/NewActivity';
 import Participants from './ActivityComponents/Participants';
 import AdminLayout from '../../Layouts/AdminLayout';
 import ImageCategory from './ActivityComponents/ImageCategory';
-
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function ActivityAdmin () {
    
-    
+  const showToastMessage = (status) => {
+    if(status === "notfound"){
+      toast.warning(" No Activity Selected", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+    else if(status === "deleted"){
+      toast.success("Delete Success!", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+    else if(status === "error"){
+      toast.error("Delete Unsuccessfull", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+  };
+
       const TABLE_HEAD = ["Title", "Image", "Location", "Time", "Date of Event","Participants",""];
       const [activityData, setActivityData] = useState([]);
       const [modalOpen, setModalOpen] = useState(false);
@@ -41,7 +58,8 @@ function ActivityAdmin () {
        
       const fetchData = async () => {
         try {
-          const querySnapshot = await getDocs(collection(db, 'Activity'));
+          const q = query(collection(db, 'Activity'), orderBy("event_date", "desc"))
+          const querySnapshot = await getDocs(q);
           return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
         } catch (error) {
           console.error('Error fetching rewards:', error);
@@ -77,7 +95,7 @@ function ActivityAdmin () {
   
       const activityDocRef = doc(db, 'Activity', activity.id);
       await deleteDoc(activityDocRef);
-      alert('Document successfully deleted!');
+      showToastMessage("deleted")
   
       handleOpen(null);
       setActivityData([]);
@@ -88,7 +106,7 @@ function ActivityAdmin () {
         setSelectedActivity(null);
       }
     } catch (error) {
-      alert('Error deleting document:', error.message);
+      showToastMessage("error")
       // Optionally, handle the error by showing a message to the user or logging it for debugging.
     }
   };
@@ -96,12 +114,12 @@ function ActivityAdmin () {
     return (
       <div>
         <AdminLayout>
-        
-         <div className='container m-auto'>
+        <ToastContainer />
+         <div className='p-2 2xl:p-4'>
             
-            <div className='m-auto  flex justify-between p-3'>
-                <div className=' flex '>
-                <p className='font-bold text-secondary md:text-[28px] text-[20px]'>ACTIVITY LISTING</p>
+            <div className='m-auto column flex justify-between p-2'>
+                <div className=' flex sm:m-auto my-auto  '>
+                <p className='font-bold text-secondary 2xl:text-[38px] md:text-[28px] text-[20px]'>ACTIVITY LISTING</p>
                 
                 </div>
                     <Button
@@ -118,8 +136,8 @@ function ActivityAdmin () {
                 </div>
                 
             <div className=''>
-            <Card className="h-full w-full overflow-scroll ">
-            <table className="w-full min-w-max table-auto text-left">
+            <Card className="h-[70vh]  w-11/12 mx-auto my-5 overflow-scroll ">
+            <table className=" w-full min-w-max table-auto text-left">
                 <thead>
                 <tr>
                     {TABLE_HEAD.map((head) => (
@@ -222,7 +240,7 @@ function ActivityAdmin () {
                         >
                         
                           <Button
-                            className="bg-primary m-2 text-white"
+                            className="bg-buttons m-2 text-white"
                             size="sm"
                             ripple="light"
                             onClick={() => handleOpen(activity)}

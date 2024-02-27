@@ -20,8 +20,8 @@ const MainLayout = ({ children }) => {
   // console.log(userrole)
   return (
     <div>
-      <Navbar userRole={userrole}/>
-       {children}
+      <Navbar userRole={userrole} children={children}/>
+      
     </div>
   )
 }
