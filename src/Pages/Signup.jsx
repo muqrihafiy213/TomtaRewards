@@ -53,6 +53,7 @@ const Signup = () => {
             points: 0,
             user_type: "0004",
             superior: "none",
+            phone:"Not Available"
         });
 
         dispatch(setUser({

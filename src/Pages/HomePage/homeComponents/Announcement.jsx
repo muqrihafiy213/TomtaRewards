@@ -174,7 +174,7 @@ const Announcement = () => {
     <DialogBody className="flex justify-center  ">
       <div className=' overflow-y-auto max-h-[60vh] 2xl:max-h-[60vh]'>
         {/* Announcement content */}
-        <div className="overflow-hidden text-center text-sm 2xl:text-[24px] sm:mt-0 sm:ml-4 p-1 sm:min-w-[40vh] md:min-w-[100vh] 2xl:min-w-full bg-gray-300 rounded-md">
+        <div className="overflow-hidden text-center text-sm 2xl:text-[24px] sm:mt-0 sm:ml-4 p-1 sm:min-w-[40vh] md:min-w-[100vh] 2xl:min-w-[70vh]  bg-gray-300 rounded-md">
           <h3 className="leading-6 text-md font-medium text-gray-900">{selectedAnnouncement?.title}</h3>
           <div className="mt-2 ">
             <p className="md:text-sm  2xl:text-2xl  text-gray-700 whitespace-pre-line">{selectedAnnouncement?.text}</p>

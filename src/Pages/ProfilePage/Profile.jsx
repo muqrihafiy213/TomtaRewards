@@ -6,18 +6,23 @@ import { auth ,db } from '../../firebaseConfig';
 import {useNavigate} from "react-router-dom"
 import { useDispatch,useSelector } from 'react-redux';
 import {  selectUser , clearUser } from '../../userSlice';
-import { getDocs, collection, query, where } from 'firebase/firestore';
+import { getDocs, collection, query, where , updateDoc , doc} from 'firebase/firestore';
 import Points from '../../MainComponents/Points';
 import ImageUploader from './ProfileComponents/ImageUploader';
+import EditProfile from './ProfileComponents/EditProfile';
+import { Button} from "@material-tailwind/react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Profile() {
     
     const dispatch = useDispatch();
     const user = useSelector(selectUser);
-    const userName = user?.userProfile?.firstName + ' ' + user?.userProfile?.lastName;
     const [userData, setUserData ] = useState([])
+    const [editPopup, setEditPopup] = useState(false);
     const navigate = useNavigate();
     const userType = user?.userProfile.user_type
+    const userID = user?.userProfile?.uid
     
     let userrole
 
@@ -30,8 +35,15 @@ function Profile() {
     else if (userType === "0002"){
       userrole = "admin"
     }
-    
-    useEffect(() => {
+
+    const showToastMessage = (status) => {
+        if(status === "editted"){
+          toast.success("Edit Success", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+        }
+      }
+
       const fetchData = async () => {
         const user = auth.currentUser;
 
@@ -58,8 +70,28 @@ function Profile() {
         }
     };
 
+    
+    useEffect(() => {
     fetchData();
 }, [])
+
+const handleEditPopup = () => {;
+    setEditPopup(true);
+  };
+
+  const handleEditRemovePopup = () => {
+    setEditPopup(false);
+  };
+
+  const handleSaveChanges = async (updatedData) => {
+    const userRef = doc(db, 'Roles', 'Users', 'UserProfile' ,userID);
+    await updateDoc(userRef, updatedData);
+
+    handleEditRemovePopup();
+    showToastMessage("editted");
+    const updatedUserData = await fetchData();
+    setUserData(updatedUserData);
+  };
 
     const handleLogout = async () => {
         try {
@@ -76,6 +108,7 @@ function Profile() {
   return (
     <div>
       <MainLayout>
+        <ToastContainer />
       <div className='m-auto container'>
         <div className='container m-3'>
           <div className='m-auto  flex justify-between p-3'>
@@ -89,13 +122,20 @@ function Profile() {
                     <div className=' sm:flex sm:justify-center'>
                         <div className='text-md container sm:p-2 text-center'>
                         <h1 className='pt-10 pb-5 text-black md:text-4xl text-2xl  font-bold' >
-                            {userName}
+                            {userData.firstName} {userData.lastName}
                         </h1>
-                        <ul className='container p-2 md:text-md text-sm' >
-                            <li className='py-3'>Tel No: 019234567</li>
-                            <li className='py-3'>Email :{userData.email}</li>
-                            <li className='py-3'>Account Type: {userrole} </li>
+                        <ul className='container flexp-2 md:text-md text-sm' >
+                            <li className='flex py-3 font-bold'>Tel No: <p className='font-normal'>&nbsp;{userData.phone}</p></li>
+                            <li className='flex py-3 font-bold'>Email: <p className='font-normal'>&nbsp;{userData.email}</p></li>
+                            <li className='flex py-3 font-bold'>Account Type: <p className='font-normal'>&nbsp;{userrole}</p></li>
                         </ul>
+                        <Button
+                            className="text-buttons my-2 mx-4"
+                            variant="text"
+                            onClick={() => handleEditPopup(userData)}
+                          >
+                            Edit
+                          </Button>
                         </div>
                     </div>
                 <div className="m-auto text-md flex justify-center">
@@ -116,6 +156,14 @@ function Profile() {
             
             </div>
       </div>
+      {userData && (
+          <EditProfile
+            openPopUp={editPopup}
+            closePopUp={handleEditRemovePopup}
+            selectedUser={userData}
+            onSaveChanges={handleSaveChanges}
+          />
+        )}
       </MainLayout>
     </div>
   )
