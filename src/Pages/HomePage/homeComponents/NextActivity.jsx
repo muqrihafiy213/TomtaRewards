@@ -68,7 +68,7 @@ const NextActivity = () => {
     };
 
     fetchAndSubscribe();
-  }, [userId, currentDate]);
+  }, [userId,userName , currentDate]);
 
 
 

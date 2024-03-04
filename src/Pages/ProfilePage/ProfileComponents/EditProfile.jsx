@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
   Card,
-  Input,
+  
   Button,
   Typography,
 } from "@material-tailwind/react";
@@ -22,12 +22,12 @@ const EditProfile = ({ openPopUp, closePopUp, selectedUser, onSaveChanges }) => 
     }
   }, [selectedUser]);
   
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    if (name === 'firstName') setFirstName(value);
-    else if (name === 'lastName') setLastName(value);
+  // const handleInputChange = (e) => {
+  //   const { name, value } = e.target;
+  //   if (name === 'firstName') setFirstName(value);
+  //   else if (name === 'lastName') setLastName(value);
    
-  };
+  // };
 
 
   const handleLosePopUp = (e) => {
@@ -55,7 +55,8 @@ const EditProfile = ({ openPopUp, closePopUp, selectedUser, onSaveChanges }) => 
                 <Typography variant="h6" color="blue-gray" className="-mb-3">
                   First Name
                 </Typography>
-                <Input
+                <p>{firstName}</p>
+                {/* <Input
                   type='text'
                   size="lg"
                   className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
@@ -65,11 +66,12 @@ const EditProfile = ({ openPopUp, closePopUp, selectedUser, onSaveChanges }) => 
                   name="firstName"
                   value={firstName}
                   onChange={ handleInputChange}
-                />
+                /> */}
                 <Typography variant="h6" color="blue-gray" className="-mb-3">
                   Last Name
                 </Typography>
-                <Input
+                <p>{lastName}</p>
+                {/* <Input
                   type='text'
                   size="lg"
                   className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
@@ -79,7 +81,7 @@ const EditProfile = ({ openPopUp, closePopUp, selectedUser, onSaveChanges }) => 
                   name="lastName"
                   value={lastName}
                   onChange={ handleInputChange}
-                />
+                /> */}
                 <Typography variant="h6" color="blue-gray" className="-mb-3">
                   Phone Number
                 </Typography>

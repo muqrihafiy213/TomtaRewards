@@ -316,7 +316,7 @@ function UserList() {
                       </td>
                       <td className={classes}>
                         <div className="w-max">
-                          {/* Add Superior information here */}
+                          {"TBA"}
                         </div>
                       </td>
                       <td className={classes}>
@@ -325,7 +325,7 @@ function UserList() {
                           color="blue-gray"
                           className="font-normal"
                         >
-                          {/* Add Employed information here */}
+                          {"TBA"}
                         </Typography>
                       </td>
                       <td className={classes}>
